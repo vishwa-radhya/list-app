@@ -11,17 +11,29 @@ const Interactor=()=>{
     }
 
     function buttonClickHandler(){
-        push(shoppingListInDB,inputValue);
-        clearInputField();
+        if(inputValue.length){
+            pushToDB();
+        }
     }
 
     function clearInputField(){
         setInputValue('');
     }
 
+    function keyUpHandler(key){
+        if(key==='Enter' && inputValue.length){
+            pushToDB();
+        }
+    }
+
+    function pushToDB(){
+        push(shoppingListInDB,inputValue);
+        clearInputField();
+    }
+
     return(
         <Fragment>
-            <input type="text" name="" id="input-field" placeholder="Bread" value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} />
+            <input type="text" name="" id="input-field" placeholder="Bread" value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>keyUpHandler(e.key)} />
             <button id="add-btn" onClick={buttonClickHandler}>Add To Cart</button>
             <ShoppingList/>
         </Fragment>
