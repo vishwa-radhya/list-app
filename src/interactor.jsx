@@ -11,7 +11,7 @@ const Interactor=()=>{
     }
 
     function buttonClickHandler(){
-        if(inputValue.length){
+        if(inputValue.trim().length){
             pushToDB();
         }
     }
@@ -21,7 +21,7 @@ const Interactor=()=>{
     }
 
     function keyUpHandler(key){
-        if(key==='Enter' && inputValue.length){
+        if(key==='Enter' && inputValue.trim().length){
             pushToDB();
         }
     }
