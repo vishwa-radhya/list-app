@@ -11,11 +11,8 @@ const Container=()=>{
 
     return(
         <div className="container">
-            <div className="img-container">
-                {imgLoaded && <Loader/>}
                 <img src={catImage} width={200} alt="shopping-cat" onLoad={imgLoadingHandler} />
-            </div>
-            <Interactor/>
+            {imgLoaded ? <Loader/> : <Interactor/>}
         </div>
     )
 }

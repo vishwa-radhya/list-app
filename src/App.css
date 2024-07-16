@@ -14,14 +14,6 @@ html,body{
 img{
   margin: 0 auto;
 }
-.img-container{
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
 input{
   color: #432000;
   background-color: #dce1eb;
