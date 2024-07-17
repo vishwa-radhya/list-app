@@ -16,12 +16,12 @@ function App() {
       })
       return ()=>unsubscribe();
     },[]);
-    // function handleAuth(user){
-    //   setUser(user);
-    // }
+    function handleAuth(user){
+      setUser(user);
+    }
   return (
     <>
-      {loading ? <Loader/> : !user ? <Auth handleAuth={setUser} /> : <Container/>}
+      {loading ? <Loader/> : !user ? <Auth handleAuth={handleAuth} /> : <Container/>}
     </>
   )
 }
