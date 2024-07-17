@@ -8,6 +8,7 @@
     height: 50px;
     top: 25%;
     left: 45%;
+    z-index: 10;
 }
 @keyframes spin{
     to{

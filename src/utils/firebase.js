@@ -18,6 +18,7 @@ export const database = getDatabase(app);
 export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 console.log(isMobile());
+console.log(navigator.userAgent);
 export const signInWithGoogle=async()=>{
   try{
     if(isMobile()){

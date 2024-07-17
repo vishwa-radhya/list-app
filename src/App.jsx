@@ -21,7 +21,7 @@ function App() {
     }
   return (
     <>
-      {loading ? <Loader/> : !user ? <Auth handleAuth={handleAuth} /> : <Container/>}
+      {loading ? <Loader width='50px' height='50px' /> : !user ? <Auth handleAuth={handleAuth} /> : <Container/>}
     </>
   )
 }
