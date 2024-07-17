@@ -15,13 +15,20 @@ function App() {
         setLoading(false);
       })
       return ()=>unsubscribe();
-    },[user]);
+    },[]);
     function handleAuth(user){
       setUser(user);
     }
+    console.log(user);
   return (
     <>
-      {loading ? <Loader width='50px' height='50px' /> : !user ? <Auth handleAuth={handleAuth} /> : <Container/>}
+    {loading ? (
+      <Loader />
+    ) : !user ? (
+      <Auth handleAuth={handleAuth} />
+    ) : (
+      <Container />
+    )}
     </>
   )
 }
