@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase,ref } from "firebase/database";
-
+import { getDatabase } from "firebase/database";
+import { getAuth,GoogleAuthProvider,signInWithPopup,signOut } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -14,4 +14,22 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
-export const shoppingListInDB = ref(database, 'shoppingList');
+// export const shoppingListInDB = ref(database, 'shoppingList');
+export const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+export const signInWithGoogle=async()=>{
+  try{
+    await signInWithPopup(auth,provider);
+  }catch(error){
+    console.log(error);
+  }
+}
+
+export const signOutUser = async()=>{
+  try{
+    await signOut(auth);
+  }catch(e){
+    console.log('error signing out',e);
+  }
+}
