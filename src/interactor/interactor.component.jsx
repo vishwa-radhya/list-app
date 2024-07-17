@@ -1,9 +1,10 @@
 import { Fragment, useState } from "react"
 import ShoppingList from "../shopping-list/shopping-list.component";
-import { push } from "firebase/database";
-import { shoppingListInDB } from "../utils/firebase"; 
+import { push,ref } from "firebase/database";
+import { database,auth } from "../utils/firebase";
+// import { shoppingListInDB } from "../utils/firebase"; 
 const Interactor=()=>{
-
+    const user= auth.currentUser;
     const [inputValue,setInputValue]=useState('');
 
     function inputChangeHandler(val){
@@ -27,8 +28,9 @@ const Interactor=()=>{
     }
 
     function pushToDB(){
-        push(shoppingListInDB,inputValue);
-        clearInputField();
+       const shoppingListRef = ref(database,`shoppingLists/${user.uid}`);
+       push(shoppingListRef,inputValue);
+       clearInputField();
     }
 
     return(

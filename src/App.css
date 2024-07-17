@@ -10,6 +10,8 @@ html,body{
   flex-direction: column;
   width: min(90vw,320px);
   margin: 30px auto;
+  position: relative;
+  /* border: 1px solid; */
 }
 img{
   margin: 0 auto;
@@ -65,3 +67,29 @@ ul li:hover{
   background-color: #ffc7c7;
 }
 
+.s-out-pic-container{
+  position: absolute;
+  width: 100%;
+  top: -5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.s-out-pic-container p{
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.s-out-pic-container div{
+  width: 11%;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s-out-pic-container div img{
+  z-index: -1;
+  border-radius: 50%;
+}
