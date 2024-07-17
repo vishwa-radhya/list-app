@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Container from './container/container.component'
 import Auth from './auth/Auth.component';
-import { getRedirectResult, onAuthStateChanged } from 'firebase/auth';
+import {  onAuthStateChanged } from 'firebase/auth';
 import { auth } from './utils/firebase';
 import Loader from './loader/loader.component';
 function App() {
@@ -10,23 +10,12 @@ function App() {
     const [loading,setLoading] = useState(true);
 
     useEffect(()=>{
-      const checkAuthState = async()=>{
-        try{
-          const result = await getRedirectResult(auth);
-          if(result && result.user){
-            setUser(result.user);
-          }else{
-            onAuthStateChanged(auth,(user)=>{
-              setUser(user);
-              setLoading(false);
-            })
-          }
-        }catch(e){
-          console.error('Error handling redirect result',e);
-          setLoading(false);
-        }
-      }
-      checkAuthState();
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setUser(user);
+        setLoading(false);
+      });
+  
+      return () => unsubscribe();
     },[]);
 
     function handleAuth(user){
