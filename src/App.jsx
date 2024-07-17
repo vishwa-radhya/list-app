@@ -15,7 +15,7 @@ function App() {
         setLoading(false);
       })
       return ()=>unsubscribe();
-    },[]);
+    },[user]);
     function handleAuth(user){
       setUser(user);
     }
