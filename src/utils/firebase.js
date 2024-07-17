@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-
+console.log(isMobile());
 export const signInWithGoogle=async()=>{
   try{
     if(isMobile()){

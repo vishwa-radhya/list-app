@@ -14,7 +14,7 @@ const Auth=({handleAuth})=>{
         });
 
         getRedirectResult(auth).then((result)=>{
-            if(result.user){
+            if(result && result.user){
                 handleAuth(result.user);
             }
         }).catch((error)=>{
