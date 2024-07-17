@@ -1,6 +1,6 @@
-import Interactor from "./interactor";
-import catImage from './assets/cat.jpg';
-import Loader from "./loader";
+import Interactor from "../interactor/interactor.component";
+import catImage from '../assets/cat.jpg';
+import Loader from "../loader/loader.component";
 import { useState } from "react";
 const Container=()=>{
     const [imgLoaded,setImgLoaded]=useState(true);

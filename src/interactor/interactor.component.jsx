@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react"
-import ShoppingList from "./shopping-list";
+import ShoppingList from "../shopping-list/shopping-list.component";
 import { push } from "firebase/database";
-import { shoppingListInDB } from "./utils/firebase"; 
+import { shoppingListInDB } from "../utils/firebase"; 
 const Interactor=()=>{
 
     const [inputValue,setInputValue]=useState('');
