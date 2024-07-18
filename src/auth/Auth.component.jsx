@@ -20,7 +20,7 @@ const Auth=()=>{
 
     return(
         <div className="auth-container">
-        <img src="/favicon-32x32.png" alt="" />
+        <img src="https://v-list-app.netlify.app/assets/auth-icon.png" alt="" />
         <h2><i className="fa-brands fa-keycdn"></i>Authentication</h2>
         <TypeWriter text='  Sign In To Organize Your Lists...' speed={79}/>
             <button className="ggl-pop-up-btn" onClick={signInWithGoogle}>
