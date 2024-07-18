@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import { getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,signOut } from "firebase/auth";
-// import { isMobile } from "./check-mobile";
+import { getAuth,GoogleAuthProvider,signInWithPopup,signOut } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -19,9 +18,6 @@ export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 export const signInWithGoogle=async()=>{
   try{
-    // if(!isMobile()){
-    //   await signInWithRedirect(auth,provider);
-    // }
     await signInWithPopup(auth,provider);
   }catch(error){
     console.log(error);

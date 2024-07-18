@@ -1,5 +1,4 @@
 import { Fragment, useEffect, useState } from "react"
-// import { shoppingListInDB,database } from "../utils/firebase";
 import { onValue, ref, remove } from "firebase/database";
 import { auth, database } from '../utils/firebase.js';
 const ShoppingList=()=>{

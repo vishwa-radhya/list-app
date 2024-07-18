@@ -7,7 +7,6 @@ import { auth } from './utils/firebase';
 import Loader from './loader/loader.component';
 import { AuthContext } from './contexts/authContext';
 function App() {
-    // const [user,setUser]=useState(null);
     const {user,handleSetUser}=useContext(AuthContext);
     const [loading,setLoading] = useState(true);
 
@@ -24,9 +23,6 @@ function App() {
       checkAuthState();
     }, [handleSetUser]);
   
-   
-  
-    console.log('Current user:', user);
   return (
     <>
     {loading ? (
