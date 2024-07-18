@@ -1,27 +1,22 @@
 import TypeWriter from '../typewriter/TypeWriter.component';
 import './Auth.styles.css';
 import {auth,signInWithGoogle} from '../utils/firebase.js';
-import { getRedirectResult, onAuthStateChanged } from 'firebase/auth';
-import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-const Auth=({handleAuth})=>{
-
+import {  onAuthStateChanged } from 'firebase/auth';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../contexts/authContext.jsx';
+const Auth=()=>{
+  const {handleSetUser}=useContext(AuthContext);
     useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth,(user)=>{
-            if(user){
-                handleAuth(user);
+          const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+              handleSetUser(user);
+            }else{
+              console.log('no user found');
             }
-        });
-
-        getRedirectResult(auth).then((result)=>{
-            if(result && result.user){
-                handleAuth(result.user);
-            }
-        }).catch((error)=>{
-            console.error('Error handling redirect',error);
-        });
-        return ()=>unsubscribe();
-    },[handleAuth]);
+          });
+      
+          return () => unsubscribe();
+    },[handleSetUser]);
 
     return(
         <div className="auth-container">
@@ -34,8 +29,5 @@ const Auth=({handleAuth})=>{
             </button>
         </div>
     )
-}
-Auth.propTypes={
-    handleAuth:PropTypes.func,
 }
 export default Auth;

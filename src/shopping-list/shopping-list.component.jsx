@@ -23,12 +23,6 @@ const ShoppingList=()=>{
     },[user]);
     
     function handleRemove(itemId){
-        // const exactLocationOfItemInDB = ref(database,`shoppingList/${itemId}`);
-        // remove(exactLocationOfItemInDB).then(()=>{
-        //     setItems((prevItems)=>prevItems.filter((item)=>item.id!==itemId));
-        // }).catch((err)=>{
-        //     console.error('error removing item: ',err);
-        // })
         const itemRef = ref(database,`shoppingLists/${user.uid}/${itemId}`);
         remove(itemRef);
     }

@@ -1,33 +1,38 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import Container from './container/container.component'
 import Auth from './auth/Auth.component';
 import {  onAuthStateChanged } from 'firebase/auth';
 import { auth } from './utils/firebase';
 import Loader from './loader/loader.component';
+import { AuthContext } from './contexts/authContext';
 function App() {
-    const [user,setUser]=useState(null);
+    // const [user,setUser]=useState(null);
+    const {user,handleSetUser}=useContext(AuthContext);
     const [loading,setLoading] = useState(true);
 
-    useEffect(()=>{
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        setUser(user);
-        setLoading(false);
-      });
+    useEffect(() => {
+      const checkAuthState = async () => {
+        setLoading(true);
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+          handleSetUser(user);
+          setLoading(false);
+        });
+        return () => unsubscribe();
+      };
   
-      return () => unsubscribe();
-    },[]);
-
-    function handleAuth(user){
-      setUser(user);
-    }
-    console.log(user);
+      checkAuthState();
+    }, [handleSetUser]);
+  
+   
+  
+    console.log('Current user:', user);
   return (
     <>
     {loading ? (
       <Loader />
     ) : !user ? (
-      <Auth handleAuth={handleAuth} />
+      <Auth />
     ) : (
       <Container />
     )}
