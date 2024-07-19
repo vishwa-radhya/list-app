@@ -9,6 +9,7 @@ import { AuthContext } from './contexts/authContext';
 function App() {
     const {user,handleSetUser}=useContext(AuthContext);
     const [loading,setLoading] = useState(true);
+    const [initialLoading,setInitialLoading]=useState(true);
 
     useEffect(() => {
       const checkAuthState = async () => {
@@ -16,6 +17,7 @@ function App() {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
           handleSetUser(user);
           setLoading(false);
+          setInitialLoading(false);
         });
         return () => unsubscribe();
       };
@@ -25,12 +27,14 @@ function App() {
   
   return (
     <>
-    {loading ? (
-      <Loader />
-    ) : !user ? (
-      <Auth />
+    {initialLoading ? (
+      <Loader/>
+    ) : loading ? (
+      <Loader/>
+    ): !user ? (
+      <Auth/>
     ) : (
-      <Container />
+      <Container/>
     )}
     </>
   )
