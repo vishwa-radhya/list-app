@@ -8,8 +8,7 @@
     flex-direction: column;
     z-index: 10;
     border-radius: 10px;
-    padding: 2px;
-    box-shadow: 1px 1px 1px rgb(135, 134, 134);
+    box-shadow: 1px 1px 1px rgb(135, 134, 134), -1px -1px 1px rgb(135, 134, 134);
     overflow: hidden;
     transition: 0.25s ease;
 }
@@ -19,7 +18,7 @@
     height: 20%;
     position: relative;
     border-radius: 2px;
-
+    border-bottom: 2px solid white;
 }
 .dd-block-2{
     background-color: rgb(245, 245, 245);
