@@ -5,14 +5,14 @@ import { signInWithGoogle } from '../utils/firebase';
 const Dropdown=({userImg,displayName,userEmail,isDropdownOpen})=>{
 
     const userEmailStyles={
-        fontSize:userEmail.length<=19 ? '0.7rem' : '0.55rem',
+        fontSize:userEmail.length<=19 ? '0.9rem' : '0.75rem',
     }
     async function handleSignOutUser(){
         await signOutUser();
     }
     const dropdownStyles={
-        width:isDropdownOpen ? '60%' : '0%',
-        height:isDropdownOpen ? '50%' : '0%'
+        width:isDropdownOpen ? '70%' : '0%',
+        height:isDropdownOpen ? '60%' : '0%'
     }
     return(
         <div className="drop-down-container" style={dropdownStyles}>

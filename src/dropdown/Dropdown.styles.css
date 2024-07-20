@@ -9,7 +9,7 @@
     z-index: 10;
     border-radius: 10px;
     padding: 2px;
-    box-shadow: 1px 1px 1px rgb(209, 207, 207);
+    box-shadow: 1px 1px 1px rgb(135, 134, 134);
     overflow: hidden;
     transition: 0.25s ease;
 }
@@ -22,7 +22,7 @@
 
 }
 .dd-block-2{
-    background-color: rgba(245, 245, 245, 0.99);
+    background-color: rgb(245, 245, 245);
     width: 100%;
     flex: 1;
     text-align: center;
@@ -32,7 +32,8 @@
     justify-content: space-evenly;
 }
 .dd-block-2 h4{
-    font-size: 0.8rem;
+    font-size: 1rem;
+    overflow: hidden;
 }
 .dd-block-2 p{
     font-size: 0.7rem;
@@ -58,14 +59,14 @@
 }
 .switch-acc{
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     height: 15%;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
 }
-.switch-acc:hover{
+.switch-acc:active{
     background-color: rgb(218, 226, 233);
 }
 .dd-block-2 i{
@@ -73,13 +74,13 @@
 }
 .sign-out-user{
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     height: 15%;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
 }
-.sign-out-user:hover{
+.sign-out-user:active{
     background-color: rgb(218, 226, 233);
 }
