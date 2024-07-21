@@ -65,12 +65,7 @@ const ShoppingList=()=>{
     
     function handleRemove(itemId){
         const itemRef = ref(database,`shoppingLists/${user.uid}/${itemId}`);
-        remove(itemRef).then(()=>{
-            if(clickedItemId === itemId){
-                delete listRefs.current[clickedItemId]
-                setClickedItemId(null);
-            }
-        })
+        remove(itemRef);
     }
 
     function showDelIcon(itemId){
