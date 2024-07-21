@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import PropTypes from 'prop-types';
 
-const TypeWriter=({text,speed=100})=>{
+const TypeWriter=({text,speed=40})=>{
     const [displayedText,setDisplayedText]=useState('');
     useEffect(()=>{
         let currentIndex=0;
