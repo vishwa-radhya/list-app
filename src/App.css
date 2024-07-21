@@ -60,10 +60,7 @@ ul li{
    flex-grow: 1;
    text-align: center;
    color: #432000;
-}
-ul li:hover{
-  cursor: pointer;
-  background-color: #ffc7c7;
+   position: relative;
 }
 
 .s-out-pic-container{
@@ -91,4 +88,27 @@ ul li:hover{
 .s-out-pic-container div img{
   z-index: -1;
   border-radius: 50%;
+}
+.delete-icon{
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #dce1eb;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: -1px 0px 2px rgba(0,0,0,0.2);
+  transition: 0.2s ease;
+  overflow: hidden;
+}
+.delete-icon i{
+  color: rgba(0, 0, 0, 0.581);
+}
+.delete-icon:hover{
+  background-color: #ffc7c7;
+}
+.delete-icon:hover i{
+  color: rgb(238, 70, 70);
 }
