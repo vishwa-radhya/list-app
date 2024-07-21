@@ -4,6 +4,7 @@ import { auth, database } from '../utils/firebase.js';
 const ShoppingList=()=>{
     const listRefs = useRef({});
     const [items,setItems]=useState([]);
+    const [refsLoaded,setRefsLoaded]=useState(false);
     const [clickedItemId,setClickedItemId]=useState(null);
     const user = auth.currentUser;
 
@@ -29,6 +30,28 @@ const ShoppingList=()=>{
         }
     }
 
+    function removeNullListsRefs(){
+        for(const key in listRefs.current){
+            if(listRefs.current[key] === null){
+                delete listRefs.current[key];
+            }
+        }
+    }
+
+    useEffect(()=>{
+        if(items.length>0){
+            setRefsLoaded(true);
+        }
+    },[items]);
+
+    useEffect(()=>{
+        if(refsLoaded){
+            removeNullListsRefs();
+            setRefsLoaded(false);
+        }
+    },[refsLoaded]);
+
+
     useEffect(()=>{
         if (clickedItemId) {
             document.addEventListener('click', handleListOutSideClick);
@@ -45,6 +68,7 @@ const ShoppingList=()=>{
         remove(itemRef).then(()=>{
             if(clickedItemId === itemId){
                 delete listRefs.current[clickedItemId]
+                setClickedItemId(null);
             }
         })
     }
@@ -52,7 +76,7 @@ const ShoppingList=()=>{
     function showDelIcon(itemId){
         setClickedItemId(clickedItemId === itemId ? null : itemId);
     }
-
+    
     return(
         <Fragment>
         <ul id="shopping-list">
