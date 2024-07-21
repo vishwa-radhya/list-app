@@ -112,3 +112,9 @@ ul li{
 .delete-icon:hover i{
   color: rgb(238, 70, 70);
 }
+.delete-icon.mobile{
+  background-color: #ffc7c7;
+}
+.delete-icon.mobile i{
+  color: rgb(238, 70, 70);
+}

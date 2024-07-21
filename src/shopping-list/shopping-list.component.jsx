@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from "react"
 import { onValue, ref, remove } from "firebase/database";
 import { auth, database } from '../utils/firebase.js';
+import { isMobile } from "../utils/check-mobile.js";
 const ShoppingList=()=>{
     const listRefs = useRef({});
     const [items,setItems]=useState([]);
@@ -79,11 +80,12 @@ const ShoppingList=()=>{
             const deleteDivStyles={
                 width:clickedItemId === item.id ? '100%' : '0',
             }
+           const deleteIconClass = isMobile() ? 'delete-icon mobile' : 'delete-icon';
          return (
-            <li key={item.id} onClick={()=>showDelIcon(item.id)} ref={el => listRefs.current[item.id]=el}>{item.value}<div className="delete-icon" style={deleteDivStyles}  onClick={(e)=>{
+            <li key={item.id} onClick={()=>showDelIcon(item.id)} ref={el => listRefs.current[item.id]=el}>{item.value}<div className={deleteIconClass} style={deleteDivStyles}  onClick={(e)=>{
             e.stopPropagation()
             handleRemove(item.id)
-        }}><i className="fa-regular fa-trash-can"></i></div></li>
+        }}><i className="fa-regular fa-trash-can" ></i></div></li>
     );   
         })}
         </ul>
