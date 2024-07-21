@@ -30,25 +30,29 @@ const ShoppingList=()=>{
     }
 
     useEffect(()=>{
-        if(clickedItemId){
-            document.addEventListener('click',handleListOutSideClick);
-        }else{
-            document.removeEventListener('click',handleListOutSideClick);
+        if (clickedItemId) {
+            document.addEventListener('click', handleListOutSideClick);
+        } else {
+            document.removeEventListener('click', handleListOutSideClick);
         }
-        return ()=>{
-            document.removeEventListener('click',handleListOutSideClick);
-        }
+        return () => {
+            document.removeEventListener('click', handleListOutSideClick);
+        };
     },[clickedItemId]);
     
     function handleRemove(itemId){
         const itemRef = ref(database,`shoppingLists/${user.uid}/${itemId}`);
-        remove(itemRef);
+        remove(itemRef).then(()=>{
+            if(clickedItemId === itemId){
+                delete listRefs.current[clickedItemId]
+            }
+        })
     }
 
     function showDelIcon(itemId){
         setClickedItemId(clickedItemId === itemId ? null : itemId);
     }
-    
+
     return(
         <Fragment>
         <ul id="shopping-list">
