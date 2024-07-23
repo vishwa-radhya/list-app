@@ -16,7 +16,7 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
     },[isEditIconClicked]);
 
     const renameContainerStyles={
-        height:isEditIconClicked ? '70px' : '0',
+        height:isEditIconClicked ? '80px' : '0',
         padding:isEditIconClicked ? '25px' : '0',
     }
     
@@ -27,10 +27,16 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
         handleRename(inputValue);
     }
 
+    function renameEnterHandler(key){
+        if(key === 'Enter'){
+            handleRename(inputValue);
+        }
+    }
+
     return(
         <div className='rename-container' style={renameContainerStyles}>
         <p>Rename the list item ?</p>
-            <input type="text" value={inputValue} ref={inputRef} onChange={(e)=>inputChangeHandler(e.target.value)} />
+            <input type="text" value={inputValue} ref={inputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>renameEnterHandler(e.key)} />
             <div className='rename-container-btn-wrapper'>
                 <button onClick={()=>{
                     handleRenameIconClick(false)
