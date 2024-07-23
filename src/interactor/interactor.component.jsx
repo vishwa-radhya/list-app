@@ -34,7 +34,7 @@ const Interactor=()=>{
 
     return(
         <Fragment>
-            <input type="text" name="" id="input-field" placeholder="Bread" value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>keyUpHandler(e.key)} />
+            <input type="text" name="" id="input-field" placeholder="Enter Items" value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>keyUpHandler(e.key)} />
             <button id="add-btn" onClick={buttonClickHandler}>Add To Cart</button>
             <ShoppingList/>
         </Fragment>
