@@ -4,6 +4,7 @@ import Loader from "../loader/loader.component";
 import Dropdown from "../dropdown/Dropdown.component";
 import { useEffect, useRef, useState } from "react";
 import { auth } from "../utils/firebase";
+import './container.styles.css';
 const Container=()=>{
     const [imgLoaded,setImgLoaded]=useState(true);
     const [isDropdownOpen,setIsDropdownOpen]=useState(false);

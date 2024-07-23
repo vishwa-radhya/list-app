@@ -2,6 +2,7 @@ import { Fragment, useEffect, useRef, useState } from "react"
 import { onValue, ref, remove,set } from "firebase/database";
 import { auth, database } from '../utils/firebase.js';
 import { isMobile } from "../utils/check-mobile.js";
+import './shopping-list.styles.css';
 import RenameContainer from "../rename/rename-container.component.jsx";
 const ShoppingList=()=>{
     const listRefs = useRef({});

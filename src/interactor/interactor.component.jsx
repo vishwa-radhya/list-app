@@ -2,6 +2,7 @@ import { Fragment, useState } from "react"
 import ShoppingList from "../shopping-list/shopping-list.component";
 import { push,ref } from "firebase/database";
 import { database,auth } from "../utils/firebase";
+import './interactor.styles.css';
 const Interactor=()=>{
     const user= auth.currentUser;
     const [inputValue,setInputValue]=useState('');
