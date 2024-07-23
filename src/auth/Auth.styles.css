@@ -22,6 +22,14 @@
     display: flex;
     gap: 10px;
     background-color: rgb(48, 137, 200);
+    color: #fdfdfd;
+    font-family: inherit;
+    border: 0;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
 }
 .ggl-pop-up-btn:hover{
     background-color: rgb(48, 137, 200);

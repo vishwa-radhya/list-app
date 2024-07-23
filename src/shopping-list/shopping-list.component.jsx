@@ -1,12 +1,16 @@
 import { Fragment, useEffect, useRef, useState } from "react"
-import { onValue, ref, remove } from "firebase/database";
+import { onValue, ref, remove,set } from "firebase/database";
 import { auth, database } from '../utils/firebase.js';
 import { isMobile } from "../utils/check-mobile.js";
+import RenameContainer from "../rename/rename-container.component.jsx";
 const ShoppingList=()=>{
     const listRefs = useRef({});
     const [items,setItems]=useState([]);
     const [refsLoaded,setRefsLoaded]=useState(false);
     const [clickedItemId,setClickedItemId]=useState(null);
+    const [clickedItemName,setClickedItemName]=useState(null);
+    const [isEditIconClicked,setIsEditIconClicked]=useState(false);
+    const renameContainerRef = useRef(null);
     const user = auth.currentUser;
 
     useEffect(()=>{
@@ -26,8 +30,9 @@ const ShoppingList=()=>{
 
     function handleListOutSideClick(event){
         const refArray = Object.values(listRefs.current);
-        if(refArray.every(ref=>ref && !ref.contains(event.target))){
+        if((refArray.every(ref=>ref && !ref.contains(event.target))) && !renameContainerRef.current.contains(event.target)){
             setClickedItemId(null);
+            setIsEditIconClicked(false);
         }
     }
 
@@ -67,28 +72,61 @@ const ShoppingList=()=>{
     function handleRemove(itemId){
         const itemRef = ref(database,`shoppingLists/${user.uid}/${itemId}`);
         remove(itemRef);
+        setIsEditIconClicked(false);
     }
 
-    function showDelIcon(itemId){
+    function showIcons(itemId,itemValue){
         setClickedItemId(clickedItemId === itemId ? null : itemId);
+        setClickedItemName(clickedItemName === itemValue ? null : itemValue);
     }
-    
+
+    function handleSetClickedItemIdToNull(bool){
+        setClickedItemId(bool);
+    }
+
+    function handleRenameIconClick(bool){
+        setIsEditIconClicked(bool);
+    }
+
+    function handleRename(newName){
+        if(clickedItemId){
+            const itemRef = ref(database,`shoppingLists/${user.uid}/${clickedItemId}`);
+            set(itemRef,newName).then(()=>{
+                setClickedItemName(newName);
+                setIsEditIconClicked(false);
+                setClickedItemId(null);
+            }).catch((err)=>{
+                console.log('error renaming item:',err);
+            })
+        }
+    }
+
     return(
         <Fragment>
         <ul id="shopping-list">
         {items.map((item)=>{
             const deleteDivStyles={
-                width:clickedItemId === item.id ? '100%' : '0',
+                width:clickedItemId === item.id ? '50%' : '0',
+            }
+            const renameDivStyles={
+                width:clickedItemId === item.id ? '50%' : '0',
             }
            const deleteIconClass = isMobile() ? 'delete-icon mobile' : 'delete-icon';
+           const renameIconClass = isMobile() ? 'rename-icon mobile' : 'rename-icon';
          return (
-            <li key={item.id} onClick={()=>showDelIcon(item.id)} ref={el => listRefs.current[item.id]=el}>{item.value}<div className={deleteIconClass} style={deleteDivStyles}  onClick={(e)=>{
+            <li key={item.id} onClick={()=>showIcons(item.id,item.value)} ref={el => listRefs.current[item.id]=el}><div className={renameIconClass} style={renameDivStyles} onClick={(e)=>{
+                e.stopPropagation();
+                handleRenameIconClick(true)
+            }}><i className="fa-regular fa-pen-to-square"></i></div>{item.value}<div className={deleteIconClass} style={deleteDivStyles}  onClick={(e)=>{
             e.stopPropagation()
             handleRemove(item.id)
         }}><i className="fa-regular fa-trash-can" ></i></div></li>
     );   
         })}
         </ul>
+        <div ref={renameContainerRef}>
+        <RenameContainer isEditIconClicked={isEditIconClicked} handleRenameIconClick={handleRenameIconClick} clickedItemName={clickedItemName} handleRename={handleRename} handleSetClickedItemIdToNull={handleSetClickedItemIdToNull} />
+        </div>
         </Fragment>
     )
 }
