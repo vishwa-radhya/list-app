@@ -115,14 +115,37 @@ const ShoppingList=()=>{
            const deleteIconClass = isMobile() ? 'delete-icon mobile' : 'delete-icon';
            const renameIconClass = isMobile() ? 'rename-icon mobile' : 'rename-icon';
          return (
-            <li key={item.id} onClick={()=>showIcons(item.id,item.value)} ref={el => listRefs.current[item.id]=el}><div className={renameIconClass} style={renameDivStyles} onClick={(e)=>{
-                e.stopPropagation();
-                handleRenameIconClick(true)
-            }}><i className="fa-regular fa-pen-to-square"></i></div>{item.value}<div className={deleteIconClass} style={deleteDivStyles}  onClick={(e)=>{
-            e.stopPropagation()
-            handleRemove(item.id)
-        }}><i className="fa-regular fa-trash-can" ></i></div></li>
-    );   
+            <li 
+                key={item.id}
+                onClick={()=>showIcons(item.id,item.value)}
+                ref={el => listRefs.current[item.id]=el}>
+            <div 
+                className={renameIconClass} 
+                style={renameDivStyles} 
+                onClick={(e)=>{
+                    e.stopPropagation();
+                    handleRenameIconClick(true)
+                }
+            }>
+            <i 
+                className="fa-regular fa-pen-to-square">
+            </i>
+            </div>
+            {item.value}
+            <div 
+                className={deleteIconClass}
+                style={deleteDivStyles}
+                onClick={(e)=>{
+                    e.stopPropagation()
+                    handleRemove(item.id)
+                    }
+            }>
+            <i 
+                className="fa-regular fa-trash-can" >
+            </i>
+            </div>
+            </li>
+        );   
         })}
         </ul>
         <div ref={renameContainerRef}>
