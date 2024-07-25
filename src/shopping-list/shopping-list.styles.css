@@ -16,6 +16,7 @@ ul li{
      text-align: center;
      color: #432000;
      position: relative;
+     transition:  0.3s ease;
 }
 
 .delete-icon{
@@ -86,4 +87,25 @@ ul li{
 
 .rename-icon.mobile i{
     color: rgb(70, 165, 238);
+}
+
+.list-wrapper{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+.list-wrapper .fa-star{
+    padding-right: 3px;
+}
+.list-wrapper .fa-solid{
+    color: gold;
+}
+.list-wrapper .indicate-fav{
+    position: absolute;
+    left: 0;
+    top: 30%;
+    height: 20px;
+    width: 3.5px;
+    background-color: gold;
+    border-radius: 10px;
 }
