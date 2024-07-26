@@ -29,7 +29,7 @@ const Interactor=()=>{
 
     function pushToDB(){
        const shoppingListRef = ref(database,`shoppingLists/${user.uid}`);
-       push(shoppingListRef,inputValue);
+       push(shoppingListRef,{value:inputValue,isFavorite:false});
        clearInputField();
     }
 

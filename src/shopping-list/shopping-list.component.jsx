@@ -6,12 +6,14 @@ import './shopping-list.styles.css';
 import RenameContainer from "../rename/rename-container.component.jsx";
 const ShoppingList=()=>{
     const listRefs = useRef({});
+    const starRefs = useRef({});
     const [items,setItems]=useState([]);
     const [refsLoaded,setRefsLoaded]=useState(false);
     const [clickedItemId,setClickedItemId]=useState(null);
     const [clickedItemName,setClickedItemName]=useState(null);
     const [isEditIconClicked,setIsEditIconClicked]=useState(false);
     const renameContainerRef = useRef(null);
+    // const [isStarClicked,setIsStarClicked]=useState(false);
     const user = auth.currentUser;
 
     useEffect(()=>{
@@ -20,7 +22,7 @@ const ShoppingList=()=>{
             onValue(shoppingListRef,(snapshot)=>{
                 const data = snapshot.val();
                 if(data){
-                    const itemsArray = Object.entries(data).map(([id,value])=>({id,value}));
+                    const itemsArray = Object.entries(data).map(([id,{isFavorite,value}])=>({id,isFavorite,value}));
                     setItems(itemsArray);
                 }else{
                     setItems([]);
@@ -30,21 +32,27 @@ const ShoppingList=()=>{
     },[user]);
 
     function handleListOutSideClick(event){
-        const refArray = Object.values(listRefs.current);
-        if((refArray.every(ref=>ref && !ref.contains(event.target))) && !renameContainerRef.current.contains(event.target)){
+        const listRefArray = Object.values(listRefs.current);
+        const starRefArray = Object.values(starRefs.current);
+        if((listRefArray.every(ref=>ref && !ref.contains(event.target))) && !renameContainerRef.current.contains(event.target) && (starRefArray.every(ref=>ref && !ref.contains(event.target))) ){
             setClickedItemId(null);
             setIsEditIconClicked(false);
         }
     }
-
+    
     function removeNullListsRefs(){
         for(const key in listRefs.current){
             if(listRefs.current[key] === null){
                 delete listRefs.current[key];
             }
         }
+        for(const key in starRefs.current){
+            if(starRefs.current[key] === null){
+                delete starRefs.current[key];
+            }
+        }
     }
-
+    
     useEffect(()=>{
         if(items.length>0){
             setRefsLoaded(true);
@@ -92,13 +100,20 @@ const ShoppingList=()=>{
     function handleRename(newName){
         if(clickedItemId){
             const itemRef = ref(database,`shoppingLists/${user.uid}/${clickedItemId}`);
-            set(itemRef,newName).then(()=>{
+            set(itemRef,{value:newName,isFavorite:false}).then(()=>{
                 setClickedItemName(newName);
                 setIsEditIconClicked(false);
                 setClickedItemId(null);
             }).catch((err)=>{
                 console.log('error renaming item:',err);
             })
+        }
+    }
+
+    function handleStarClick(id,name,fav){
+        if(id){
+            const itemRef = ref(database,`shoppingLists/${user.uid}/${id}`);
+            set(itemRef,{value:name,isFavorite:!fav}).catch((e)=>console.log(e))
         }
     }
 
@@ -112,13 +127,22 @@ const ShoppingList=()=>{
             const renameDivStyles={
                 width:clickedItemId === item.id ? '50%' : '0',
             }
+            const starDivStyles={
+                width:clickedItemId === item.id ? 'auto' : '0',
+                padding:clickedItemId === item.id ? '5px' : '0'
+            }
            const deleteIconClass = isMobile() ? 'delete-icon mobile' : 'delete-icon';
            const renameIconClass = isMobile() ? 'rename-icon mobile' : 'rename-icon';
+           const starIconClass = item.isFavorite ? 'fa-solid fa-star' : 'fa-regular fa-star';
          return (
+            <div className="list-wrapper" key={item.id}>
+            <div className={starIconClass} ref={el => starRefs.current[item.id]=el} style={starDivStyles} onClick={()=>handleStarClick(item.id,item.value,item.isFavorite)}></div>
             <li 
                 key={item.id}
                 onClick={()=>showIcons(item.id,item.value)}
-                ref={el => listRefs.current[item.id]=el}>
+                ref={el => listRefs.current[item.id]=el}
+                style={{border: item.isFavorite ? '1px solid #FADF6F' : '0'}}
+                >
             <div 
                 className={renameIconClass} 
                 style={renameDivStyles} 
@@ -145,6 +169,7 @@ const ShoppingList=()=>{
             </i>
             </div>
             </li>
+            </div>
         );   
         })}
         </ul>
