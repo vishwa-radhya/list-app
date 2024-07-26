@@ -13,7 +13,7 @@ const ShoppingList=()=>{
     const [clickedItemName,setClickedItemName]=useState(null);
     const [isEditIconClicked,setIsEditIconClicked]=useState(false);
     const renameContainerRef = useRef(null);
-    const [isStarClicked,setIsStarClicked]=useState(false);
+    // const [isStarClicked,setIsStarClicked]=useState(false);
     const user = auth.currentUser;
 
     useEffect(()=>{
@@ -46,8 +46,13 @@ const ShoppingList=()=>{
                 delete listRefs.current[key];
             }
         }
+        for(const key in starRefs.current){
+            if(starRefs.current[key] === null){
+                delete starRefs.current[key];
+            }
+        }
     }
-
+    
     useEffect(()=>{
         if(items.length>0){
             setRefsLoaded(true);
@@ -135,7 +140,9 @@ const ShoppingList=()=>{
             <li 
                 key={item.id}
                 onClick={()=>showIcons(item.id,item.value)}
-                ref={el => listRefs.current[item.id]=el}>
+                ref={el => listRefs.current[item.id]=el}
+                style={{border: item.isFavorite ? '1px solid #FADF6F' : '0'}}
+                >
             <div 
                 className={renameIconClass} 
                 style={renameDivStyles} 
@@ -148,7 +155,7 @@ const ShoppingList=()=>{
                 className="fa-regular fa-pen-to-square">
             </i>
             </div>
-            {item.value}<div className={item.isFavorite ? 'indicate-fav' : ''}></div>
+            {item.value}
             <div 
                 className={deleteIconClass}
                 style={deleteDivStyles}

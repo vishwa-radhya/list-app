@@ -100,12 +100,3 @@ ul li{
 .list-wrapper .fa-solid{
     color: gold;
 }
-.list-wrapper .indicate-fav{
-    position: absolute;
-    left: 0;
-    top: 30%;
-    height: 20px;
-    width: 3.5px;
-    background-color: gold;
-    border-radius: 10px;
-}
