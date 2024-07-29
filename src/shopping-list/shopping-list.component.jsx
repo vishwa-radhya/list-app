@@ -1,10 +1,13 @@
 import { Fragment, useEffect, useRef, useState } from "react"
-import { onValue, ref, remove,set } from "firebase/database";
+import { onValue, ref, set } from "firebase/database";
 import { auth, database } from '../utils/firebase.js';
 import { isMobile } from "../utils/check-mobile.js";
 import './shopping-list.styles.css';
 import RenameContainer from "../rename/rename-container.component.jsx";
-const ShoppingList=()=>{
+import DeleteButton from "../delete-button/delete-button.component.jsx";
+import PropTypes from 'prop-types';
+
+const ShoppingList=({isFavItemsOnly})=>{
     const listRefs = useRef({});
     const starRefs = useRef({});
     const [items,setItems]=useState([]);
@@ -13,7 +16,6 @@ const ShoppingList=()=>{
     const [clickedItemName,setClickedItemName]=useState(null);
     const [isEditIconClicked,setIsEditIconClicked]=useState(false);
     const renameContainerRef = useRef(null);
-    // const [isStarClicked,setIsStarClicked]=useState(false);
     const user = auth.currentUser;
 
     useEffect(()=>{
@@ -22,15 +24,16 @@ const ShoppingList=()=>{
             onValue(shoppingListRef,(snapshot)=>{
                 const data = snapshot.val();
                 if(data){
-                    const itemsArray = Object.entries(data).map(([id,{isFavorite,value}])=>({id,isFavorite,value}));
-                    setItems(itemsArray);
+                    let itemsArray = Object.entries(data).map(([id,{isFavorite,value}])=>({id,isFavorite,value}));
+                    const newItemsArray = isFavItemsOnly ? itemsArray.filter(item=>item.isFavorite) : itemsArray;
+                    setItems(newItemsArray);
                 }else{
                     setItems([]);
                 }
             });
         }
-    },[user]);
-
+    },[user,isFavItemsOnly]);
+    
     function handleListOutSideClick(event){
         const listRefArray = Object.values(listRefs.current);
         const starRefArray = Object.values(starRefs.current);
@@ -78,11 +81,7 @@ const ShoppingList=()=>{
         };
     },[clickedItemId]);
     
-    function handleRemove(itemId){
-        const itemRef = ref(database,`shoppingLists/${user.uid}/${itemId}`);
-        remove(itemRef);
-        setIsEditIconClicked(false);
-    }
+    
 
     function showIcons(itemId,itemValue){
         setClickedItemId(clickedItemId === itemId ? null : itemId);
@@ -121,9 +120,7 @@ const ShoppingList=()=>{
         <Fragment>
         <ul id="shopping-list">
         {items.map((item)=>{
-            const deleteDivStyles={
-                width:clickedItemId === item.id ? '50%' : '0',
-            }
+            
             const renameDivStyles={
                 width:clickedItemId === item.id ? '50%' : '0',
             }
@@ -131,7 +128,7 @@ const ShoppingList=()=>{
                 width:clickedItemId === item.id ? 'auto' : '0',
                 padding:clickedItemId === item.id ? '5px' : '0'
             }
-           const deleteIconClass = isMobile() ? 'delete-icon mobile' : 'delete-icon';
+           
            const renameIconClass = isMobile() ? 'rename-icon mobile' : 'rename-icon';
            const starIconClass = item.isFavorite ? 'fa-solid fa-star' : 'fa-regular fa-star';
          return (
@@ -141,7 +138,7 @@ const ShoppingList=()=>{
                 key={item.id}
                 onClick={()=>showIcons(item.id,item.value)}
                 ref={el => listRefs.current[item.id]=el}
-                style={{border: item.isFavorite ? '1px solid #FADF6F' : '0'}}
+                style={{border: item.isFavorite ? '1px solid #FADF6F' : '0',backgroundColor: isFavItemsOnly ? '#FCDA76' :''}}
                 >
             <div 
                 className={renameIconClass} 
@@ -156,18 +153,7 @@ const ShoppingList=()=>{
             </i>
             </div>
             {item.value}
-            <div 
-                className={deleteIconClass}
-                style={deleteDivStyles}
-                onClick={(e)=>{
-                    e.stopPropagation()
-                    handleRemove(item.id)
-                    }
-            }>
-            <i 
-                className="fa-regular fa-trash-can" >
-            </i>
-            </div>
+            <DeleteButton itemId={item.id} setIsEditIconClicked={setIsEditIconClicked} clickedItemId={clickedItemId}  />
             </li>
             </div>
         );   
@@ -178,5 +164,8 @@ const ShoppingList=()=>{
         </div>
         </Fragment>
     )
+}
+ShoppingList.propTypes={
+    isFavItemsOnly:PropTypes.bool,
 }
 export default ShoppingList;

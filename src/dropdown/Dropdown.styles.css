@@ -31,11 +31,11 @@
     justify-content: space-evenly;
 }
 .dd-block-2 h4{
-    font-size: 1rem;
+    font-size: 0.9rem;
     overflow: hidden;
 }
 .dd-block-2 p{
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     margin-top: -15px;
     overflow: hidden;
 }
@@ -58,7 +58,7 @@
 }
 .switch-acc{
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     height: 15%;
     display: flex;
     align-items: center;
@@ -73,7 +73,7 @@
 }
 .sign-out-user{
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     height: 15%;
     display: flex;
     align-items: center;

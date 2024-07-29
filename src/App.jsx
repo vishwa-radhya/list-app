@@ -6,6 +6,7 @@ import {  onAuthStateChanged } from 'firebase/auth';
 import { auth } from './utils/firebase';
 import Loader from './loader/loader.component';
 import { AuthContext } from './contexts/authContext';
+import { BrowserRouter } from 'react-router-dom';
 function App() {
     const {user,handleSetUser}=useContext(AuthContext);
     const [loading,setLoading] = useState(true);
@@ -34,7 +35,9 @@ function App() {
     ): !user ? (
       <Auth/>
     ) : (
-      <Container/>
+      <BrowserRouter>
+        <Container/>
+      </BrowserRouter>
     )}
     </>
   )

@@ -11,8 +11,8 @@ const Dropdown=({userImg,displayName,userEmail,isDropdownOpen})=>{
         await signOutUser();
     }
     const dropdownStyles={
-        width:isDropdownOpen ? '70%' : '0%',
-        height:isDropdownOpen ? '215px' : '0%'
+        width:isDropdownOpen ? '60%' : '0%',
+        height:isDropdownOpen ? '180px' : '0%'
     }
     return(
         <div className="drop-down-container" style={dropdownStyles}>
