@@ -43,7 +43,7 @@ const InputAndBtn=({placeHolder,buttonText,pushAsFav})=>{
 
     return(
         <Fragment>
-        <input type="text" name="" id="input-field" placeholder={placeHolder} value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>keyUpHandler(e.key)} />
+        <input type="text" name="" id="input-field" maxLength={35} placeholder={placeHolder} value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>keyUpHandler(e.key)} />
             <button id="add-btn" onClick={buttonClickHandler}>{buttonText}</button>
             </Fragment>
     )

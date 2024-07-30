@@ -36,7 +36,12 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
     return(
         <div className='rename-container' style={renameContainerStyles}>
         <p>Rename the list item ?</p>
-            <input type="text" value={inputValue} ref={inputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>renameEnterHandler(e.key)} />
+            <div className="rename-input-div">
+            <input type="text" maxLength={35} value={inputValue} ref={inputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>renameEnterHandler(e.key)} />
+            <div className="input-len-indicator">
+            {inputValue ? inputValue.length : ''}/35
+            </div>
+            </div>
             <div className='rename-container-btn-wrapper'>
                 <button onClick={()=>{
                     handleRenameIconClick(false)
