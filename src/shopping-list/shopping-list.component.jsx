@@ -99,7 +99,8 @@ const ShoppingList=({isFavItemsOnly})=>{
     function handleRename(newName){
         if(clickedItemId){
             const itemRef = ref(database,`shoppingLists/${user.uid}/${clickedItemId}`);
-            set(itemRef,{value:newName,isFavorite:false}).then(()=>{
+            const renameObject = isFavItemsOnly ? {value:newName,isFavorite:true} : {value:newName,isFavorite:false};
+            set(itemRef,renameObject).then(()=>{
                 setClickedItemName(newName);
                 setIsEditIconClicked(false);
                 setClickedItemId(null);
