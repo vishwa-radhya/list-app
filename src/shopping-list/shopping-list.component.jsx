@@ -131,7 +131,7 @@ const ShoppingList=({isFavItemsOnly})=>{
             }
            
            const renameIconClass = isMobile() ? 'rename-icon mobile' : 'rename-icon';
-           const starIconClass = item.isFavorite ? 'fa-solid fa-star animate__animated animate__flip' : 'fa-regular fa-star';
+           const starIconClass = item.isFavorite ? 'fa-solid fa-star animate__animated animate__rubberBand' : 'fa-regular fa-star';
          return (
             <div className="list-wrapper" key={item.id}>
             <div className={starIconClass} ref={el => starRefs.current[item.id]=el} style={starDivStyles} onClick={()=>handleStarClick(item.id,item.value,item.isFavorite)}></div>
