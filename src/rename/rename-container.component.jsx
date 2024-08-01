@@ -3,7 +3,7 @@ import './rename-container.styles.css';
 import PropTypes from 'prop-types';
 const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,handleRename,handleSetClickedItemIdToNull})=>{
     const inputRef = useRef(null);
-    const [inputValue,setInputValue] = useState(clickedItemName);
+    const [inputValue,setInputValue] = useState('');
     
     useEffect(()=>{
         setInputValue(clickedItemName);
