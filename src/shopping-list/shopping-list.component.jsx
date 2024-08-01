@@ -113,7 +113,8 @@ const ShoppingList=({isFavItemsOnly})=>{
     function handleStarClick(id,name,fav){
         if(id){
             const itemRef = ref(database,`shoppingLists/${user.uid}/${id}`);
-            set(itemRef,{value:name,isFavorite:!fav}).catch((e)=>console.log(e))
+            set(itemRef,{value:name,isFavorite:!fav}).catch((e)=>console.log(e));
+            setIsEditIconClicked(false);
         }
     }
 
