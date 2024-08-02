@@ -25,11 +25,12 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
     }
     function handleOkClick(){
         handleRename(inputValue);
+        inputRef.current.blur();
     }
 
     function renameEnterHandler(key){
         if(key === 'Enter'){
-            handleRename(inputValue);
+            handleOkClick();
         }
     }
 
