@@ -17,7 +17,7 @@ const ShoppingList=({isFavItemsOnly})=>{
     const [isEditIconClicked,setIsEditIconClicked]=useState(false);
     const renameContainerRef = useRef(null);
     const user = auth.currentUser;
-
+    
     useEffect(()=>{
         if(user){
             const shoppingListRef = ref(database,`shoppingLists/${user.uid}`);
