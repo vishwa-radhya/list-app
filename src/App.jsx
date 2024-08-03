@@ -19,6 +19,7 @@ function App() {
             setLoading(false);
           }else{
             setLoading(false);
+            handleSetUser(null);
           }
         });
         return () => unsubscribe();
@@ -26,6 +27,7 @@ function App() {
       setLoading(true);
       checkAuthState();      
     }, [handleSetUser]);
+  
   
   return (
     <>

@@ -16,7 +16,7 @@ ul li{
      text-align: center;
      color: #432000;
      position: relative;
-     transition:  0.3s ease;
+     transition:  0.25s ease;
      max-width: 100%;
      word-wrap: break-word;
      word-break:break-word;
@@ -64,6 +64,7 @@ ul li{
 }
 .list-wrapper .fa-star{
     padding-right: 3px;
+    transition: 0.25s ease;
 }
 .list-wrapper .fa-solid{
     color: gold;

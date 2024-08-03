@@ -2,7 +2,11 @@ import './Dropdown.styles.css'
 import PropTypes from 'prop-types';
 import { signOutUser } from '../utils/firebase';
 import { signInWithGoogle } from '../utils/firebase';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/authContext';
 const Dropdown=({userImg,displayName,userEmail,isDropdownOpen})=>{
+
+    const {handleSetUser}=useContext(AuthContext);
 
     const userEmailStyles={
         fontSize:userEmail.length<=19 ? '0.9rem' : '0.75rem',
@@ -27,7 +31,10 @@ const Dropdown=({userImg,displayName,userEmail,isDropdownOpen})=>{
                 <div className="switch-acc" onClick={signInWithGoogle}>
                 <i className="fa-solid fa-users"></i><span>Switch Account</span>
                 </div>
-                <div className="sign-out-user" onClick={handleSignOutUser}>
+                <div className="sign-out-user" onClick={
+                    ()=>{ handleSignOutUser()
+                        handleSetUser(null);
+                }}>
                 <i className="fa-solid fa-arrow-right-from-bracket"></i><span>Sign Out</span>
                 </div>
             </div>
