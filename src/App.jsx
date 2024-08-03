@@ -10,27 +10,26 @@ import { BrowserRouter } from 'react-router-dom';
 function App() {
     const {user,handleSetUser}=useContext(AuthContext);
     const [loading,setLoading] = useState(true);
-    const [initialLoading,setInitialLoading]=useState(true);
 
     useEffect(() => {
       const checkAuthState = async () => {
-        setLoading(true);
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-          handleSetUser(user);
+          if(user){
+            handleSetUser(user);
+            setLoading(false);
+          }else{
+            setLoading(false);
+          }
         });
         return () => unsubscribe();
       };
-      
-      checkAuthState();
-      setLoading(false);
-      setInitialLoading(false);
+      setLoading(true);
+      checkAuthState();      
     }, [handleSetUser]);
   
   return (
     <>
-    {initialLoading ? (
-      <Loader/>
-    ) : loading ? (
+    { loading ? (
       <Loader/>
     ): !user ? (
       <Auth/>

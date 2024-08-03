@@ -38,7 +38,7 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
         <div className='rename-container' style={renameContainerStyles}>
         <p>Rename the list item ?</p>
             <div className="rename-input-div">
-            <input type="text" maxLength={35} value={inputValue} ref={inputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>renameEnterHandler(e.key)} />
+            <input type="text" maxLength={35} value={inputValue ? inputValue : ''} ref={inputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>renameEnterHandler(e.key)} />
             <div className="input-len-indicator">
             {inputValue ? inputValue.length : ''}/35
             </div>
