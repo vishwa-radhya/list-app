@@ -1,7 +1,9 @@
 .auth-loader {
         width: 84px;
         height: 84px;
-        position: relative;
+        position: absolute;
+        top:25%;
+        left:45%;
         overflow: hidden;
       }
       .auth-loader:before , .auth-loader:after {
