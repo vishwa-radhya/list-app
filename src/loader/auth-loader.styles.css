@@ -1,9 +1,9 @@
 .auth-loader {
-        width: 84px;
-        height: 84px;
-        position: absolute;
-        top:50%;
-        left:30%;
+        width: 100px;
+        height: 100px;
+        position: relative;
+        top:300px;
+        left:50%;
         overflow: hidden;
       }
       .auth-loader:before , .auth-loader:after {
@@ -16,7 +16,7 @@
         border-radius: 50%;
         background:#000;
         transform: translate(-50% , 100%)  scale(0);
-        animation: push 2s infinite ease-in;
+        animation: push 2s infinite ease;
       }
       .auth-loader:after {
       animation-delay: 1s;
