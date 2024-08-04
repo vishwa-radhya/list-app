@@ -88,8 +88,8 @@ const ShoppingList=({isFavItemsOnly})=>{
         setClickedItemName(clickedItemName === itemValue ? null : itemValue);
     }
 
-    function handleSetClickedItemIdToNull(bool){
-        setClickedItemId(bool);
+    function handleSetClickedItemIdToNull(val){
+        setClickedItemId(val);
     }
 
     function handleRenameIconClick(bool){

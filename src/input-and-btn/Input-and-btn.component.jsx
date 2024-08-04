@@ -20,7 +20,8 @@ const InputAndBtn=({placeHolder,buttonText,pushAsFav})=>{
             pushToDB();
         }
     }
-
+    
+    
     function pushToDB(){
         const shoppingListRef = ref(database,`shoppingLists/${user.uid}/home`);
         if(!pushAsFav){

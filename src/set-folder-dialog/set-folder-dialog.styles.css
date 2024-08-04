@@ -1,45 +1,50 @@
-.rename-container{
+.set-folder-name-dialog{
     width: 270px;
     position: absolute;
     z-index: 10;
     top: 20%;
-    left: 0%;
+    left: 3%;
     display: flex;
     flex-direction: column;
     background-color: whitesmoke;
     border-radius: 20px;
     overflow: hidden;
-    transition: .2s ease;
+    transition: .25s ease;
     box-shadow: 0px 5px 10px rgb(128, 126, 126);
+    padding: 15px;
 }
-.rename-container p{
-    font-size: 0.8rem;
-    margin-top: -10px;
-    font-weight: 600;
+.set-folder-name-dialog-input-div{
+    width: 100%;
+    display: flex;
+    position: relative;
+    top: -15px;
 }
-.rename-container input{
+.set-folder-name-dialog p{
+    font-size: 0.9rem;
+    position: relative;
+    top: -7px;
+}
+.set-folder-name-dialog input{
     border: 0;
     border-bottom: 1px solid black;
     font-family: inherit;
     color: black;
     background-color: inherit;
-    font-size: 1.1rem;
+    font-size: 1rem;
     outline: none;
     text-align: left;
-    margin-top: -3px;
     width: 90%;
 }
-.rename-container .rename-container-btn-wrapper{
+.set-folder-name-dialog-btn-wrapper{
     display: flex;
     align-items: center;
     justify-content: right;
     width: 100%;
-    margin-left: 10px;
-    position: relative;
-    top: 45%;
-    height: 1.5rem;
+    margin-left: -10px;
+    /* border: 1px solid; */
+    height: 30px;
 }
-.rename-container button{
+.set-folder-name-dialog-btn-wrapper button{
     font-family: inherit;
     background-color: inherit;
     border: 0;
@@ -50,16 +55,6 @@
     height: 100%;
     font-weight: 500;
 }
-.rename-container button:hover{
+.set-folder-name-dialog-btn-wrapper button:hover{
     background-color: rgb(225, 226, 226);
-}
-.rename-container .rename-input-div{
-    width: 100%;
-    display: flex;
-}
-.rename-container .input-len-indicator{
-    flex: 1;
-    font-size: 0.75rem;
-    position: relative;
-    left: 3px;
 }
