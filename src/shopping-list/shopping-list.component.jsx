@@ -20,7 +20,7 @@ const ShoppingList=({isFavItemsOnly})=>{
     
     useEffect(()=>{
         if(user){
-            const shoppingListRef = ref(database,`shoppingLists/${user.uid}`);
+            const shoppingListRef = ref(database,`shoppingLists/${user.uid}/home`);
             onValue(shoppingListRef,(snapshot)=>{
                 const data = snapshot.val();
                 if(data){
@@ -98,7 +98,7 @@ const ShoppingList=({isFavItemsOnly})=>{
 
     function handleRename(newName){
         if(clickedItemId){
-            const itemRef = ref(database,`shoppingLists/${user.uid}/${clickedItemId}`);
+            const itemRef = ref(database,`shoppingLists/${user.uid}/home/${clickedItemId}`);
             const renameObject = isFavItemsOnly ? {value:newName,isFavorite:true} : {value:newName,isFavorite:false};
             set(itemRef,renameObject).then(()=>{
                 setClickedItemName(newName);
@@ -112,7 +112,7 @@ const ShoppingList=({isFavItemsOnly})=>{
 
     function handleStarClick(id,name,fav){
         if(id){
-            const itemRef = ref(database,`shoppingLists/${user.uid}/${id}`);
+            const itemRef = ref(database,`shoppingLists/${user.uid}/home/${id}`);
             set(itemRef,{value:name,isFavorite:!fav}).catch((e)=>console.log(e));
             setIsEditIconClicked(false);
         }

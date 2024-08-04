@@ -22,7 +22,7 @@ const InputAndBtn=({placeHolder,buttonText,pushAsFav})=>{
     }
 
     function pushToDB(){
-        const shoppingListRef = ref(database,`shoppingLists/${user.uid}`);
+        const shoppingListRef = ref(database,`shoppingLists/${user.uid}/home`);
         if(!pushAsFav){
             push(shoppingListRef,{value:inputValue,isFavorite:false});
         }else{

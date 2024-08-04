@@ -9,7 +9,7 @@ const DeleteButton=({itemId,setIsEditIconClicked,clickedItemId})=>{
     const user = auth.currentUser;
 
     function handleRemove(itemId){
-        const itemRef = ref(database,`shoppingLists/${user.uid}/${itemId}`);
+        const itemRef = ref(database,`shoppingLists/${user.uid}/home/${itemId}`);
         remove(itemRef);
         setIsEditIconClicked(false);
     }
