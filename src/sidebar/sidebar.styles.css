@@ -7,12 +7,11 @@
     position: absolute;
     min-height: 180px;
     transition: 0.25s ease;
-    background-color: #1c2235e7;
+    background-color: #1c2235f3;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     gap: 3px;
-    overflow: hidden;
     z-index: 3;
     top: -10px;
 }
@@ -55,4 +54,25 @@ hr{
     justify-content: center;
     align-items: center;
     gap: 7px;
+}
+
+.folder-options-div{
+    position: absolute;
+    background-color: #1c2235;
+    color: ghostwhite;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 8px;
+}
+.folder-options-div div{
+    display: flex;
+    gap: 5px;
+    border-radius: 8px;
+    align-items: center;
+    padding: 5px;
+}
+.folder-options-div div:hover{
+    background-color: #474d59;
 }
