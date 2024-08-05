@@ -5,12 +5,13 @@ import { set,ref, onValue } from "firebase/database";
 import { auth } from "../utils/firebase";
 import { useState } from 'react';
 import { FolderNamesContext } from '../contexts/folder-names-context';
+import PropTypes from 'prop-types';
 
 const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDialogOpen},ref1)=>{
 
     const [inputValue,setInputValue] = useState('');
     const user=auth.currentUser;
-    const {handleFolderNamesAdd}=useContext(FolderNamesContext);
+    const {handleFolderNamesAdd,folderNames,isFolderExisted,handleFolderExistedError}=useContext(FolderNamesContext);
 
     useEffect(()=>{
         if(user){
@@ -21,7 +22,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
                 handleFolderNamesAdd(folderNamesFromDbArr);
             })
         }
-    },[user])
+    },[user,handleFolderNamesAdd])
 
 
 
@@ -31,11 +32,14 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
     }
     
     function handleCreateClick(){
-        if(inputValue.trim()){
+        if(inputValue.trim() && !folderNames.includes(inputValue.trim())){
             const dbReference = ref(database,`shoppingLists/${user.uid}/folders/${inputValue}/marker`);
             set(dbReference,true);
             setIsCreateFolderDialogOpen(false);
             setInputValue('');
+            handleFolderExistedError(false);
+        }else{
+            handleFolderExistedError(true);
         }
     }
 
@@ -47,7 +51,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
 
     const setFolderNameDialogStyles={
         height:isCreateFolderDialogOpen?'auto' :'0',
-        padding:isCreateFolderDialogOpen?'15px':'0',
+        padding:isCreateFolderDialogOpen?'15px 15px 5px 15px':'0',
     }
 
     return(
@@ -60,11 +64,21 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
             </div>
             </div>
             <div className='set-folder-name-dialog-btn-wrapper'>
-                <button onClick={()=>setIsCreateFolderDialogOpen(false)}>Cancel</button>
+                <button onClick={
+                    ()=>{
+                        setIsCreateFolderDialogOpen(false)
+                        handleFolderExistedError(false);
+                    }
+                }>Cancel</button>
                 <button onClick={handleCreateClick}>Create</button>
              </div>
+             {isFolderExisted && <p className='folder-dialog-error-msg' style={{fontSize:'0.7rem'}}>*Null and existed folder names are not allowed</p>}
         </div>
     )
 })
 SetFolderDialog.displayName='SetFolderDialog';
+SetFolderDialog.propTypes={
+    setIsCreateFolderDialogOpen:PropTypes.func,
+    isCreateFolderDialogOpen:PropTypes.bool,
+}
 export default SetFolderDialog;

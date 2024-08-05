@@ -1,16 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import PropTypes from 'prop-types';
 export const FolderNamesContext = createContext();
 
 export const FolderNamesProvider=({children})=>{
     const [folderNames,setFolderNames]=useState([]);
+    const [isFolderExisted,setIsFolderExisted]=useState(false);
 
-    function handleFolderNamesAdd(arr){      
+    const handleFolderNamesAdd=useCallback((arr)=>{
         setFolderNames([...arr]);
+    },[]);
+
+    const handleFolderExistedError=(bool)=>{
+        setIsFolderExisted(bool);
     }
 
     return(
-        <FolderNamesContext.Provider value={{folderNames,handleFolderNamesAdd}}>
+        <FolderNamesContext.Provider value={{folderNames,handleFolderNamesAdd,isFolderExisted,handleFolderExistedError}}>
         {children}
         </FolderNamesContext.Provider>
     )

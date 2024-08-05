@@ -1,8 +1,9 @@
 import { Fragment, useContext, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import './sidebar.styles.css';
 import SetFolderDialog from '../set-folder-dialog/set-folder-dialog.component';
 import { FolderNamesContext } from '../contexts/folder-names-context';
+
 const SideBar=()=>{
     const [isSideBarOpen,setIsSideBarOpen]=useState(false);
     const sideBarRef = useRef(null);
@@ -10,6 +11,8 @@ const SideBar=()=>{
     const createFolderDialogRef=useRef(null);
     const [isCreateFolderDialogOpen,setIsCreateFolderDialogOpen]=useState(false);
     const {folderNames}=useContext(FolderNamesContext);
+
+    const navigateRouter = useNavigate();
 
     const sideBarStyles={
         width: isSideBarOpen ? '135px' : '0',
@@ -44,6 +47,10 @@ const SideBar=()=>{
         setIsCreateFolderDialogOpen(bool);
     }
 
+    function handleFolderRouting(folderName){
+        navigateRouter(`folders/${folderName}`)
+    }
+
     return(
         <Fragment>
             <div className="side-bar" style={sideBarStyles} ref={sideBarRef}>
@@ -53,7 +60,7 @@ const SideBar=()=>{
                <div className='side-bar-items add-folders-btn' onClick={()=>handleOpenCreateFolderDialog(true)}><i className='fa-solid fa-folder-plus'></i></div>
                {
                 folderNames.map((folder,index)=>{
-                    return <div key={index} className='side-bar-items'><i className='fa-solid fa-folder'></i>{folder}</div>
+                    return <div key={index} className='side-bar-items' onClick={()=>handleFolderRouting(folder)}><i className='fa-solid fa-folder'></i>{folder}</div>
                 })
                }
             </div>

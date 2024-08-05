@@ -58,3 +58,7 @@
 .set-folder-name-dialog-btn-wrapper button:hover{
     background-color: rgb(225, 226, 226);
 }
+.folder-dialog-error-msg{
+    color: red;
+    overflow: hidden;
+}
