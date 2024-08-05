@@ -9,8 +9,8 @@ const Interactor=()=>{
     return(
         <Fragment>
             <Picture catImage={catImage} pictureWidth={200}/>
-            <InputAndBtn placeHolder='Enter Items' buttonText='Add To Cart' pushAsFav={false} />
-            <ShoppingList isFavItemsOnly={false}/>
+            <InputAndBtn placeHolder='Enter Items' buttonText='Add To Cart' pushAsFav={false} dbReference='home' />
+            <ShoppingList isFavItemsOnly={false}  dbReference='home' isFavOptionRequired={true} />
         </Fragment>
     )
 }

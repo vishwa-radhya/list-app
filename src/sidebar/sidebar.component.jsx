@@ -57,7 +57,7 @@ const SideBar=()=>{
                <Link to='/'> <div className='side-bar-items side-bar-home'><i className="fa-solid fa-house"></i>Home</div></Link>
                <Link to='/fav'> <div className='side-bar-items'><i className="fa-solid fa-star" style={{color:'gold'}}></i>Favorites</div></Link>
                <hr />
-               <div className='side-bar-items add-folders-btn' onClick={()=>handleOpenCreateFolderDialog(true)}><i className='fa-solid fa-folder-plus'></i></div>
+               <div className='side-bar-items add-folders-btn' onClick={()=>handleOpenCreateFolderDialog(true)}><i className='fa-solid fa-folder-plus'></i>Create</div>
                {
                 folderNames.map((folder,index)=>{
                     return <div key={index} className='side-bar-items' onClick={()=>handleFolderRouting(folder)}><i className='fa-solid fa-folder'></i>{folder}</div>

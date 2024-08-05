@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react"
-import { onValue, ref, set } from "firebase/database";
+import { onValue, ref, remove, set } from "firebase/database";
 import { auth, database } from '../utils/firebase.js';
 import { isMobile } from "../utils/check-mobile.js";
 import './shopping-list.styles.css';
@@ -7,7 +7,7 @@ import RenameContainer from "../rename/rename-container.component.jsx";
 import DeleteButton from "../delete-button/delete-button.component.jsx";
 import PropTypes from 'prop-types';
 
-const ShoppingList=({isFavItemsOnly})=>{
+const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const listRefs = useRef({});
     const starRefs = useRef({});
     const [items,setItems]=useState([]);
@@ -20,10 +20,15 @@ const ShoppingList=({isFavItemsOnly})=>{
     
     useEffect(()=>{
         if(user){
-            const shoppingListRef = ref(database,`shoppingLists/${user.uid}/home`);
+            const shoppingListRef = ref(database,`shoppingLists/${user.uid}/${dbReference}`);
             onValue(shoppingListRef,(snapshot)=>{
                 const data = snapshot.val();
                 if(data){
+                    if(data.marker){
+                        const markerRef = ref(database,`shoppingLists/${user.uid}/${dbReference}/marker`);
+                        remove(markerRef);
+                        
+                    }
                     let itemsArray = Object.entries(data).map(([id,{isFavorite,value}])=>({id,isFavorite,value}));
                     const newItemsArray = isFavItemsOnly ? itemsArray.filter(item=>item.isFavorite) : itemsArray;
                     setItems(newItemsArray);
@@ -32,7 +37,7 @@ const ShoppingList=({isFavItemsOnly})=>{
                 }
             });
         }
-    },[user,isFavItemsOnly]);
+    },[user,isFavItemsOnly,dbReference]);
     
     function handleListOutSideClick(event){
         const listRefArray = Object.values(listRefs.current);
@@ -90,6 +95,7 @@ const ShoppingList=({isFavItemsOnly})=>{
 
     function handleSetClickedItemIdToNull(val){
         setClickedItemId(val);
+        setClickedItemName(val);
     }
 
     function handleRenameIconClick(bool){
@@ -98,7 +104,7 @@ const ShoppingList=({isFavItemsOnly})=>{
 
     function handleRename(newName){
         if(clickedItemId){
-            const itemRef = ref(database,`shoppingLists/${user.uid}/home/${clickedItemId}`);
+            const itemRef = ref(database,`shoppingLists/${user.uid}/${dbReference}/${clickedItemId}`);
             const renameObject = isFavItemsOnly ? {value:newName,isFavorite:true} : {value:newName,isFavorite:false};
             set(itemRef,renameObject).then(()=>{
                 setClickedItemName(newName);
@@ -110,14 +116,14 @@ const ShoppingList=({isFavItemsOnly})=>{
         }
     }
 
-    function handleStarClick(id,name,fav){
-        if(id){
-            const itemRef = ref(database,`shoppingLists/${user.uid}/home/${id}`);
-            set(itemRef,{value:name,isFavorite:!fav}).catch((e)=>console.log(e));
+    function handleStarClick(fav){
+        if(clickedItemId){
+            const itemRef = ref(database,`shoppingLists/${user.uid}/${dbReference}/${clickedItemId}`);
+            set(itemRef,{value:clickedItemName,isFavorite:!fav}).catch((e)=>console.log(e));
             setIsEditIconClicked(false);
         }
     }
-
+    
     return(
         <Fragment>
         <ul id="shopping-list">
@@ -135,12 +141,12 @@ const ShoppingList=({isFavItemsOnly})=>{
            const starIconClass = item.isFavorite ? 'fa-solid fa-star animate__animated animate__rubberBand' : 'fa-regular fa-star';
          return (
             <div className="list-wrapper" key={item.id}>
-            <div className={starIconClass} ref={el => starRefs.current[item.id]=el} style={starDivStyles} onClick={()=>handleStarClick(item.id,item.value,item.isFavorite)}></div>
+            {isFavOptionRequired && <div className={starIconClass} ref={el => starRefs.current[item.id]=el} style={starDivStyles} onClick={()=>handleStarClick(item.isFavorite)}></div>}
             <li 
                 key={item.id}
                 onClick={()=>showIcons(item.id,item.value)}
                 ref={el => listRefs.current[item.id]=el}
-                style={{outline: item.isFavorite ? '2px solid #FADF6F' : '0',backgroundColor: isFavItemsOnly ? '#FCDA76' :''}}
+                style={{outline: item.isFavorite  ? '2px solid #FADF6F' : '0',backgroundColor: isFavItemsOnly ? '#FCDA76' :''}}
                 >
             <div 
                 className={renameIconClass} 
@@ -155,7 +161,7 @@ const ShoppingList=({isFavItemsOnly})=>{
             </i>
             </div>
             {item.value}
-            <DeleteButton itemId={item.id} setIsEditIconClicked={setIsEditIconClicked} clickedItemId={clickedItemId}  />
+            <DeleteButton itemId={item.id} setIsEditIconClicked={setIsEditIconClicked} clickedItemId={clickedItemId} dbReference={dbReference}  />
             </li>
             </div>
         );   
@@ -169,5 +175,7 @@ const ShoppingList=({isFavItemsOnly})=>{
 }
 ShoppingList.propTypes={
     isFavItemsOnly:PropTypes.bool,
+    dbReference:PropTypes.string,
+    isFavOptionRequired:PropTypes.bool,
 }
 export default ShoppingList;

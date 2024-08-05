@@ -1,9 +1,7 @@
 .fav-div-container{
-    /* border: 1px solid; */
     display: flex;
     flex-direction: column;
 }
 .fav-div-container img{
-    /* border: 1px solid; */
     padding: 30px;
 }

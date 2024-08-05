@@ -24,9 +24,6 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
         }
     },[user,handleFolderNamesAdd])
 
-
-
-
     function inputChangeHandler(val){
         setInputValue(val);
     }
@@ -58,7 +55,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
         <div className="set-folder-name-dialog" ref={ref1} style={setFolderNameDialogStyles}>
             <p>Enter the name for the folder</p>
             <div className="set-folder-name-dialog-input-div">
-            <input type="text" maxLength={25} value={inputValue ? inputValue : ''} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>createEnterHandler(e.key)} />
+            <input type="text" maxLength={25} value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>createEnterHandler(e.key)} />
             <div className="input-len-indicator">
             {inputValue ? inputValue.length : ''}/25
             </div>
