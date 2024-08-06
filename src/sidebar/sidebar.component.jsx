@@ -11,15 +11,15 @@ const SideBar=()=>{
     const createFolderDialogRef=useRef(null);
     const [isCreateFolderDialogOpen,setIsCreateFolderDialogOpen]=useState(false);
     const [showPopup,setShowPopup]=useState(false);
-    const [popupPosition,setPopupPosition]=useState({top:0,left:0});
+    const [popupPosition,setPopupPosition]=useState({top:0});
     const {folderNames}=useContext(FolderNamesContext);
     const timeoutRef = useRef(null);
     const navigateRouter = useNavigate();
     const popupRef = useRef(null);
 
     const sideBarStyles={
-        width: isSideBarOpen ? '135px' : '0',
-        padding : isSideBarOpen ? '10px 10px' : '0',
+        width: isSideBarOpen ? '140px' : '0',
+        padding : isSideBarOpen ? '20px 10px' : '0',
     }
 
     
@@ -75,10 +75,10 @@ const SideBar=()=>{
 
     function handleFolderMouseDown(event){
         const rect = event.target.getBoundingClientRect();
-        setPopupPosition({top:rect.bottom,left:rect.left});
+        setPopupPosition({top:rect.bottom});
         timeoutRef.current = setTimeout(()=>{
             setShowPopup(true);
-        },900);        
+        },600);        
     }
 
     function handleFolderMouseUp(){
@@ -104,8 +104,8 @@ const SideBar=()=>{
                 })
                }
                {showPopup && <div ref={popupRef} className='folder-options-div' style={{
-                top:popupPosition.top-25,
-                left:popupPosition.left-320,
+                top:popupPosition.top-15,
+                left:'13px',
                }}>
                 <div><i className='fa-regular fa-pen-to-square'></i>Rename</div>
                 <div><i className='fa-regular fa-trash-can'></i>Delete</div>
