@@ -1,0 +1,12 @@
+.folder-title-container{
+    /* border: 1px solid black; */
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 2rem;
+}
+
+  

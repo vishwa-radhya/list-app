@@ -5,11 +5,11 @@ import { isMobile } from "../utils/check-mobile.js";
 import PropTypes from 'prop-types';
 import './delete-button.styles.css';
 
-const DeleteButton=({itemId,setIsEditIconClicked,clickedItemId})=>{
+const DeleteButton=({itemId,setIsEditIconClicked,clickedItemId,dbReference})=>{
     const user = auth.currentUser;
 
     function handleRemove(itemId){
-        const itemRef = ref(database,`shoppingLists/${user.uid}/home/${itemId}`);
+        const itemRef = ref(database,`shoppingLists/${user.uid}/${dbReference}/${itemId}`);
         remove(itemRef);
         setIsEditIconClicked(false);
     }
@@ -39,5 +39,6 @@ DeleteButton.propTypes={
     itemId:PropTypes.string,
     setIsEditIconClicked:PropTypes.func,
     clickedItemId:PropTypes.string,
+    dbReference:PropTypes.string,
 }
 export default DeleteButton;

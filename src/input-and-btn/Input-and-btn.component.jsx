@@ -5,7 +5,7 @@ import { database } from "../utils/firebase";
 import { auth } from "../utils/firebase";
 import './input-and-btn.styles.css';
 import PropTypes from 'prop-types';
-const InputAndBtn=({placeHolder,buttonText,pushAsFav})=>{
+const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference})=>{
 
     const [inputValue,setInputValue]=useState('');
     const user= auth.currentUser;
@@ -20,9 +20,10 @@ const InputAndBtn=({placeHolder,buttonText,pushAsFav})=>{
             pushToDB();
         }
     }
-
+    
+    
     function pushToDB(){
-        const shoppingListRef = ref(database,`shoppingLists/${user.uid}/home`);
+        const shoppingListRef = ref(database,`shoppingLists/${user.uid}/${dbReference}`);
         if(!pushAsFav){
             push(shoppingListRef,{value:inputValue,isFavorite:false});
         }else{
@@ -52,5 +53,6 @@ InputAndBtn.propTypes={
     placeHolder:PropTypes.string,
     buttonText:PropTypes.string,
     pushAsFav:PropTypes.bool,
+    dbReference:PropTypes.string,
 }
 export default InputAndBtn;

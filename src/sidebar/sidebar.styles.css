@@ -1,27 +1,19 @@
-.side-bar-container{
-    position: absolute;
-    height: 200px;
-    display: flex;
-    z-index: 9;
-    transition: 0.25s ease;
-    margin-top: -20px;
-}
 
-.side-bar-container a{
+.side-bar a{
     text-decoration: none;
 }
 
 .side-bar{
-    width: 80px;
-    height: 100%;
+    position: absolute;
+    min-height: 180px;
     transition: 0.25s ease;
-    background-color: #1c2235e1;
+    background-color: #1c2235f3;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    padding: 8px 10px;
-    gap: 5px;
-    overflow: hidden;
+    gap: 3px;
+    z-index: 3;
+    top: -10px;
 }
 .side-bar-items{
     display: flex;
@@ -38,15 +30,49 @@
 
 
 .side-bar-toggle{
-    height: 100%;
     display: flex;
-    flex-direction: column;
     padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: -15px;
 }
 
 .side-bar-toggle .fa-solid{
  font-size: 1.1rem;
- display: flex;
- align-items: center;
- justify-content: center;
+}
+
+hr{
+    width: 100%;
+    margin-top: 1px;
+    border: none;
+    border-top: 1.5px solid #989797;
+    border-radius: 8px;
+}
+
+ .add-folders-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+
+.folder-options-div{
+    position: absolute;
+    background-color: #1c2235;
+    color: ghostwhite;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 8px;
+}
+.folder-options-div div{
+    display: flex;
+    gap: 5px;
+    border-radius: 8px;
+    align-items: center;
+    padding: 5px;
+}
+.folder-options-div div:hover{
+    background-color: #474d59;
 }

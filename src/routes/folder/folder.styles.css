@@ -1,0 +1,4 @@
+.folder-component-container{
+    display: flex;
+    flex-direction: column;
+}

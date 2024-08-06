@@ -6,6 +6,8 @@ import './container.styles.css';
 import Home from '../routes/home/home.component';
 import Favorites from '../routes/favorites/favorites.component';
 import SideBar from '../sidebar/sidebar.component';
+import FolderComponent from '../routes/folder/folder.component';
+
 const Container=()=>{
     const [isDropdownOpen,setIsDropdownOpen]=useState(false);
     const dropdownRef = useRef(null);
@@ -47,6 +49,7 @@ const Container=()=>{
                 <Routes>
                     <Route path='/' element={<Home/>} />
                     <Route path='fav' element={<Favorites/>} />
+                    <Route path='folders/:folderName' element={<FolderComponent/>}/>
                 </Routes>
             <div ref={dropdownRef}>
             <Dropdown userImg={userImg} displayName={displayName} userEmail={userEmail} isDropdownOpen={isDropdownOpen} />
