@@ -19,7 +19,7 @@ const SideBar=()=>{
 
     const sideBarStyles={
         width: isSideBarOpen ? '140px' : '0',
-        padding : isSideBarOpen ? '20px 10px' : '0',
+        padding : isSideBarOpen ? '20px 15px 30px' : '0',
     }
 
     
@@ -104,7 +104,7 @@ const SideBar=()=>{
                 })
                }
                {showPopup && <div ref={popupRef} className='folder-options-div' style={{
-                top:popupPosition.top-15,
+                top:popupPosition.top-19,
                 left:'13px',
                }}>
                 <div><i className='fa-regular fa-pen-to-square'></i>Rename</div>

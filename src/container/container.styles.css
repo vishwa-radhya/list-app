@@ -9,7 +9,7 @@
 .s-out-pic-container{
     position: absolute;
     width: 100%;
-    top: -5%;
+    top: -18px;
     display: flex;
     align-items: center;
     justify-content: right;

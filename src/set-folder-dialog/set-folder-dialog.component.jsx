@@ -1,7 +1,7 @@
 import { forwardRef, useContext, useEffect } from 'react';
 import './set-folder-dialog.styles.css';
 import { database } from "../utils/firebase";
-import { push,ref, onValue } from "firebase/database";
+import { set,ref, onValue } from "firebase/database";
 import { auth } from "../utils/firebase";
 import { useState } from 'react';
 import { FolderNamesContext } from '../contexts/folder-names-context';
@@ -30,8 +30,8 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
     
     function handleCreateClick(){
         if(inputValue.trim() && !folderNames.includes(inputValue.trim())){
-            const dbReference = ref(database,`shoppingLists/${user.uid}/folders/${inputValue}`);
-            push(dbReference,{isFavorite:false,value:'sample item'});
+            const dbReference = ref(database,`shoppingLists/${user.uid}/folders/${inputValue}/marker`);
+            set(dbReference,true);
             setIsCreateFolderDialogOpen(false);
             setInputValue('');
             handleFolderExistedError(false);

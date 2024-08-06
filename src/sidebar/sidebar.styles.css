@@ -22,6 +22,7 @@
     padding: 5px;
     border-radius: 8px;
     color: ghostwhite;
+    cursor: pointer;
 }
 
 .side-bar-items:hover{
@@ -60,10 +61,10 @@ hr{
     position: absolute;
     background-color: #1c2235;
     color: ghostwhite;
-    padding: 15px;
+    padding: 13px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     border-radius: 8px;
 }
 .folder-options-div div{
@@ -71,7 +72,8 @@ hr{
     gap: 5px;
     border-radius: 8px;
     align-items: center;
-    padding: 5px;
+    padding: 8px;
+    font-size: 0.8rem;
 }
 .folder-options-div div:hover{
     background-color: #474d59;
