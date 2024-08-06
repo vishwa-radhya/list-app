@@ -21,9 +21,6 @@ const DeleteDialog=forwardRef(({deleteFolderName,setShowPopup},ref1)=>{
     }
 
     function handleFolderDelete(){
-        // console.log(deleteFolderName);
-        // console.log(location.pathname);
-        // navigator('/')
         if(deleteFolderName){
             if(location.pathname.includes(deleteFolderName.replaceAll(' ','%20'))){
                 navigateRouter('/')

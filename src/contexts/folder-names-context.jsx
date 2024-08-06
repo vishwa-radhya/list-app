@@ -8,7 +8,7 @@ export const FolderNamesProvider=({children})=>{
     const [isDeleteFolderDialogOpen,setIsdeleteFolderDialogOpen]=useState(false);
 
     const handleFolderNamesAdd=useCallback((arr)=>{
-        setFolderNames([...arr]);
+        setFolderNames(arr);
     },[]);
 
     const handleFolderExistedError=(bool)=>{

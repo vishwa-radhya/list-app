@@ -18,8 +18,12 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
             const dbFolderReference = ref(database,`shoppingLists/${user.uid}/folders`)
             onValue(dbFolderReference,(snapshot)=>{
                 const data = snapshot.val();
+                if(data){
                 const folderNamesFromDbArr = Object.keys(data);                
                 handleFolderNamesAdd(folderNamesFromDbArr);
+                }else{
+                    handleFolderNamesAdd([]);
+                }
             })
         }
     },[user,handleFolderNamesAdd])
