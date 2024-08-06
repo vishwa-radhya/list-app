@@ -24,10 +24,6 @@ const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
             onValue(shoppingListRef,(snapshot)=>{
                 const data = snapshot.val();
                 if(data){
-                    if(data.marker && Object.keys(data).length>1){
-                        const markerRef = ref(database,`shoppingLists/${user.uid}/${dbReference}/marker`);
-                        remove(markerRef);
-                    }
                     let itemsArray = Object.entries(data).map(([id,{isFavorite,value}])=>({id,isFavorite,value}));
                     const newItemsArray = isFavItemsOnly ? itemsArray.filter(item=>item.isFavorite) : itemsArray;
                     setItems(newItemsArray);
