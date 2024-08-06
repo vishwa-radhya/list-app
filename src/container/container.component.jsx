@@ -1,5 +1,5 @@
 import Dropdown from "../dropdown/Dropdown.component";
-import { useEffect, useRef, useState } from "react";
+import {   useEffect, useRef, useState } from "react";
 import { auth } from "../utils/firebase";
 import { Route, Routes } from 'react-router-dom';
 import './container.styles.css';
@@ -15,7 +15,6 @@ const Container=()=>{
     const userImg = auth.currentUser.photoURL;
     const displayName = auth.currentUser.displayName;
     const userEmail = auth.currentUser.email;
-
 
     function handleClickOutside(event){
         if(dropdownRef.current && !dropdownRef.current.contains(event.target) && !userImgRef.current.contains(event.target)){
@@ -40,7 +39,7 @@ const Container=()=>{
     }
 
     
-    
+
     return(
         <div className="container">
         <div className="s-out-pic-container">

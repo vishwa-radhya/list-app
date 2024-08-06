@@ -3,6 +3,7 @@ html,body{
   padding: 0;
   font-family: "Comfortaa", sans-serif;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 img{

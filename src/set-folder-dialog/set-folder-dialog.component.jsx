@@ -48,7 +48,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
 
     const setFolderNameDialogStyles={
         height:isCreateFolderDialogOpen?'auto' :'0',
-        padding:isCreateFolderDialogOpen?'15px 15px 5px 15px':'0',
+        padding:isCreateFolderDialogOpen?'15px 15px 6px 15px':'0',
     }
 
     return(
@@ -65,6 +65,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
                     ()=>{
                         setIsCreateFolderDialogOpen(false)
                         handleFolderExistedError(false);
+                        setInputValue('')
                     }
                 }>Cancel</button>
                 <button onClick={handleCreateClick}>Create</button>

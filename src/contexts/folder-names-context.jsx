@@ -5,6 +5,7 @@ export const FolderNamesContext = createContext();
 export const FolderNamesProvider=({children})=>{
     const [folderNames,setFolderNames]=useState([]);
     const [isFolderExisted,setIsFolderExisted]=useState(false);
+    const [isDeleteFolderDialogOpen,setIsdeleteFolderDialogOpen]=useState(false);
 
     const handleFolderNamesAdd=useCallback((arr)=>{
         setFolderNames([...arr]);
@@ -14,8 +15,16 @@ export const FolderNamesProvider=({children})=>{
         setIsFolderExisted(bool);
     }
 
+    const handleSetDeleteFolderDialog=(bool)=>{
+        setIsdeleteFolderDialogOpen(bool);
+    }
+
+    const folderNamesContextValues={
+        folderNames,handleFolderNamesAdd,isFolderExisted,handleFolderExistedError,isDeleteFolderDialogOpen,handleSetDeleteFolderDialog
+    }
+
     return(
-        <FolderNamesContext.Provider value={{folderNames,handleFolderNamesAdd,isFolderExisted,handleFolderExistedError}}>
+        <FolderNamesContext.Provider value={folderNamesContextValues}>
         {children}
         </FolderNamesContext.Provider>
     )
