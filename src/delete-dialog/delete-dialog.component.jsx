@@ -28,7 +28,7 @@ const DeleteDialog=forwardRef(({deleteFolderName,setShowPopup},ref1)=>{
 
     return(
         <div className="delete-folder-dialog" ref={ref1} >
-            <p>Are you sure you want to delete this folder?</p>
+            <p>Are you sure you want to delete this folder?<span>  {deleteFolderName}</span> </p>
             <div className="btn-wrapper">
             <button className='dfd-cnl' onClick={
                 (e)=>{

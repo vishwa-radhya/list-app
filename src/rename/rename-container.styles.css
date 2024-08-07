@@ -15,7 +15,7 @@
 .rename-container p{
     font-size: 0.8rem;
     margin-top: -10px;
-    font-weight: 600;
+    font-weight: 700;
 }
 .rename-container input{
     border: 0;
@@ -48,7 +48,7 @@
     font-size: 0.8rem;
     border-radius: 10px;
     height: 100%;
-    font-weight: 500;
+    font-weight: 700;
 }
 .rename-container button:hover{
     background-color: rgb(225, 226, 226);
