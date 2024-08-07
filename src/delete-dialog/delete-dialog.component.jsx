@@ -7,18 +7,11 @@ import { useLocation,useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const DeleteDialog=forwardRef(({deleteFolderName,setShowPopup},ref1)=>{
-    const {handleSetDeleteFolderDialog,isDeleteFolderDialogOpen}=useContext(FolderNamesContext);
+    const {handleSetDeleteFolderDialog}=useContext(FolderNamesContext);
 
     const location = useLocation();
     const navigateRouter = useNavigate();
     const user = auth.currentUser;
-
-
-    const deleteDialogStyles={
-        height:isDeleteFolderDialogOpen ? 'auto' : '0',
-        width:isDeleteFolderDialogOpen ? 'auto' : '0',
-        padding:isDeleteFolderDialogOpen ? '10px' : '0',
-    }
 
     function handleFolderDelete(){
         if(deleteFolderName){
@@ -34,11 +27,20 @@ const DeleteDialog=forwardRef(({deleteFolderName,setShowPopup},ref1)=>{
     }
 
     return(
-        <div className="delete-folder-dialog" ref={ref1} style={deleteDialogStyles}>
+        <div className="delete-folder-dialog" ref={ref1} >
             <p>Are you sure you want to delete this folder?</p>
             <div className="btn-wrapper">
-            <button className='dfd-cnl' onClick={()=>handleSetDeleteFolderDialog(false)}>Cancel</button>
-            <button className='dfd-del' onClick={handleFolderDelete}>Delete</button>
+            <button className='dfd-cnl' onClick={
+                (e)=>{
+                    e.stopPropagation();
+                    handleSetDeleteFolderDialog(false)
+                }
+            }>Cancel</button>
+            <button className='dfd-del' onClick={
+                (e)=>{
+                    e.stopPropagation();
+                handleFolderDelete()
+            }}>Delete</button>
             </div>
         </div>
     )

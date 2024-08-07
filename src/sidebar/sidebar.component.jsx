@@ -1,7 +1,10 @@
 import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import './sidebar.styles.css';
+import { auth } from "../utils/firebase";
 import SetFolderDialog from '../set-folder-dialog/set-folder-dialog.component';
+import { database } from "../utils/firebase";
+import { ref,onValue } from 'firebase/database';
 import { FolderNamesContext } from '../contexts/folder-names-context';
 import DeleteDialog from '../delete-dialog/delete-dialog.component';
 const SideBar=()=>{
@@ -10,7 +13,7 @@ const SideBar=()=>{
     const sideBarToggleRef = useRef(null);
     const createFolderDialogRef=useRef(null);
     const [isCreateFolderDialogOpen,setIsCreateFolderDialogOpen]=useState(false);
-    const {handleSetDeleteFolderDialog,folderNames}=useContext(FolderNamesContext);
+    const {handleSetDeleteFolderDialog,folderNames,handleFolderNamesAdd,isDeleteFolderDialogOpen}=useContext(FolderNamesContext);
     const [showPopup,setShowPopup]=useState(false);
     const [popupPosition,setPopupPosition]=useState({top:0});
     const timeoutRef = useRef(null);
@@ -23,15 +26,17 @@ const SideBar=()=>{
         width: isSideBarOpen ? '220px' : '0',
         padding : isSideBarOpen ? '20px 15px 30px' : '0',
     }
+    
 
+    const user=auth.currentUser;
     
 
     function sideBarToggleHandler(){
         setIsSideBarOpen(!isSideBarOpen);
     }
-
+    
     function handleSideBarOutSideClick(event){
-        if(sideBarRef.current && !sideBarRef.current.contains(event.target) && !sideBarToggleRef.current.contains(event.target) && createFolderDialogRef.current && !createFolderDialogRef.current.contains(event.target) && deleteDialogRef.current && !deleteDialogRef.current.contains(event.target) ){
+        if(sideBarRef.current && !sideBarRef.current.contains(event.target) && !sideBarToggleRef.current.contains(event.target) && (!createFolderDialogRef.current || !createFolderDialogRef.current.contains(event.target)) && (!deleteDialogRef.current || !deleteDialogRef.current.contains(event.target)) ){            
             setIsSideBarOpen(false);
             setIsCreateFolderDialogOpen(false);
             handleSetDeleteFolderDialog(false);
@@ -52,7 +57,7 @@ const SideBar=()=>{
     useEffect(()=>{
         if(showPopup){
             const handleClickOutSide=(event)=>{
-                if(popupRef.current && !popupRef.current.contains(event.target) && deleteDialogRef.current && !deleteDialogRef.current.contains(event.target)){
+                if(popupRef.current && !popupRef.current.contains(event.target) && (!deleteDialogRef.current || !deleteDialogRef.current.contains(event.target))){
                     setShowPopup(false);
                     handleSetDeleteFolderDialog(false)
                 }
@@ -66,6 +71,22 @@ const SideBar=()=>{
             }
         }
     },[showPopup,handleSetDeleteFolderDialog])
+
+    useEffect(()=>{
+        if(user){
+            const dbFolderReference = ref(database,`shoppingLists/${user.uid}/folders`)
+            onValue(dbFolderReference,(snapshot)=>{
+                const data = snapshot.val();
+                if(data){
+                const folderNamesFromDbArr = Object.keys(data);                
+                handleFolderNamesAdd(folderNamesFromDbArr);
+                }else{
+                    handleFolderNamesAdd([]);
+                }
+            })
+        }
+    },[user,handleFolderNamesAdd])
+
 
     function handleOpenCreateFolderDialog(bool){
         setIsCreateFolderDialogOpen(bool);
@@ -85,7 +106,7 @@ const SideBar=()=>{
         setPopupPosition({top:rect.bottom});
         timeoutRef.current = setTimeout(()=>{
             setShowPopup(true);
-        },600);        
+        },500);        
     }
 
     function handleFolderMouseUp(){
@@ -120,8 +141,8 @@ const SideBar=()=>{
                </Fragment>}
             </div>
             <div className='side-bar-toggle' ref={sideBarToggleRef}><i className={isSideBarOpen ? '' : 'fa-solid fa-bars'} onClick={sideBarToggleHandler}></i></div>
-            <SetFolderDialog setIsCreateFolderDialogOpen={setIsCreateFolderDialogOpen} ref={createFolderDialogRef} isCreateFolderDialogOpen={isCreateFolderDialogOpen} />
-             <DeleteDialog ref={deleteDialogRef} deleteFolderName={deleteFolderName} setShowPopup={setShowPopup} />
+            { isCreateFolderDialogOpen && <SetFolderDialog setIsCreateFolderDialogOpen={setIsCreateFolderDialogOpen} isCreateFolderDialogOpen={isCreateFolderDialogOpen} ref={createFolderDialogRef}  />}
+             { isDeleteFolderDialogOpen && <DeleteDialog ref={deleteDialogRef} deleteFolderName={deleteFolderName} setShowPopup={setShowPopup} />}
         </Fragment>
     )
 }

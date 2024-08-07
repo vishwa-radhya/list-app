@@ -1,7 +1,7 @@
-import { forwardRef, useContext, useEffect } from 'react';
+import { forwardRef, useContext, useEffect, useRef } from 'react';
 import './set-folder-dialog.styles.css';
 import { database } from "../utils/firebase";
-import { set,ref, onValue } from "firebase/database";
+import { set,ref } from "firebase/database";
 import { auth } from "../utils/firebase";
 import { useState } from 'react';
 import { FolderNamesContext } from '../contexts/folder-names-context';
@@ -11,22 +11,14 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
 
     const [inputValue,setInputValue] = useState('');
     const user=auth.currentUser;
-    const {handleFolderNamesAdd,folderNames,isFolderExisted,handleFolderExistedError}=useContext(FolderNamesContext);
-
-    useEffect(()=>{
-        if(user){
-            const dbFolderReference = ref(database,`shoppingLists/${user.uid}/folders`)
-            onValue(dbFolderReference,(snapshot)=>{
-                const data = snapshot.val();
-                if(data){
-                const folderNamesFromDbArr = Object.keys(data);                
-                handleFolderNamesAdd(folderNamesFromDbArr);
-                }else{
-                    handleFolderNamesAdd([]);
-                }
-            })
+    const {folderNames,isFolderExisted,handleFolderExistedError}=useContext(FolderNamesContext);
+    const createFolderDialogInputRef = useRef(null);
+    
+    useEffect(()=>{                
+        if(isCreateFolderDialogOpen){
+            createFolderDialogInputRef.current.focus();
         }
-    },[user,handleFolderNamesAdd])
+    },[isCreateFolderDialogOpen]);
 
     function inputChangeHandler(val){
         setInputValue(val);
@@ -39,6 +31,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
             setIsCreateFolderDialogOpen(false);
             setInputValue('');
             handleFolderExistedError(false);
+            createFolderDialogInputRef.current.blur();
         }else{
             handleFolderExistedError(true);
         }
@@ -50,23 +43,19 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
         }
     }
 
-    const setFolderNameDialogStyles={
-        height:isCreateFolderDialogOpen?'auto' :'0',
-        padding:isCreateFolderDialogOpen?'15px 15px 6px 15px':'0',
-    }
-
     return(
-        <div className="set-folder-name-dialog" ref={ref1} style={setFolderNameDialogStyles}>
+        <div className="set-folder-name-dialog" ref={ref1} >
             <p>Enter the name for the folder</p>
             <div className="set-folder-name-dialog-input-div">
-            <input type="text" maxLength={25} value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>createEnterHandler(e.key)} />
+            <input type="text" maxLength={25} value={inputValue} ref={createFolderDialogInputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>createEnterHandler(e.key)} />
             <div className="input-len-indicator">
             {inputValue ? inputValue.length : ''}/25
             </div>
             </div>
             <div className='set-folder-name-dialog-btn-wrapper'>
                 <button onClick={
-                    ()=>{
+                    (e)=>{
+                        e.stopPropagation();
                         setIsCreateFolderDialogOpen(false)
                         handleFolderExistedError(false);
                         setInputValue('')

@@ -5,7 +5,6 @@
 
 .side-bar{
     position: absolute;
-    min-height: 180px;
     transition: 0.25s ease;
     background-color: #1c2235f3;
     border-radius: 8px;
@@ -13,14 +12,17 @@
     flex-direction: column;
     gap: 10px;
     z-index: 3;
-    top: -10px;
-    left: -20px;
+    top: -20px;
+    left: -30px;
+    min-height: 91vh;
+    max-height: 91vh;
+    overflow-y: auto;
 }
 .side-bar-items{
     display: flex;
     gap: 10px;
     width: 95%;
-    padding: 5px;
+    padding: 8px;
     border-radius: 8px;
     color: ghostwhite;
     cursor: pointer;
@@ -80,4 +82,19 @@ hr{
 }
 .folder-options-div div:hover{
     background-color: #474d59;
+}
+::-webkit-scrollbar{
+    width: 8px;
+}
+::-webkit-scrollbar:horizontal{
+    display: none;
+}
+
+::-webkit-scrollbar-track{
+    background: #1c2235;
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgb(96, 96, 111);
+    border-radius: 10px;
 }
