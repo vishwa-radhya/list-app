@@ -141,7 +141,7 @@ const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
                 key={item.id}
                 onClick={()=>showIcons(item.id,item.value)}
                 ref={el => listRefs.current[item.id]=el}
-                style={{outline: item.isFavorite  ? '2px solid #FADF6F' : '0',backgroundColor: isFavItemsOnly ? '#FCDA76' :'',maxWidth:item.value===undefined ? '0%' : '100%',padding:item.value===undefined?'0px':'15px'}}
+                style={{outline: item.isFavorite  ? '2px solid #FADF6F' : '0',backgroundColor: isFavItemsOnly ? '#FCDA76' :'',padding:item.value===undefined?'0':'15px'}}
                 >
             <div 
                 className={renameIconClass} 

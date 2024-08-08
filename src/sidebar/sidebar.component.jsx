@@ -7,23 +7,29 @@ import { database } from "../utils/firebase";
 import { ref,onValue } from 'firebase/database';
 import { FolderNamesContext } from '../contexts/folder-names-context';
 import DeleteDialog from '../delete-dialog/delete-dialog.component';
+import RenameFolderDialog from '../rename-folder-dialog/rename-folder-dialog.component';
 const SideBar=()=>{
     const [isSideBarOpen,setIsSideBarOpen]=useState(false);
     const sideBarRef = useRef(null);
     const sideBarToggleRef = useRef(null);
     const createFolderDialogRef=useRef(null);
     const [isCreateFolderDialogOpen,setIsCreateFolderDialogOpen]=useState(false);
-    const {handleSetDeleteFolderDialog,folderNames,handleFolderNamesAdd,isDeleteFolderDialogOpen}=useContext(FolderNamesContext);
+    const {handleSetDeleteFolderDialog,folderNames,handleFolderNamesAdd,isDeleteFolderDialogOpen,isRenameFolderDialogOpen,handleSetRenameFolderDialog}=useContext(FolderNamesContext);
     const [showPopup,setShowPopup]=useState(false);
     const [popupPosition,setPopupPosition]=useState({top:0});
     const timeoutRef = useRef(null);
     const navigateRouter = useNavigate();
     const popupRef = useRef(null);
     const deleteDialogRef =useRef(null);
-    const [deleteFolderName,setDeleteFolderName]=useState('');
+    const renameDialogref = useRef(null);
+    const [currentFolderName,setCurrentFolderName]=useState('');
+    const createFolderButtonRef =useRef(null);
+    const popupRenameButtonRef = useRef(null);
+    const popupDeleteButtonRef = useRef(null);
+
 
     const sideBarStyles={
-        width: isSideBarOpen ? '220px' : '0',
+        width: isSideBarOpen ? '280px' : '0',
         padding : isSideBarOpen ? '20px 15px 30px' : '0',
     }
     
@@ -35,31 +41,32 @@ const SideBar=()=>{
         setIsSideBarOpen(!isSideBarOpen);
     }
     
-    function handleSideBarOutSideClick(event){
-        if(sideBarRef.current && !sideBarRef.current.contains(event.target) && !sideBarToggleRef.current.contains(event.target) && (!createFolderDialogRef.current || !createFolderDialogRef.current.contains(event.target)) && (!deleteDialogRef.current || !deleteDialogRef.current.contains(event.target)) ){            
-            setIsSideBarOpen(false);
-            setIsCreateFolderDialogOpen(false);
-            handleSetDeleteFolderDialog(false);
-        }
-    }
+    
     useEffect(()=>{
         if(isSideBarOpen){
+            const handleSideBarOutSideClick=(event)=>{
+                if(sideBarRef.current && !sideBarRef.current.contains(event.target) && !sideBarToggleRef.current.contains(event.target)){                        
+                    setIsSideBarOpen(false);
+                    setIsCreateFolderDialogOpen(false);
+                    handleSetDeleteFolderDialog(false);
+                    handleSetRenameFolderDialog(false);
+                }
+            }
             document.addEventListener('click',handleSideBarOutSideClick);
-        }else{
-            document.removeEventListener('click',handleSideBarOutSideClick);
-        }
-        return ()=>{
-            document.removeEventListener('click',handleSideBarOutSideClick);
+            return ()=>{
+                document.removeEventListener('click',handleSideBarOutSideClick);
+            }
         }
 
-    },[isSideBarOpen]);
-
+    },[isSideBarOpen,handleSetDeleteFolderDialog,handleSetRenameFolderDialog]);
+    
     useEffect(()=>{
         if(showPopup){
             const handleClickOutSide=(event)=>{
-                if(popupRef.current && !popupRef.current.contains(event.target) && (!deleteDialogRef.current || !deleteDialogRef.current.contains(event.target))){
+                if(popupRef.current && !popupRef.current.contains(event.target) && (!deleteDialogRef.current || !deleteDialogRef.current.contains(event.target)) && (!renameDialogref.current || !renameDialogref.current.contains(event.target))){
                     setShowPopup(false);
                     handleSetDeleteFolderDialog(false)
+                    handleSetRenameFolderDialog(false);
                 }
             }
             document.addEventListener('mousedown',handleClickOutSide);
@@ -70,7 +77,7 @@ const SideBar=()=>{
                 document.removeEventListener('touchstart',handleClickOutSide);
             }
         }
-    },[showPopup,handleSetDeleteFolderDialog])
+    },[showPopup,handleSetDeleteFolderDialog,handleSetRenameFolderDialog])
 
     useEffect(()=>{
         if(user){
@@ -96,13 +103,13 @@ const SideBar=()=>{
         if(showPopup){
             e.preventDefault();
         }else{
-            navigateRouter(`folders/${folderName}`)
+            navigateRouter(`folders/${folderName}`)            
         }
     }
 
     function handleFolderMouseDown(event){
         const rect = event.target.getBoundingClientRect();
-        setDeleteFolderName(event.target.textContent);
+        setCurrentFolderName(event.target.textContent);
         setPopupPosition({top:rect.bottom});
         timeoutRef.current = setTimeout(()=>{
             setShowPopup(true);
@@ -125,7 +132,7 @@ const SideBar=()=>{
                <Link to='/'> <div className='side-bar-items side-bar-home'><i className="fa-solid fa-house"></i>Home</div></Link>
                <Link to='/fav'> <div className='side-bar-items'><i className="fa-solid fa-star" style={{color:'#CCB142'}}></i>Favorites</div></Link>
                <hr />
-               <div className='side-bar-items add-folders-btn' onClick={()=>handleOpenCreateFolderDialog(true)}><i className='fa-solid fa-folder-plus'></i>Create</div>
+               <div className='side-bar-items add-folders-btn' ref={createFolderButtonRef} onClick={()=>handleOpenCreateFolderDialog(true)}><i className='fa-solid fa-folder-plus'></i>Create</div>
                {
                 folderNames.map((folder,index)=>{
                     return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onMouseLeave={handleFolderMouseLeave} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave}><i className='fa-solid fa-folder'></i>{folder}</div>
@@ -135,14 +142,15 @@ const SideBar=()=>{
                 top:popupPosition.top-19,
                 left:'85px',
                }}>
-                <div><i className='fa-regular fa-pen-to-square'></i>Rename</div>
-                <div onClick={()=>handleSetDeleteFolderDialog(true)}><i className='fa-regular fa-trash-can'></i>Delete</div>
+                <div onClick={()=>handleSetRenameFolderDialog(true)} ref={popupRenameButtonRef}><i className='fa-regular fa-pen-to-square'></i>Rename</div>
+                <div onClick={()=>handleSetDeleteFolderDialog(true)} ref={popupDeleteButtonRef}><i className='fa-regular fa-trash-can'></i>Delete</div>
                </div>}
                </Fragment>}
             </div>
             <div className='side-bar-toggle' ref={sideBarToggleRef}><i className={isSideBarOpen ? '' : 'fa-solid fa-bars'} onClick={sideBarToggleHandler}></i></div>
-            { isCreateFolderDialogOpen && <SetFolderDialog setIsCreateFolderDialogOpen={setIsCreateFolderDialogOpen} isCreateFolderDialogOpen={isCreateFolderDialogOpen} ref={createFolderDialogRef}  />}
-             { isDeleteFolderDialogOpen && <DeleteDialog ref={deleteDialogRef} deleteFolderName={deleteFolderName} setShowPopup={setShowPopup} />}
+            { isCreateFolderDialogOpen && <SetFolderDialog setIsCreateFolderDialogOpen={setIsCreateFolderDialogOpen} isCreateFolderDialogOpen={isCreateFolderDialogOpen} ref={createFolderDialogRef} createFolderButtonRef={createFolderButtonRef} />}
+             { isDeleteFolderDialogOpen && <DeleteDialog ref={deleteDialogRef} currentFolderName={currentFolderName} setShowPopup={setShowPopup} popupDeleteButtonRef={popupDeleteButtonRef} />}
+             {isRenameFolderDialogOpen && <RenameFolderDialog ref={renameDialogref} popupRenameButtonRef={popupRenameButtonRef} currentFolderName={currentFolderName} setShowPopup={setShowPopup} />}
         </Fragment>
     )
 }

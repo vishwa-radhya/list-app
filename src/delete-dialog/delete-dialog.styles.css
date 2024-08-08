@@ -10,7 +10,7 @@
     box-shadow: 2px 2px 3px rgb(128, 126, 126);
     transition: 0.45s ease;
     overflow: hidden;
-    font-weight: 600;
+    font-weight: 500;
 }
 .delete-folder-dialog span{
     color: rgb(19, 194, 89);
@@ -27,7 +27,7 @@
     cursor: pointer;
     font-size: 0.9rem;
     height: 100%;
-    font-weight: 700;
+    font-weight: 600;
     border-radius: 15px;
     border: 0;
     text-align: center;

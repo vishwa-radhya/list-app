@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { FolderNamesContext } from '../contexts/folder-names-context';
 import PropTypes from 'prop-types';
 
-const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDialogOpen},ref1)=>{
+const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDialogOpen,createFolderButtonRef},ref1)=>{
 
     const [inputValue,setInputValue] = useState('');
     const user=auth.currentUser;
@@ -23,6 +23,23 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
     function inputChangeHandler(val){
         setInputValue(val);
     }
+
+    useEffect(()=>{
+        if(isCreateFolderDialogOpen){
+            const handleClickOutSide =(event)=>{
+                if(
+                    (!ref1.current || !ref1.current.contains(event.target)) && createFolderButtonRef.current && !createFolderButtonRef.current.contains(event.target)
+                ){
+                    setIsCreateFolderDialogOpen(false);
+                }
+            }
+            document.addEventListener('click',handleClickOutSide);
+        
+        return ()=>{
+            document.removeEventListener('click',handleClickOutSide);
+        }
+    }
+    },[isCreateFolderDialogOpen,createFolderButtonRef,ref1,setIsCreateFolderDialogOpen])
     
     function handleCreateClick(){
         if(inputValue.trim() && !folderNames.includes(inputValue.trim())){
@@ -36,7 +53,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
             handleFolderExistedError(true);
         }
     }
-
+    
     function createEnterHandler(key){
         if(key === 'Enter'){
             handleCreateClick();
@@ -71,5 +88,6 @@ SetFolderDialog.displayName='SetFolderDialog';
 SetFolderDialog.propTypes={
     setIsCreateFolderDialogOpen:PropTypes.func,
     isCreateFolderDialogOpen:PropTypes.bool,
+    createFolderButtonRef:PropTypes.object,
 }
 export default SetFolderDialog;

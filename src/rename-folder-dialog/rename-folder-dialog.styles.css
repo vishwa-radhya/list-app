@@ -1,0 +1,54 @@
+.rename-folder-dialog-div{
+    background-color: whitesmoke;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 20px;
+    transition: .2s ease;
+    box-shadow: 0px 3px 6px rgb(160, 159, 159);
+    z-index: 10;
+    position: absolute;
+    top: 80px;
+}
+.rename-folder-dialog-div input{
+    width: 100%;
+    font-family: inherit;
+    background-color: inherit;
+    font-size: 1rem;
+    outline: none;
+    border: 0;
+}
+.rename-folder-dialog-div fieldset{
+    border: 2px solid;
+    border-radius: 3px;
+}
+.rename-folder-dialog-div legend{
+    font-size: 0.8rem;
+}
+.rename-folder-btn-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    gap: 10px;
+    top: 10px;
+}
+.rename-folder-btn-wrapper button{
+    font-family: inherit;
+    background-color: inherit;
+    border: 0;
+    color: black;
+    cursor: pointer;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    height: 100%;
+    font-weight: 500;
+    padding: 5px;
+    
+}
+.rename-folder-btn-wrapper button:hover{
+    background-color: rgb(225, 226, 226);
+}
+.rename-folder-dialog-div button:disabled{
+    color: gray;
+}

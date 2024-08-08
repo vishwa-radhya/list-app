@@ -6,6 +6,7 @@ export const FolderNamesProvider=({children})=>{
     const [folderNames,setFolderNames]=useState([]);
     const [isFolderExisted,setIsFolderExisted]=useState(false);
     const [isDeleteFolderDialogOpen,setIsdeleteFolderDialogOpen]=useState(false);
+    const [isRenameFolderDialogOpen,setIsRenameFolderDialogOpen]=useState(false);
 
     const handleFolderNamesAdd=useCallback((arr)=>{
         setFolderNames(arr);
@@ -19,8 +20,12 @@ export const FolderNamesProvider=({children})=>{
         setIsdeleteFolderDialogOpen(bool);
     }
 
+    const handleSetRenameFolderDialog=(bool)=>{
+        setIsRenameFolderDialogOpen(bool);
+    }
+
     const folderNamesContextValues={
-        folderNames,handleFolderNamesAdd,isFolderExisted,handleFolderExistedError,isDeleteFolderDialogOpen,handleSetDeleteFolderDialog
+        folderNames,handleFolderNamesAdd,isFolderExisted,handleFolderExistedError,isDeleteFolderDialogOpen,handleSetDeleteFolderDialog,isRenameFolderDialogOpen,handleSetRenameFolderDialog
     }
 
     return(
