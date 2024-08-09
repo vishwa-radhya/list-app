@@ -6,7 +6,6 @@ import { FolderNamesContext } from '../contexts/folder-names-context';
 import PropTypes from 'prop-types';
 import { useLocation,useNavigate } from 'react-router-dom';
 
-
 const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,setShowPopup},ref1)=>{
 
     const [inputValue,setInputValue]=useState('');

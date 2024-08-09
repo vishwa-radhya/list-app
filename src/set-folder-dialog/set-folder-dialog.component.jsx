@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { FolderNamesContext } from '../contexts/folder-names-context';
 import PropTypes from 'prop-types';
 
+
 const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDialogOpen,createFolderButtonRef},ref1)=>{
 
     const [inputValue,setInputValue] = useState('');
@@ -61,7 +62,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
     }
 
     return(
-        <div className="set-folder-name-dialog" ref={ref1} >
+        <div className="set-folder-name-dialog" ref={ref1} onClick={(e)=>e.stopPropagation()} >
             <p>Enter the name for the folder</p>
             <div className="set-folder-name-dialog-input-div">
             <input type="text" maxLength={25} value={inputValue} ref={createFolderDialogInputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>createEnterHandler(e.key)} />

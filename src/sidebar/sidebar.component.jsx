@@ -18,6 +18,7 @@ const SideBar=()=>{
     const [showPopup,setShowPopup]=useState(false);
     const [popupPosition,setPopupPosition]=useState({top:0});
     const timeoutRef = useRef(null);
+    const hideSideBarItemsTimeoutRef = useRef(null);
     const navigateRouter = useNavigate();
     const popupRef = useRef(null);
     const deleteDialogRef =useRef(null);
@@ -26,10 +27,23 @@ const SideBar=()=>{
     const createFolderButtonRef =useRef(null);
     const popupRenameButtonRef = useRef(null);
     const popupDeleteButtonRef = useRef(null);
+    const [isSideBarItemsHidden,setIsSideBarItemsHidden]=useState(false);
 
-
+    useEffect(()=>{
+        if(isSideBarOpen){
+        hideSideBarItemsTimeoutRef.current = setTimeout(()=>{
+            setIsSideBarItemsHidden(isSideBarOpen);
+        },300)
+    }else{
+        setIsSideBarItemsHidden(isSideBarOpen);
+    }
+        return ()=>{
+            clearTimeout(hideSideBarItemsTimeoutRef);            
+        }
+    },[isSideBarOpen]);
+    
     const sideBarStyles={
-        width: isSideBarOpen ? '280px' : '0',
+        width: isSideBarOpen ? '270px' : '0',
         padding : isSideBarOpen ? '20px 15px 30px' : '0',
     }
     
@@ -128,11 +142,14 @@ const SideBar=()=>{
     return(
         <Fragment>
             <div className="side-bar" style={sideBarStyles} ref={sideBarRef}>
-            {isSideBarOpen && <Fragment>
+            {isSideBarItemsHidden && <Fragment>
                <Link to='/'> <div className='side-bar-items side-bar-home'><i className="fa-solid fa-house"></i>Home</div></Link>
                <Link to='/fav'> <div className='side-bar-items'><i className="fa-solid fa-star" style={{color:'#CCB142'}}></i>Favorites</div></Link>
                <hr />
-               <div className='side-bar-items add-folders-btn' ref={createFolderButtonRef} onClick={()=>handleOpenCreateFolderDialog(true)}><i className='fa-solid fa-folder-plus'></i>Create</div>
+               <div className='side-bar-items add-folders-btn' ref={createFolderButtonRef} onClick={
+                ()=>{
+                    handleOpenCreateFolderDialog(true)}
+            }><i className='fa-solid fa-folder-plus'></i>Create Folder</div>
                {
                 folderNames.map((folder,index)=>{
                     return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onMouseLeave={handleFolderMouseLeave} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave}><i className='fa-solid fa-folder'></i>{folder}</div>

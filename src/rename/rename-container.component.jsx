@@ -6,9 +6,9 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
     const [inputValue,setInputValue] = useState('');
     
     useEffect(()=>{        
-        setInputValue(clickedItemName ?? '');
+        setInputValue(clickedItemName ?? 'new name');
     },[clickedItemName])
-
+    
     useEffect(()=>{
         if(isEditIconClicked){
             inputRef.current.focus();

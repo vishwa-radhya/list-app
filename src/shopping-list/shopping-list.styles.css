@@ -19,7 +19,6 @@ ul li{
      word-wrap: break-word;
      word-break:break-word;
      flex-grow: 1;
-     min-width: 70px;
 }
 
 .rename-icon{
