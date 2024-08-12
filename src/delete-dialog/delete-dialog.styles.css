@@ -11,6 +11,7 @@
     transition: 0.45s ease;
     overflow: hidden;
     font-weight: 500;
+    animation: slide 0.2s ease;
 }
 .delete-folder-dialog span{
     color: rgb(19, 194, 89);

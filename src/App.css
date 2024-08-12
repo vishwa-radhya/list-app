@@ -14,3 +14,11 @@ button:hover{
   background-color: #6dd5a6;
 }
 
+@keyframes slide{
+  from{
+      transform: translateY(-10px);
+  }
+  to{
+      transform: translateY(0px);
+  }
+}

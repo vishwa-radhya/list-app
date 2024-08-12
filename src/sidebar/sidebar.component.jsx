@@ -43,8 +43,7 @@ const SideBar=()=>{
     },[isSideBarOpen]);
     
     const sideBarStyles={
-        width: isSideBarOpen ? '270px' : '0',
-        padding : isSideBarOpen ? '20px 15px 30px' : '0',
+        width: isSideBarOpen ? '310px' : '0',
     }
     
 
@@ -142,7 +141,7 @@ const SideBar=()=>{
     return(
         <Fragment>
             <div className="side-bar" style={sideBarStyles} ref={sideBarRef}>
-            {isSideBarItemsHidden && <Fragment>
+            {isSideBarItemsHidden && <div className='side-bar-items-div'>
                <Link to='/'> <div className='side-bar-items side-bar-home'><i className="fa-solid fa-house"></i>Home</div></Link>
                <Link to='/fav'> <div className='side-bar-items'><i className="fa-solid fa-star" style={{color:'#CCB142'}}></i>Favorites</div></Link>
                <hr />
@@ -162,7 +161,7 @@ const SideBar=()=>{
                 <div onClick={()=>handleSetRenameFolderDialog(true)} ref={popupRenameButtonRef}><i className='fa-regular fa-pen-to-square'></i>Rename</div>
                 <div onClick={()=>handleSetDeleteFolderDialog(true)} ref={popupDeleteButtonRef}><i className='fa-regular fa-trash-can'></i>Delete</div>
                </div>}
-               </Fragment>}
+               </div>}
             </div>
             <div className='side-bar-toggle' ref={sideBarToggleRef}><i className={isSideBarOpen ? '' : 'fa-solid fa-bars'} onClick={sideBarToggleHandler}></i></div>
             { isCreateFolderDialogOpen && <SetFolderDialog setIsCreateFolderDialogOpen={setIsCreateFolderDialogOpen} isCreateFolderDialogOpen={isCreateFolderDialogOpen} ref={createFolderDialogRef} createFolderButtonRef={createFolderButtonRef} />}

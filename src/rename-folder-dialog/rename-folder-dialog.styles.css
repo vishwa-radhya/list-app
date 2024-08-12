@@ -8,6 +8,7 @@
     z-index: 10;
     top: 80px;
     position:absolute;
+    animation: slide 0.2s ease;
 }
 .rename-folder-dialog-div input{
     width: 100%;

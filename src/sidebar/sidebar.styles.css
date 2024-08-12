@@ -10,14 +10,19 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     z-index: 3;
     top: -20px;
     left: -30px;
-    min-height: 91vh;
-    max-height: 91vh;
+    min-height: 97vh;
+    max-height: 97vh;
     overflow-y: auto;
     box-shadow: 2px 0px 7px rgb(155, 148, 148);
+}
+.side-bar-items-div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 15px 30px;
 }
 .side-bar-items{
     display: flex;
