@@ -88,6 +88,7 @@ hr{
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgb(168, 167, 167);
     z-index: 5;
+    animation: slide 0.2s ease;
 }
 .folder-options-div div{
     display: flex;
@@ -101,7 +102,7 @@ hr{
     background-color: #d7d7d7;
 }
 ::-webkit-scrollbar{
-    width: 0.5px;
+    width: 2px;
 }
 ::-webkit-scrollbar:horizontal{
     display: none;
