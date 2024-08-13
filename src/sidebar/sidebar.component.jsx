@@ -122,7 +122,7 @@ const SideBar=()=>{
         }
     }
 
-    function handleFolderMouseDown(event){
+    function handleFolderMouseDown(event){        
         const rect = event.target.getBoundingClientRect();
         setCurrentFolderName(event.target.textContent);
         setPopupPosition({top:rect.bottom});
@@ -137,7 +137,7 @@ const SideBar=()=>{
     }
 
     function handleFolderMouseLeave(){
-        clearTimeout(timeoutRef.current);
+        clearTimeout(timeoutRef.current);        
     }
 
     function handleSettingsRouting(){
@@ -159,7 +159,7 @@ const SideBar=()=>{
             <div className='sidebar-folders-div'>
                {
                 folderNames.map((folder,index)=>{
-                    return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onMouseLeave={handleFolderMouseLeave} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave} onTouchMove={handleFolderMouseLeave}><i className='fa-solid fa-folder'></i>{folder}</div>
+                    return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onMouseLeave={handleFolderMouseLeave} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave} onTouchMoveCapture={handleFolderMouseLeave}><i className='fa-solid fa-folder'></i>{folder}</div>
                 })
             }
             </div>

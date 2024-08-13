@@ -48,6 +48,7 @@
     width: 100%;
     overflow-y: auto;
     height: 28.5rem;
+    border-radius: 8px;
 }
 
 .side-bar-toggle{
@@ -102,7 +103,7 @@ hr{
     background-color: #d7d7d7;
 }
 ::-webkit-scrollbar{
-    width: 2px;
+    width: 0.4px;
 }
 ::-webkit-scrollbar:horizontal{
     display: none;

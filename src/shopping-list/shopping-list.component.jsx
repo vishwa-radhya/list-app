@@ -111,10 +111,10 @@ const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
         }
     }
 
-    function handleStarClick(fav){
-        if(clickedItemId){
-            const itemRef = ref(database,`shoppingLists/${user.uid}/${dbReference}/${clickedItemId}`);
-            set(itemRef,{value:clickedItemName,isFavorite:!fav}).catch((e)=>console.log(e));
+    function handleStarClick(fav,id,name){
+        if(id){
+            const itemRef = ref(database,`shoppingLists/${user.uid}/${dbReference}/${id}`);
+            set(itemRef,{value:name,isFavorite:!fav}).catch((e)=>console.log(e));
             setIsEditIconClicked(false);
         }
     }
@@ -136,7 +136,7 @@ const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
            const starIconClass = item.isFavorite ? 'fa-solid fa-star animate__animated animate__rubberBand' : 'fa-regular fa-star';
          return (
             <div className="list-wrapper" key={item.id}>
-            {isFavOptionRequired && <div className={starIconClass} ref={el => starRefs.current[item.id]=el} style={starDivStyles} onClick={()=>handleStarClick(item.isFavorite)}></div>}
+            {isFavOptionRequired && <div className={starIconClass} ref={el => starRefs.current[item.id]=el} style={starDivStyles} onClick={()=>handleStarClick(item.isFavorite,item.id,item.value)}></div>}
             <li 
                 key={item.id}
                 onClick={()=>showIcons(item.id,item.value)}
