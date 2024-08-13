@@ -122,7 +122,9 @@ const SideBar=()=>{
         }
     }
 
-    function handleFolderMouseDown(event){        
+    function handleFolderMouseDown(event){   
+        console.log('touch down');
+             
         const rect = event.target.getBoundingClientRect();
         setCurrentFolderName(event.target.textContent);
         setPopupPosition({top:rect.bottom});
@@ -132,11 +134,15 @@ const SideBar=()=>{
     }
 
     function handleFolderMouseUp(){
+        console.log('touch up');
+        
         clearTimeout(timeoutRef.current);
 
     }
 
     function handleFolderMouseLeave(){
+        console.log('touch leave');
+        
         clearTimeout(timeoutRef.current);        
     }
 
