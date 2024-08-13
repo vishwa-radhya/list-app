@@ -8,6 +8,7 @@ import { ref,onValue } from 'firebase/database';
 import { FolderNamesContext } from '../contexts/folder-names-context';
 import DeleteDialog from '../delete-dialog/delete-dialog.component';
 import RenameFolderDialog from '../rename-folder-dialog/rename-folder-dialog.component';
+
 const SideBar=()=>{
     const [isSideBarOpen,setIsSideBarOpen]=useState(false);
     const sideBarRef = useRef(null);
@@ -48,8 +49,9 @@ const SideBar=()=>{
     
 
     const user=auth.currentUser;
+    const userImg = auth.currentUser.photoURL;
+    const displayName = auth.currentUser.displayName;
     
-
     function sideBarToggleHandler(){
         setIsSideBarOpen(!isSideBarOpen);
     }
@@ -116,7 +118,8 @@ const SideBar=()=>{
         if(showPopup){
             e.preventDefault();
         }else{
-            navigateRouter(`folders/${folderName}`)            
+            navigateRouter(`folders/${folderName}`)    
+            setIsSideBarOpen(false);        
         }
     }
 
@@ -138,6 +141,11 @@ const SideBar=()=>{
         clearTimeout(timeoutRef.current);
     }
 
+    function handleSettingsRouting(){
+        navigateRouter('/settings');
+        setIsSideBarOpen(false);
+    }
+
     return(
         <Fragment>
             <div className="side-bar" style={sideBarStyles} ref={sideBarRef}>
@@ -149,11 +157,22 @@ const SideBar=()=>{
                 ()=>{
                     handleOpenCreateFolderDialog(true)}
             }><i className='fa-solid fa-folder-plus'></i>Create Folder</div>
+            <div className='sidebar-folders-div'>
                {
                 folderNames.map((folder,index)=>{
                     return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onMouseLeave={handleFolderMouseLeave} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave}><i className='fa-solid fa-folder'></i>{folder}</div>
                 })
-               }
+            }
+            </div>
+             <div className='sidebar-user-div' onClick={handleSettingsRouting}>
+                <div>
+                    <img src={userImg} alt="user-image" width={35} />
+                </div>
+                <div className='p-div'>
+                    <p>{displayName}</p>
+                </div>
+                <i className='fa-solid fa-ellipsis'></i>
+            </div>
                {showPopup && <div ref={popupRef} className='folder-options-div' style={{
                 top:popupPosition.top-19,
                 left:'85px',

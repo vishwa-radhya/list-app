@@ -14,15 +14,17 @@
     top: -20px;
     left: -30px;
     min-height: 97vh;
-    max-height: 97vh;
-    overflow-y: auto;
     box-shadow: 2px 0px 7px rgb(155, 148, 148);
 }
 .side-bar-items-div{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 20px 15px 30px;
+    gap: 7px;
+    padding: 20px 15px 1px;
+    flex: 1;
+}
+.side-bar-items-div a{
+    color: black;
 }
 .side-bar-items{
     display: flex;
@@ -30,7 +32,7 @@
     width: 95%;
     padding: 8px;
     border-radius: 8px;
-    color: rgb(30, 32, 33);
+    color: rgb(53, 56, 58);
     cursor: pointer;
     font-size: 1.15rem;
     font-weight: 450;
@@ -39,7 +41,14 @@
 .side-bar-items:hover{
     background-color: #d7d7d7;
 }
-
+.sidebar-folders-div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    overflow-y: auto;
+    height: 28.5rem;
+}
 
 .side-bar-toggle{
     display: flex;
@@ -78,6 +87,7 @@ hr{
     gap: 5px;
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgb(168, 167, 167);
+    z-index: 5;
 }
 .folder-options-div div{
     display: flex;
@@ -91,17 +101,46 @@ hr{
     background-color: #d7d7d7;
 }
 ::-webkit-scrollbar{
-    width: 8px;
+    width: 0.5px;
 }
 ::-webkit-scrollbar:horizontal{
     display: none;
 }
 
 ::-webkit-scrollbar-track{
-    background: #e9e9ea;
+    background: #d3d8da;
     border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb{
-    background-color: rgb(131, 132, 132);
+    background-color: rgb(70, 72, 73);
     border-radius: 10px;
+}
+
+.sidebar-user-div{
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-top: auto;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 0 10px;
+    border-radius: 10px;
+}
+.sidebar-user-div img{
+    border-radius: 50%;
+}
+.sidebar-user-div p{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.sidebar-user-div .p-div{
+    flex: 1;
+    margin-top: -2px;
+}
+.sidebar-user-div i{
+    font-size: 1.3rem;
+}
+.sidebar-user-div:hover{
+    background-color: #d7d7d7;
 }

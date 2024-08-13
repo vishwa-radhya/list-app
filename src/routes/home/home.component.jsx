@@ -1,11 +1,10 @@
-import { Fragment } from "react"
 import Interactor from "../../interactor/interactor.component"
-
+import './home.styles.css';
 const Home=()=>{
     return(
-        <Fragment>
+        <div className="home-div">
             <Interactor/>
-        </Fragment>
+        </div>
     )
 }
 export default Home;
