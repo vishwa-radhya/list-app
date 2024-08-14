@@ -124,8 +124,9 @@ const SideBar=()=>{
     }
 
     function handleFolderMouseDown(event){   
-        // console.log('touch down');
-             if(isScrolling) return;
+        if(isScrolling) return;
+        console.log('touch down');
+             
         const rect = event.target.getBoundingClientRect();
         setCurrentFolderName(event.target.textContent);
         setPopupPosition({top:rect.bottom});
@@ -137,6 +138,7 @@ const SideBar=()=>{
     const handleFolderDivScroll=()=>{
         // console.log('scrolled');
         setIsScrolling(true);
+        clearTimeout(timeoutRef.current);
     }
     function handleFolderMouseUp(){
         // console.log('touch up');
@@ -149,7 +151,9 @@ const SideBar=()=>{
         // console.log('touch leave');
         
         clearTimeout(timeoutRef.current);  
-        setIsScrolling(false);      
+        setIsScrolling(false);
+        console.log('scrolling false');
+              
     }
 
     function handleSettingsRouting(){
