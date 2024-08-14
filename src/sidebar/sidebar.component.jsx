@@ -29,6 +29,7 @@ const SideBar=()=>{
     const popupRenameButtonRef = useRef(null);
     const popupDeleteButtonRef = useRef(null);
     const [isSideBarItemsHidden,setIsSideBarItemsHidden]=useState(false);
+    const [isScrolling,setIsScrolling]=useState(false);
 
     useEffect(()=>{
         if(isSideBarOpen){
@@ -123,8 +124,8 @@ const SideBar=()=>{
     }
 
     function handleFolderMouseDown(event){   
-        console.log('touch down');
-             
+        // console.log('touch down');
+             if(isScrolling) return;
         const rect = event.target.getBoundingClientRect();
         setCurrentFolderName(event.target.textContent);
         setPopupPosition({top:rect.bottom});
@@ -133,15 +134,25 @@ const SideBar=()=>{
         },600);        
     }
 
+    const handleFolderDivScroll=()=>{
+        // console.log('scrolled');
+        
+        setIsScrolling(true);
+        setTimeout(()=>{
+            setIsScrolling(false);
+            // console.log('scroll ended');
+            
+        },200);
+    }
     function handleFolderMouseUp(){
-        console.log('touch up');
+        // console.log('touch up');
         
         clearTimeout(timeoutRef.current);
 
     }
 
     function handleFolderMouseLeave(){
-        console.log('touch leave');
+        // console.log('touch leave');
         
         clearTimeout(timeoutRef.current);        
     }
@@ -162,10 +173,10 @@ const SideBar=()=>{
                 ()=>{
                     handleOpenCreateFolderDialog(true)}
             }><i className='fa-solid fa-folder-plus'></i>Create Folder</div>
-            <div className='sidebar-folders-div'>
+            <div className='sidebar-folders-div' onScroll={handleFolderDivScroll}>
                {
                 folderNames.map((folder,index)=>{
-                    return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onMouseLeave={handleFolderMouseLeave} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave} onTouchMoveCapture={handleFolderMouseLeave}><i className='fa-solid fa-folder'></i>{folder}</div>
+                    return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave}><i className='fa-solid fa-folder'></i>{folder}</div>
                 })
             }
             </div>
