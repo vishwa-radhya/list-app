@@ -60,7 +60,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
             handleCreateClick();
         }
     }
-
+    // console.log('render set folder dialog');
     return(
         <div className="set-folder-name-dialog" ref={ref1} onClick={(e)=>e.stopPropagation()} >
             <p>Enter the name for the folder</p>

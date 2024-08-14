@@ -1,4 +1,19 @@
 .folder-component-container{
     display: flex;
     flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+.folder-component-ellipsis{
+    position: absolute;
+    left: 78%;
+    top: -13.7px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.folder-component-ellipsis i{
+    font-size: 1.1rem;
+}
+.folder-component-ellipsis:hover{
+    background-color:#ece2e2 ;
 }

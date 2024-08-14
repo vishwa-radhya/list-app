@@ -87,7 +87,7 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
             handleFolderRename();
         }
     }
-
+    // console.log('render rename folder');
     return(
         <div className='rename-folder-dialog-div' ref={ref1} onClick={(e)=>e.stopPropagation()}>
         <fieldset>

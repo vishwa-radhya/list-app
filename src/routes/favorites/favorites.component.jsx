@@ -4,6 +4,7 @@ import './favorites.styles.css';
 import InputAndBtn from "../../input-and-btn/Input-and-btn.component";
 import ShoppingList from '../../shopping-list/shopping-list.component';
 const Favorites=()=>{
+    // console.log('render favorites component');
     return(
         <div className="fav-div-container">
             <Picture catImage={nFavCat} pictureWidth={150} />

@@ -41,7 +41,7 @@ const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference})=>{
             pushToDB();
         }
     }
-
+    // console.log('render input and btn');
     return(
         <Fragment>
         <input type="text" name="" id="input-field" maxLength={35} placeholder={placeHolder} value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>keyUpHandler(e.key)} />

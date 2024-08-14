@@ -33,7 +33,7 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
             handleOkClick();
         }
     }
-
+    // console.log('render rename container');
     return(
         <div className='rename-container' style={renameContainerStyles}>
         <p>Rename the list item ?</p>

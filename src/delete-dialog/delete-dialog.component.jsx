@@ -40,7 +40,7 @@ const DeleteDialog=forwardRef(({currentFolderName,setShowPopup,popupDeleteButton
         }
         
     }
-
+    // console.log('render delete dialog');
     return(
         <div className="delete-folder-dialog" ref={ref1} >
             <p>Are you sure you want to delete this folder?<span>  {currentFolderName}</span> </p>

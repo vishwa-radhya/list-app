@@ -19,7 +19,7 @@ const DeleteButton=({itemId,setIsEditIconClicked,clickedItemId,dbReference})=>{
     }
 
     const deleteIconClass = isMobile() ? 'delete-icon mobile' : 'delete-icon';
-
+    // console.log('render delete list button');
     return(
         <div 
             className={deleteIconClass}

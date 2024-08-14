@@ -99,6 +99,8 @@ const SideBar=()=>{
         if(user){
             const dbFolderReference = ref(database,`shoppingLists/${user.uid}/folders`)
             onValue(dbFolderReference,(snapshot)=>{
+                // console.log('hit from folders match');
+                
                 const data = snapshot.val();
                 if(data){
                 const folderNamesFromDbArr = Object.keys(data);                
@@ -124,9 +126,7 @@ const SideBar=()=>{
     }
 
     function handleFolderMouseDown(event){   
-        if(isScrolling) return;
-        console.log('touch down');
-             
+        if(isScrolling) return;             
         const rect = event.target.getBoundingClientRect();
         setCurrentFolderName(event.target.textContent);
         setPopupPosition({top:rect.bottom});
@@ -136,31 +136,23 @@ const SideBar=()=>{
     }
 
     const handleFolderDivScroll=()=>{
-        // console.log('scrolled');
         setIsScrolling(true);
         clearTimeout(timeoutRef.current);
     }
     function handleFolderMouseUp(){
-        // console.log('touch up');
-        
         clearTimeout(timeoutRef.current);
-
     }
 
     function handleFolderMouseLeave(){
-        // console.log('touch leave');
-        
         clearTimeout(timeoutRef.current);  
         setIsScrolling(false);
-        console.log('scrolling false');
-              
     }
 
     function handleSettingsRouting(){
         navigateRouter('/settings');
         setIsSideBarOpen(false);
     }
-
+    // console.log('render sidebar');
     return(
         <Fragment>
             <div className="side-bar" style={sideBarStyles} ref={sideBarRef}>

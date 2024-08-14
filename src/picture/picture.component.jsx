@@ -8,7 +8,7 @@ const Picture=({catImage,pictureWidth})=>{
     function imgLoadingHandler(){
         setImgLoaded(false);
     }
-
+    // console.log('render picture');
     return(
         <Fragment>
         {imgLoaded && <Loader/> }

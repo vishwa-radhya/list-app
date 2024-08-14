@@ -10,6 +10,7 @@ import Settings from "../routes/settings/settings.component";
 const Container=()=>{
 
     const userImg = auth.currentUser.photoURL;
+    // console.log('render container');
     return(
         <div className="container">
         <div className="s-out-pic-container">

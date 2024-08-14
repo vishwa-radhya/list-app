@@ -5,7 +5,7 @@ import Picture from '../picture/picture.component';
 import catImage from '../assets/cat.jpg'
 import InputAndBtn from "../input-and-btn/Input-and-btn.component";
 const Interactor=()=>{ 
-
+    // console.log('render interactor');
     return(
         <Fragment>
             <Picture catImage={catImage} pictureWidth={200}/>

@@ -22,6 +22,7 @@ const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
         if(user){
             const shoppingListRef = ref(database,`shoppingLists/${user.uid}/${dbReference}`);
             onValue(shoppingListRef,(snapshot)=>{
+                // console.log('hit from list');
                 const data = snapshot.val();
                 if(data){
                     let itemsArray = Object.entries(data).map(([id,{isFavorite,value}])=>({id,isFavorite,value}));
@@ -118,7 +119,7 @@ const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
             setIsEditIconClicked(false);
         }
     }
-    
+    // console.log('render shopping list');
     return(
         <Fragment>
         <ul id="shopping-list">
