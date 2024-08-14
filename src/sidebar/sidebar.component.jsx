@@ -136,13 +136,7 @@ const SideBar=()=>{
 
     const handleFolderDivScroll=()=>{
         // console.log('scrolled');
-        
         setIsScrolling(true);
-        setTimeout(()=>{
-            setIsScrolling(false);
-            // console.log('scroll ended');
-            
-        },200);
     }
     function handleFolderMouseUp(){
         // console.log('touch up');
@@ -154,7 +148,8 @@ const SideBar=()=>{
     function handleFolderMouseLeave(){
         // console.log('touch leave');
         
-        clearTimeout(timeoutRef.current);        
+        clearTimeout(timeoutRef.current);  
+        setIsScrolling(false);      
     }
 
     function handleSettingsRouting(){
