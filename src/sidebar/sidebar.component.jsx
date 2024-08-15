@@ -15,7 +15,7 @@ const SideBar=()=>{
     const sideBarToggleRef = useRef(null);
     const createFolderDialogRef=useRef(null);
     const [isCreateFolderDialogOpen,setIsCreateFolderDialogOpen]=useState(false);
-    const {handleSetDeleteFolderDialog,folderNames,handleFolderNamesAdd,isDeleteFolderDialogOpen,isRenameFolderDialogOpen,handleSetRenameFolderDialog}=useContext(FolderNamesContext);
+    const {handleSetDeleteFolderDialog,folderNames,handleFolderNamesAdd,isDeleteFolderDialogOpen,isRenameFolderDialogOpen,handleSetRenameFolderDialog,currentFolderName,handleSetCurrentFolderName}=useContext(FolderNamesContext);
     const [showPopup,setShowPopup]=useState(false);
     const [popupPosition,setPopupPosition]=useState({top:0});
     const timeoutRef = useRef(null);
@@ -24,7 +24,6 @@ const SideBar=()=>{
     const popupRef = useRef(null);
     const deleteDialogRef =useRef(null);
     const renameDialogref = useRef(null);
-    const [currentFolderName,setCurrentFolderName]=useState('');
     const createFolderButtonRef =useRef(null);
     const popupRenameButtonRef = useRef(null);
     const popupDeleteButtonRef = useRef(null);
@@ -124,11 +123,11 @@ const SideBar=()=>{
             setIsSideBarOpen(false);        
         }
     }
-
+    
     function handleFolderMouseDown(event){   
         if(isScrolling) return;             
         const rect = event.target.getBoundingClientRect();
-        setCurrentFolderName(event.target.textContent);
+        handleSetCurrentFolderName(event.target.textContent);
         setPopupPosition({top:rect.bottom});
         timeoutRef.current = setTimeout(()=>{
             setShowPopup(true);

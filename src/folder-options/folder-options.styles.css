@@ -1,6 +1,6 @@
 .folder-options-division{
     position: absolute;
-    background-color: #f1f3f4;
+    background-color: #f6f9f9;
     color: rgb(60, 59, 59);
     top: 22px;
     left: 67%;
@@ -22,7 +22,6 @@
     align-items: center;
     gap: 11px;
     padding: 8px 20px;
-    /* width: 100%; */
     font-size: 1rem;
     font-weight: 600;
 }
