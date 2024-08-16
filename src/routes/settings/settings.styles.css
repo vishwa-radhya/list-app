@@ -1,0 +1,61 @@
+.settings-div{
+    /* border: 1px solid; */
+    position: relative;
+    top: 15px;
+    padding: 15px 20px;
+}
+.settings-div-user-img{
+    display: flex;
+    align-items: center;
+}
+.settings-div-user-img img{
+    border-radius: 50%;
+    margin-left: 10px;
+}
+.settings-div-user-img p{
+    margin-right: 120px;
+    font-size: 1.1rem;
+}
+.settings-div .settings-img{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.settings-div .account-div .items{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.settings-div .account-div .items div{
+    /* border: 1px solid; */
+    display: flex;
+    gap: 1px;
+    height: 50px;
+    position: relative;
+    top: -2px;
+}
+.account-div .items div i{
+    font-size: 1.5rem;
+    margin:auto 15px auto;
+}
+.account-div .items div .inner-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}
+.inner-block span{
+    /* border: 1px solid;    */
+    margin-top: -10px; 
+    font-size: 0.9rem;
+}
+.inner-block p{
+    font-weight: 550;
+}
+.clickable:hover{
+    background-color: rgb(229, 237, 238);
+}
+.clickable{
+    border-radius: 8px;
+}
