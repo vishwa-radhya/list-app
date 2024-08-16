@@ -1,12 +1,21 @@
 import './settings.styles.css';
 import {auth} from '../../utils/firebase.js';
 import settingsSvg from '../../assets/settings-svg.svg';
+import { signOutUser } from '../../utils/firebase.js';
+import { signInWithGoogle } from '../../utils/firebase.js';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/authContext.jsx';
+
 const Settings=()=>{
     const imageUrl = auth.currentUser.photoURL;
     const userName = auth.currentUser.displayName;
     const userEmail = auth.currentUser.email;
     const lastLoginAt = auth.currentUser.metadata.lastSignInTime.replace('GMT','');
-    
+    const {handleSetUser}=useContext(AuthContext);
+    async function handleSignOutUser(){
+        await signOutUser();
+    }
+
     return(
         <div className='settings-div'>
         <div className='settings-img'>
@@ -34,18 +43,22 @@ const Settings=()=>{
                             <span>{lastLoginAt}</span>
                         </div>
                     </div>
-                    <div className='clickable'>
-                        <i className='fa-regular fa-user'></i>
+                    <div className='clickable blue' onClick={signInWithGoogle}>
+                        <i className='fa-regular fa-user' style={{color:"#69A5FF"}}></i>
                         <div className='inner-block'>
-                            <p>Switch</p>
-                            <span>Click to switch user accounts</span>
+                            <p style={{color:"#69A5FF"}}>Switch</p>
+                            <span style={{color:"#69A5FF"}}>Click to switch user accounts</span>
                         </div>
                     </div>
-                    <div style={{color:'#FF6768'}} className='clickable'>
-                        <i className='fa-solid fa-arrow-right-from-bracket'></i>
-                        <div className='inner-block'>
-                            <p>Sign Out</p>
-                            <span>Click to sign out</span>
+                    <div className='clickable red' onClick={
+                        ()=>{ 
+                            handleSignOutUser()
+                            handleSetUser(null);
+                    }}>
+                        <i className='fa-solid fa-arrow-right-from-bracket' style={{color:'#FF6768'}}></i>
+                        <div className='inner-block '>
+                            <p style={{color:'#FF6768'}}>Sign Out</p>
+                            <span style={{color:'#FF6768'}}>Click to sign out</span>
                         </div>
                     </div>
                 </div>

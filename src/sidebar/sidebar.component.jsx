@@ -49,8 +49,8 @@ const SideBar=()=>{
     
 
     const user=auth.currentUser;
-    const userImg = auth.currentUser.photoURL;
-    const displayName = auth.currentUser.displayName;
+    const userImg = auth.currentUser?.photoURL;
+    const displayName = auth.currentUser?.displayName;
     
     function sideBarToggleHandler(){
         setIsSideBarOpen(!isSideBarOpen);

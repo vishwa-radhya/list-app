@@ -1,20 +1,30 @@
 .settings-div{
-    /* border: 1px solid; */
+     /* border: 1px solid;  */
     position: relative;
     top: 15px;
     padding: 15px 20px;
+    width: 104.5%;
+    left: -28.5px;
+}
+.settings-img p{
+    font-weight: 600;
 }
 .settings-div-user-img{
     display: flex;
     align-items: center;
+    width: 110%;
+    position: relative;
+    justify-content: flex-start;
+    left: -18px;
 }
 .settings-div-user-img img{
     border-radius: 50%;
     margin-left: 10px;
 }
 .settings-div-user-img p{
-    margin-right: 120px;
+    margin-right: 210px;
     font-size: 1.1rem;
+    font-weight: 600;
 }
 .settings-div .settings-img{
     display: flex;
@@ -28,34 +38,46 @@
     gap: 10px;
 }
 .settings-div .account-div .items div{
-    /* border: 1px solid; */
     display: flex;
     gap: 1px;
     height: 50px;
     position: relative;
     top: -2px;
+    padding: 1px;
 }
 .account-div .items div i{
-    font-size: 1.5rem;
-    margin:auto 15px auto;
+    font-size: 1.3rem;
+    margin:auto 15px auto 8px;
+    color: rgb(93, 93, 93);
 }
 .account-div .items div .inner-block{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-
 }
 .inner-block span{
-    /* border: 1px solid;    */
     margin-top: -10px; 
     font-size: 0.9rem;
+    color: rgb(93, 93, 93);
 }
 .inner-block p{
     font-weight: 550;
+    color: rgb(56, 55, 55);
 }
 .clickable:hover{
-    background-color: rgb(229, 237, 238);
+    background-color: rgb(208, 208, 208);
 }
 .clickable{
     border-radius: 8px;
+}
+.account-div{
+    position: relative;
+    left: -13px;
+    width: 109%;
+}
+.items .red:hover{
+    background-color: rgb(255, 224, 224);
+}
+.items .blue:hover{
+    background-color: rgb(224, 236, 255);
 }
