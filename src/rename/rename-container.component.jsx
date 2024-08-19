@@ -14,11 +14,6 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
             inputRef.current.focus();
         }
     },[isEditIconClicked]);
-
-    const renameContainerStyles={
-        height:isEditIconClicked ? '80px' : '0',
-        padding:isEditIconClicked ? '25px' : '0',
-    }
     
     function inputChangeHandler(val){
         setInputValue(val);
@@ -35,7 +30,7 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
     }
     // console.log('render rename container');
     return(
-        <div className='rename-container' style={renameContainerStyles}>
+        <div className='rename-container'>
         <p>Rename the list item ?</p>
             <div className="rename-input-div">
             <input type="text" maxLength={35} value={inputValue} ref={inputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>renameEnterHandler(e.key)} />

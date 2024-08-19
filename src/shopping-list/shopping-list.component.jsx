@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useRef, useState,memo } from "react"
 import { onValue, ref, set } from "firebase/database";
 import { auth, database } from '../utils/firebase.js';
 import { isMobile } from "../utils/check-mobile.js";
@@ -7,7 +7,7 @@ import RenameContainer from "../rename/rename-container.component.jsx";
 import DeleteButton from "../delete-button/delete-button.component.jsx";
 import PropTypes from 'prop-types';
 
-const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
+const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const listRefs = useRef({});
     const starRefs = useRef({});
     const [items,setItems]=useState([]);
@@ -22,7 +22,6 @@ const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
         if(user){
             const shoppingListRef = ref(database,`shoppingLists/${user.uid}/${dbReference}`);
             onValue(shoppingListRef,(snapshot)=>{
-                // console.log('hit from list');
                 const data = snapshot.val();
                 if(data){
                     let itemsArray = Object.entries(data).map(([id,{isFavorite,value}])=>({id,isFavorite,value}));
@@ -41,6 +40,7 @@ const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
         if((listRefArray.every(ref=>ref && !ref.contains(event.target))) && !renameContainerRef.current.contains(event.target) && (starRefArray.every(ref=>ref && !ref.contains(event.target))) ){
             setClickedItemId(null);
             setIsEditIconClicked(false);
+            setClickedItemName(null);   
         }
     }
     
@@ -164,11 +164,12 @@ const ShoppingList=({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
         })}
         </ul>
         <div ref={renameContainerRef}>
-        <RenameContainer isEditIconClicked={isEditIconClicked} handleRenameIconClick={handleRenameIconClick} clickedItemName={clickedItemName} handleRename={handleRename} handleSetClickedItemIdToNull={handleSetClickedItemIdToNull} />
+        {isEditIconClicked && <RenameContainer isEditIconClicked={isEditIconClicked} handleRenameIconClick={handleRenameIconClick} clickedItemName={clickedItemName} handleRename={handleRename} handleSetClickedItemIdToNull={handleSetClickedItemIdToNull} />}
         </div>
         </Fragment>
     )
-}
+})
+ShoppingList.displayName='ShoppingList'
 ShoppingList.propTypes={
     isFavItemsOnly:PropTypes.bool,
     dbReference:PropTypes.string,

@@ -5,12 +5,14 @@ import { signOutUser } from '../../utils/firebase.js';
 import { signInWithGoogle } from '../../utils/firebase.js';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/authContext.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const Settings=()=>{
     const imageUrl = auth.currentUser.photoURL;
     const userName = auth.currentUser.displayName;
     const userEmail = auth.currentUser.email;
     const lastLoginAt = auth.currentUser.metadata.lastSignInTime.replace('GMT','');
+    const navigateRouter = useNavigate();
     const {handleSetUser}=useContext(AuthContext);
     async function handleSignOutUser(){
         await signOutUser();
@@ -62,6 +64,18 @@ const Settings=()=>{
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className='info-div'>
+                    <h5>About</h5>
+                    <div className='items'>
+                            <div onClick={()=>navigateRouter('/about')} className='gray-bg clickable'>
+                            <i className='fa-solid fa-circle-info'></i>
+                            <div className='inner-block'>
+                                <p>App Info</p>
+                                <span>Click to view app info</span>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     )

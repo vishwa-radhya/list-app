@@ -6,6 +6,7 @@ import Favorites from '../routes/favorites/favorites.component';
 import SideBar from '../sidebar/sidebar.component';
 import FolderComponent from '../routes/folder/folder.component';
 import Settings from "../routes/settings/settings.component";
+import About from "../routes/about/about.component";
 
 const Container=()=>{
     const navigateRouter = useNavigate();
@@ -22,6 +23,7 @@ const Container=()=>{
                     <Route path='fav' element={<Favorites/>} />
                     <Route path='folders/:folderName' element={<FolderComponent/>}/>
                     <Route path="settings" element={<Settings/>} />
+                    <Route path="about" element={<About/>}/>
                 </Routes>
             <SideBar/>
         </div>

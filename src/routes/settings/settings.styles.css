@@ -1,5 +1,4 @@
 .settings-div{
-     /* border: 1px solid;  */
     position: relative;
     top: 15px;
     padding: 15px 20px;
@@ -32,25 +31,25 @@
     text-align: center;
     font-size: 1.1rem;
 }
-.settings-div .account-div .items{
+.settings-div .items{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.settings-div .account-div .items div{
+.settings-div  .items div{
     display: flex;
     gap: 1px;
     height: 50px;
     position: relative;
     top: -2px;
-    padding: 1px;
+    padding: 2px 0px;
 }
-.account-div .items div i{
+.settings-div .items div i{
     font-size: 1.3rem;
     margin:auto 15px auto 8px;
     color: rgb(93, 93, 93);
 }
-.account-div .items div .inner-block{
+.settings-div .items div .inner-block{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -80,4 +79,14 @@
 }
 .items .blue:hover{
     background-color: rgb(224, 236, 255);
+}
+.settings-div .info-div{
+    position: relative;
+    left: -13px;
+    width: 109%;
+}
+.gray-bg{
+    &:hover{
+    background-color: rgb(228, 228, 228);
+    }
 }
