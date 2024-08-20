@@ -8,29 +8,24 @@ import { useRef } from 'react';
 
 const About=()=>{
 
-    const eyesRef = useRef({});
+    const githubProfilePicRef = useRef(null);
 
-    function handleEyesBlink(){
-        for(let eye in eyesRef.current){
-            eyesRef.current[eye].classList.add('open');
+    function handleChangeOfImg(){
+        if(githubProfilePicRef.current){
+            githubProfilePicRef.current.classList.remove('animate__animated', 'animate__rubberBand');
+            // Force reflow
+            void githubProfilePicRef.current.offsetWidth;
+            githubProfilePicRef.current.classList.add('animate__animated', 'animate__rubberBand');
         }
-        eyesRef.current['left'].style.animation='scaler-1 1.8s ease-in-out'
-        eyesRef.current['right'].style.animation='scaler-2 1.8s ease-in-out'
-        setTimeout(()=>{
-            for(let eye in eyesRef.current){
-                eyesRef.current[eye].classList.remove('open')
-            }
-            eyesRef.current['left'].style.animation=''
-             eyesRef.current['right'].style.animation=''
-        },2000)
     }
+    
 
     return (
         <div className='about-div'>
-            <p className='description'>Our Shopping List App, a simple and efficient tool designed to help you organize and manage your shopping needs. </p>
+            <p className='description'>Our Shopping List App, a simple and efficient tool designed to help you organize and manage your shopping needs...</p>
             <h5>Developed By</h5>
             <div className='dev-info'>
-                <img src="https://github.com/vishwa-radhya.png" alt="dev-gh-img" width={180} onClick={handleEyesBlink} />
+                <img src="https://github.com/vishwa-radhya.png" ref={githubProfilePicRef} className='animate__animated animate__rubberBand' alt="dev-gh-img" width={180} onClick={handleChangeOfImg}  />
                 <a href="https://github.com/vishwa-radhya/list-app" target='_blank'>
                 <p><i className='fa-brands fa-square-github'></i><span>Vishwa Radhya</span></p>
                 </a>
@@ -52,8 +47,6 @@ const About=()=>{
                     <a href="https://fontawesome.com/" target='_blank'><img src={FontAwesomeSvg} alt="font-awesome" /></a>
                 </div>
             </div>
-            <div className="eyes left" ref={el=>eyesRef.current['left']=el}></div>
-            <div className="eyes right" ref={el=>eyesRef.current['right']=el}></div>
         </div>
     )
 }

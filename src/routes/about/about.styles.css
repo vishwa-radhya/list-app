@@ -3,8 +3,11 @@
     position: relative;
 }
 .about-div .description{
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-align: justify;
+    font-family: "Kalam", cursive;
+    color: rgb(111, 119, 119);
+    font-weight: 500;
 }
 .about-div .dev-info{
     display: flex;
@@ -56,35 +59,4 @@
     img:hover{
         scale: 1.1;
     }
-}
-.eyes{
-    position: absolute;
-    top: 198px;
-    width: 31px;
-    height: 0px;
-    background-color: rgb(177, 176, 181);
-    transition: height 0.3s ease-in-out;
-}
-.left{
-    left: 114.8px;
-}
-.right{
-    left: 174.8px;
-}
-.open{
-    height: 30px;
-}
-@keyframes scaler-1{
-    0%{scale: 1.15;}
-    25%{scale: 1;}
-    50%{scale: 1.15;}
-    75%{scale: 1;}
-    100%{scale: 1.15;}
-}
-@keyframes scaler-2{
-    0%{scale: 1;}
-    25%{scale: 1.15;}
-    50%{scale: 1;}
-    75%{scale: 1.15;}
-    100%{scale: 1;}
 }
