@@ -10,18 +10,17 @@
 }
 .settings-div-user-img{
     display: flex;
-    align-items: center;
     width: 110%;
     position: relative;
-    justify-content: flex-start;
     left: -18px;
+    gap: 10px;
 }
 .settings-div-user-img img{
     border-radius: 50%;
     margin-left: 10px;
+    margin: auto 5px;
 }
 .settings-div-user-img p{
-    margin-right: 210px;
     font-size: 1.1rem;
     font-weight: 600;
 }
