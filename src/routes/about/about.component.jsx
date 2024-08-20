@@ -5,9 +5,11 @@ import FirebaseSvg from '../../assets/firebase-svg.svg';
 import FontAwesomeSvg from '../../assets/font-awesome-svgr.svg';
 import NetlifySvg from '../../assets/netlify-svg.svg';
 import { useRef } from 'react';
+import ImgLoader from '../../img-loader/img-loader.component';
+import { useState } from 'react';
 
 const About=()=>{
-
+    const [imgLoaded,setImgLoaded]=useState(true);
     const githubProfilePicRef = useRef(null);
 
     function handleChangeOfImg(){
@@ -19,13 +21,17 @@ const About=()=>{
         }
     }
     
+    function imgLoadingHandler(){
+        setImgLoaded(false);
+    }
 
     return (
         <div className='about-div'>
             <p className='description'>Our Shopping List App, a simple and efficient tool designed to help you organize and manage your shopping needs...</p>
             <h5>Developed By</h5>
             <div className='dev-info'>
-                <img src="https://github.com/vishwa-radhya.png" ref={githubProfilePicRef} className='animate__animated animate__rubberBand' alt="dev-gh-img" width={180} onClick={handleChangeOfImg}  />
+            {imgLoaded && <ImgLoader/>}
+                <img src="https://github.com/vishwa-radhya.png" ref={githubProfilePicRef} className='animate__animated animate__rubberBand' alt="dev-gh-img" width={180} onClick={handleChangeOfImg}  onLoad={imgLoadingHandler} />
                 <a href="https://github.com/vishwa-radhya/list-app" target='_blank'>
                 <p><i className='fa-brands fa-square-github'></i><span>Vishwa Radhya</span></p>
                 </a>

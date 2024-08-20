@@ -1,5 +1,5 @@
 import { Fragment, useState } from 'react';
-import Loader from "../loader/loader.component";
+import ImgLoaderForPicture from '../img-loader/img-loader-pict.component';
 import PropTypes from 'prop-types';
 const Picture=({catImage,pictureWidth})=>{
 
@@ -11,7 +11,7 @@ const Picture=({catImage,pictureWidth})=>{
     // console.log('render picture');
     return(
         <Fragment>
-        {imgLoaded && <Loader/> }
+        {imgLoaded && <ImgLoaderForPicture/> }
         <img src={catImage} width={pictureWidth} alt="shopping-cat" onLoad={imgLoadingHandler} />
         </Fragment>
     )

@@ -6,6 +6,7 @@ import './shopping-list.styles.css';
 import RenameContainer from "../rename/rename-container.component.jsx";
 import DeleteButton from "../delete-button/delete-button.component.jsx";
 import PropTypes from 'prop-types';
+import ListLoader from "../list-loader/list-loader.component.jsx";
 
 const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const listRefs = useRef({});
@@ -17,11 +18,13 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const [isEditIconClicked,setIsEditIconClicked]=useState(false);
     const renameContainerRef = useRef(null);
     const user = auth.currentUser;
+    const [contentLoaded,setContentLoaded]=useState(true);
     
     useEffect(()=>{
         if(user){
             const shoppingListRef = ref(database,`shoppingLists/${user.uid}/${dbReference}`);
             onValue(shoppingListRef,(snapshot)=>{
+                setContentLoaded(true);
                 const data = snapshot.val();
                 if(data){
                     let itemsArray = Object.entries(data).map(([id,{isFavorite,value}])=>({id,isFavorite,value}));
@@ -30,6 +33,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
                 }else{
                     setItems([]);
                 }
+                setContentLoaded(false);
             });
         }
     },[user,isFavItemsOnly,dbReference]);
@@ -122,7 +126,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     // console.log('render shopping list');
     return(
         <Fragment>
-        <ul id="shopping-list">
+        {contentLoaded ? <ListLoader/> : <ul id="shopping-list">
         {items.map((item)=>{
             
             const renameDivStyles={
@@ -162,7 +166,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
             </div>
         );   
         })}
-        </ul>
+        </ul>}
         <div ref={renameContainerRef}>
         {isEditIconClicked && <RenameContainer isEditIconClicked={isEditIconClicked} handleRenameIconClick={handleRenameIconClick} clickedItemName={clickedItemName} handleRename={handleRename} handleSetClickedItemIdToNull={handleSetClickedItemIdToNull} />}
         </div>

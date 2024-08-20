@@ -6,16 +6,17 @@ import SetFolderDialog from '../set-folder-dialog/set-folder-dialog.component';
 import { database } from "../utils/firebase";
 import { ref,onValue } from 'firebase/database';
 import { FolderNamesContext } from '../contexts/folder-names-context';
+import { SideBarContext } from '../contexts/side-bar-context';
 import DeleteDialog from '../delete-dialog/delete-dialog.component';
 import RenameFolderDialog from '../rename-folder-dialog/rename-folder-dialog.component';
 
 const SideBar=()=>{
-    const [isSideBarOpen,setIsSideBarOpen]=useState(false);
     const sideBarRef = useRef(null);
     const sideBarToggleRef = useRef(null);
     const createFolderDialogRef=useRef(null);
     const [isCreateFolderDialogOpen,setIsCreateFolderDialogOpen]=useState(false);
     const {handleSetDeleteFolderDialog,folderNames,handleFolderNamesAdd,isDeleteFolderDialogOpen,isRenameFolderDialogOpen,handleSetRenameFolderDialog,currentFolderName,handleSetCurrentFolderName}=useContext(FolderNamesContext);
+    const {isSideBarOpen,handleSetIsSideBarOpen} = useContext(SideBarContext);
     const [showPopup,setShowPopup]=useState(false);
     const [popupPosition,setPopupPosition]=useState({top:0});
     const timeoutRef = useRef(null);
@@ -53,7 +54,7 @@ const SideBar=()=>{
     const displayName = auth.currentUser?.displayName;
     
     function sideBarToggleHandler(){
-        setIsSideBarOpen(!isSideBarOpen);
+        handleSetIsSideBarOpen(!isSideBarOpen);
     }
     
     
@@ -61,7 +62,7 @@ const SideBar=()=>{
         if(isSideBarOpen){
             const handleSideBarOutSideClick=(event)=>{
                 if(sideBarRef.current && !sideBarRef.current.contains(event.target) && !sideBarToggleRef.current.contains(event.target)){                        
-                    setIsSideBarOpen(false);
+                    handleSetIsSideBarOpen(false);
                     setIsCreateFolderDialogOpen(false);
                     handleSetDeleteFolderDialog(false);
                     handleSetRenameFolderDialog(false);
@@ -73,7 +74,7 @@ const SideBar=()=>{
             }
         }
 
-    },[isSideBarOpen,handleSetDeleteFolderDialog,handleSetRenameFolderDialog]);
+    },[isSideBarOpen,handleSetDeleteFolderDialog,handleSetRenameFolderDialog,handleSetIsSideBarOpen]);
     
     useEffect(()=>{
         if(showPopup){
@@ -120,7 +121,7 @@ const SideBar=()=>{
             e.preventDefault();
         }else{
             navigateRouter(`folders/${folderName}`)    
-            setIsSideBarOpen(false);        
+            handleSetIsSideBarOpen(false);        
         }
     }
     
@@ -149,15 +150,15 @@ const SideBar=()=>{
 
     function handleSettingsRouting(){
         navigateRouter('/settings');
-        setIsSideBarOpen(false);
+        handleSetIsSideBarOpen(false);
     }
     // console.log('render sidebar');
     return(
         <Fragment>
             <div className="side-bar" style={sideBarStyles} ref={sideBarRef}>
             {isSideBarItemsHidden && <div className='side-bar-items-div'>
-               <Link to='/'> <div className='side-bar-items side-bar-home'><i className="fa-solid fa-house"></i>Home</div></Link>
-               <Link to='/fav'> <div className='side-bar-items'><i className="fa-solid fa-star" style={{color:'#CCB142'}}></i>Favorites</div></Link>
+               <Link to='/'> <div className='side-bar-items side-bar-home' onClick={()=>handleSetIsSideBarOpen(false)}><i className="fa-solid fa-house"></i>Home</div></Link>
+               <Link to='/fav'> <div className='side-bar-items' onClick={()=>handleSetIsSideBarOpen(false)}><i className="fa-solid fa-star" style={{color:'#CCB142'}} ></i>Favorites</div></Link>
                <hr />
                <div className='side-bar-items add-folders-btn' ref={createFolderButtonRef} onClick={
                 ()=>{
