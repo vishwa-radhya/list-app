@@ -27,7 +27,7 @@ const About=()=>{
 
     return (
         <div className='about-div'>
-            <p className='description'>Our Shopping List App, a simple and efficient tool designed to help you organize and manage your shopping needs...</p>
+            <p className='description'>Our Shopping List App, a simple and efficient tool designed to help you organize and manage your shopping needs.</p>
             <h5>Developed By</h5>
             <div className='dev-info'>
             {imgLoaded && <ImgLoader/>}

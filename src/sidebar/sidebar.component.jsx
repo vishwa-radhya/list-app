@@ -121,7 +121,7 @@ const SideBar=()=>{
             e.preventDefault();
         }else{
             navigateRouter(`folders/${folderName}`)    
-            handleSetIsSideBarOpen(false);        
+            handleSetIsSideBarOpen(false);
         }
     }
     

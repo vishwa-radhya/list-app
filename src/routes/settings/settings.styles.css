@@ -84,8 +84,28 @@
     left: -13px;
     width: 109%;
 }
+.settings-div .app-settings-div{
+    position: relative;
+    left: -13px;
+    width: 109%;
+    /* border: 1px solid; */
+}
 .gray-bg{
     &:hover{
     background-color: rgb(228, 228, 228);
     }
+}
+.app-settings-div select{
+    min-width: 30%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: inherit;
+    outline: none;
+    height: 2rem;
+    border-radius: 8px;
+    background-color: inherit;
+    font-weight: 500;
+}
+.app-settings-div select:active{
+    background-color: rgb(228, 228, 228);
 }

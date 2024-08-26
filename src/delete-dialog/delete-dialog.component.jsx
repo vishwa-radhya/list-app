@@ -35,6 +35,9 @@ const DeleteDialog=forwardRef(({currentFolderName,setShowPopup,popupDeleteButton
             }
             const folderRefPath = ref(database,`shoppingLists/${user.uid}/folders/${currentFolderName}`);
             remove(folderRefPath).catch(e=>console.log(e))
+            if(currentFolderName === localStorage.getItem('landingRoute').slice(8)){
+                localStorage.setItem('landingRoute','/');
+            }
             handleSetDeleteFolderDialog(false);
             setShowPopup(false);
         }

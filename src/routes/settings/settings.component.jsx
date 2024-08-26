@@ -3,9 +3,10 @@ import {auth} from '../../utils/firebase.js';
 import settingsSvg from '../../assets/settings-svg.svg';
 import { signOutUser } from '../../utils/firebase.js';
 import { signInWithGoogle } from '../../utils/firebase.js';
-import { useContext } from 'react';
+import { useContext,  useState } from 'react';
 import { AuthContext } from '../../contexts/authContext.jsx';
 import { useNavigate } from 'react-router-dom';
+import { FolderNamesContext } from '../../contexts/folder-names-context.jsx';
 
 const Settings=()=>{
     const imageUrl = auth.currentUser.photoURL;
@@ -13,9 +14,19 @@ const Settings=()=>{
     const userEmail = auth.currentUser.email;
     const lastLoginAt = auth.currentUser.metadata.lastSignInTime.replace('GMT','');
     const navigateRouter = useNavigate();
+    const {folderNames}=useContext(FolderNamesContext);
     const {handleSetUser}=useContext(AuthContext);
+    const [landingRoute,setLandingRoute]=useState(()=>{
+        return localStorage.getItem('landingRoute') || 'Home';
+    })
     async function handleSignOutUser(){
         await signOutUser();
+    }
+
+    const handleSelectChange=(e)=>{
+        const selectedValue = e.target.value;
+        setLandingRoute(selectedValue);
+        localStorage.setItem('landingRoute',selectedValue);
     }
 
     return(
@@ -64,6 +75,25 @@ const Settings=()=>{
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className='app-settings-div'>
+                    <h5>App</h5>
+                    <div className="items">
+                        <div>
+                            <i className='fa-solid fa-rocket'></i>
+                            <div className='inner-block'>
+                                <p>Landing Place</p>
+                                <span>Select a default landing place from below.</span>
+                            </div>
+                            </div>
+                            <select name="landing-place-select" id="landing-place-select" onChange={handleSelectChange} value={landingRoute}>
+                                <option value="/">Home</option>
+                                <option value="fav">Favorites</option>
+                                {folderNames.map(folderName=>{
+                                    return <option value={`folders/${folderName}`} key={folderName}>{folderName}</option>
+                                })}
+                            </select>
+                    </div>
             </div>
             <div className='info-div'>
                     <h5>About</h5>

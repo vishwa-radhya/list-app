@@ -7,11 +7,20 @@ import SideBar from '../sidebar/sidebar.component';
 import FolderComponent from '../routes/folder/folder.component';
 import Settings from "../routes/settings/settings.component";
 import About from "../routes/about/about.component";
+import {  useEffect } from "react";
 
 const Container=()=>{
     const navigateRouter = useNavigate();
     const userImg = auth.currentUser.photoURL;
-    // console.log('render container');
+    
+    useEffect(()=>{        
+        const routePath = localStorage.getItem('landingRoute');
+        if(routePath && routePath !== '/'){    
+            navigateRouter(routePath);
+        }
+    },[])
+
+    
     return(
         <div className="container">
         <div className="s-out-pic-container">
