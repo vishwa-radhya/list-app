@@ -3,16 +3,13 @@ import ImgLoaderForPicture from '../img-loader/img-loader-pict.component';
 import PropTypes from 'prop-types';
 const Picture=({catImage,pictureWidth})=>{
 
-    const [imgLoaded,setImgLoaded]=useState(true);
+    const [imgLoaded,setImgLoaded]=useState(false);
 
-    function imgLoadingHandler(){
-        setImgLoaded(false);
-    }
     // console.log('render picture');
     return(
         <Fragment>
-        {imgLoaded && <ImgLoaderForPicture/> }
-        <img src={catImage} width={pictureWidth} alt="shopping-cat" onLoad={imgLoadingHandler} />
+        {!imgLoaded && <ImgLoaderForPicture/> }
+        <img src={catImage} width={pictureWidth} alt="shopping-cat" onLoad={()=>setImgLoaded(true)} /> 
         </Fragment>
     )
 }

@@ -56,11 +56,11 @@ const Settings=()=>{
                             <span>{lastLoginAt}</span>
                         </div>
                     </div>
-                    <div className='clickable blue' onClick={signInWithGoogle}>
-                        <i className='fa-regular fa-user' style={{color:"#69A5FF"}}></i>
+                    <div className='clickable gray-bg' onClick={signInWithGoogle}>
+                        <i className='fa-regular fa-user' ></i>
                         <div className='inner-block'>
-                            <p style={{color:"#69A5FF"}}>Switch</p>
-                            <span style={{color:"#69A5FF"}}>Click to switch user accounts</span>
+                            <p >Switch</p>
+                            <span >Click to switch user accounts</span>
                         </div>
                     </div>
                     <div className='clickable red' onClick={

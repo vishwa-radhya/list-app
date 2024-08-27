@@ -67,6 +67,7 @@
 }
 .clickable{
     border-radius: 8px;
+    width: 70%;
 }
 .account-div{
     position: relative;
@@ -76,9 +77,7 @@
 .items .red:hover{
     background-color: rgb(255, 224, 224);
 }
-.items .blue:hover{
-    background-color: rgb(224, 236, 255);
-}
+
 .settings-div .info-div{
     position: relative;
     left: -13px;
