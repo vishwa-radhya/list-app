@@ -4,12 +4,12 @@ import ViteSvg from '../../assets/vite-svg.svg';
 import FirebaseSvg from '../../assets/firebase-svg.svg';
 import FontAwesomeSvg from '../../assets/font-awesome-svgr.svg';
 import NetlifySvg from '../../assets/netlify-svg.svg';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import ImgLoader from '../../img-loader/img-loader.component';
 import { useState } from 'react';
 
 const About=()=>{
-    const [imgLoaded,setImgLoaded]=useState(true);
+    const [imgLoaded,setImgLoaded]=useState(false);
     const githubProfilePicRef = useRef(null);
 
     function handleChangeOfImg(){
@@ -21,17 +21,19 @@ const About=()=>{
         }
     }
     
-    function imgLoadingHandler(){
-        setImgLoaded(false);
-    }
+    useEffect(()=>{
+        const img = new Image();
+        img.src = "https://github.com/vishwa-radhya.png";
+        img.onload=()=>setImgLoaded(true);
+    },[])
 
     return (
         <div className='about-div'>
             <p className='description'>Our Shopping List App, a simple and efficient tool designed to help you organize and manage your shopping needs.</p>
             <h5>Developed By</h5>
             <div className='dev-info'>
-            {imgLoaded && <ImgLoader/>}
-                <img src="https://github.com/vishwa-radhya.png" ref={githubProfilePicRef} className='animate__animated animate__rubberBand' alt="dev-gh-img" width={180} onClick={handleChangeOfImg}  onLoad={imgLoadingHandler} />
+            {!imgLoaded && <ImgLoader/>}
+                <img src="https://github.com/vishwa-radhya.png" ref={githubProfilePicRef} className='animate__animated animate__rubberBand' alt="dev-gh-img" width={180} onClick={handleChangeOfImg} style={{display:imgLoaded ? 'block' : 'none'}} />
                 <a href="https://github.com/vishwa-radhya/list-app" target='_blank'>
                 <p><i className='fa-brands fa-square-github'></i><span>Vishwa Radhya</span></p>
                 </a>

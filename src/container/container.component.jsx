@@ -25,7 +25,7 @@ const Container=()=>{
         <div className="container">
         <div className="s-out-pic-container">
         <div onClick={()=>navigateRouter('/settings')}>
-        {userImg && <img src={userImg} alt="" width={25}></img> }</div>
+        {userImg && <img src={userImg} alt="." width={25}></img> }</div>
         </div>
                 <Routes>
                     <Route path='/' element={<Home/>} />
