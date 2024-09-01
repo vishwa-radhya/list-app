@@ -45,7 +45,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
     function handleCreateClick(){
         if(inputValue.trim() && !folderNames.includes(inputValue.trim())){
             const dbReference = ref(database,`shoppingLists/${user.uid}/folders/${inputValue}/marker`);
-            set(dbReference,true);
+            set(dbReference,Date().split('GMT')[0]);
             setIsCreateFolderDialogOpen(false);
             setInputValue('');
             handleFolderExistedError(false);

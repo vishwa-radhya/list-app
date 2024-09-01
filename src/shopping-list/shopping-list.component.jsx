@@ -28,7 +28,10 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
                 const data = snapshot.val();
                 if(data){
                     let itemsArray = Object.entries(data).map(([id,{isFavorite,value}])=>({id,isFavorite,value}));
-                    const newItemsArray = isFavItemsOnly ? itemsArray.filter(item=>item.isFavorite) : itemsArray;
+                    let newItemsArray = isFavItemsOnly ? itemsArray.filter(item=>item.isFavorite) : itemsArray;
+                    if(dbReference.includes('folders')){
+                          newItemsArray = newItemsArray.filter(item => item.id !== 'marker')  
+                    }
                     setItems(newItemsArray);
                 }else{
                     setItems([]);
@@ -123,7 +126,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
             setIsEditIconClicked(false);
         }
     }
-    // console.log('render shopping list');
+    
     return(
         <Fragment>
         {contentLoaded ? <ListLoader/> : <ul id="shopping-list">
