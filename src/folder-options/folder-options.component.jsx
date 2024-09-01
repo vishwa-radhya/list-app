@@ -1,12 +1,20 @@
 import { forwardRef, useContext } from 'react';
 import './folder-options.styles.css';
 import { FolderNamesContext } from '../contexts/folder-names-context';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const FolderOptions=forwardRef((props,ref1)=>{
     const {handleSetRenameFolderDialog,handleSetDeleteFolderDialog}=useContext(FolderNamesContext);
+    const navigateRouter = useNavigate();
+    const pathLocation = useLocation();
+    
+    const handleFolderInfoRouting=()=>{
+        navigateRouter(`${pathLocation.pathname}/info`)        
+    }
+
     return(
         <div className='folder-options-division' ref={ref1}>
-            <div><i className='fa-solid fa-circle-info'></i>Details</div>
+            <div onClick={handleFolderInfoRouting}><i className='fa-solid fa-circle-info'></i>Details</div>
             <hr />
             <div onClick={()=>{
                 handleSetDeleteFolderDialog(false);

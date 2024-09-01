@@ -7,11 +7,12 @@ import SideBar from '../sidebar/sidebar.component';
 import FolderComponent from '../routes/folder/folder.component';
 import Settings from "../routes/settings/settings.component";
 import About from "../routes/about/about.component";
+import FolderInfo from "../routes/folder-info/folder-info.component";
 import {  useEffect } from "react";
 
 const Container=()=>{
     const navigateRouter = useNavigate();
-    const userImg = auth.currentUser.photoURL;
+    const userImg = auth.currentUser?.photoURL;
     
     useEffect(()=>{        
         const routePath = localStorage.getItem('landingRoute');
@@ -33,6 +34,7 @@ const Container=()=>{
                     <Route path='folders/:folderName' element={<FolderComponent/>}/>
                     <Route path="settings" element={<Settings/>} />
                     <Route path="about" element={<About/>}/>
+                    <Route path="folders/:folderName/info" element={<FolderInfo/>} />
                 </Routes>
             <SideBar/>
         </div>

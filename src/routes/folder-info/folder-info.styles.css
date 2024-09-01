@@ -1,0 +1,43 @@
+.folder-info-component{
+    display: flex;
+    flex-direction: column;
+}
+
+.folder-info-component .folder-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.folder-info-component .folder-img i{
+    font-size: 80px;
+    color: rgb(66, 66, 66);
+}
+
+.folder-info-component .items{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.folder-info-component .items div{
+    display: flex;
+    gap: 1px;
+    height: 50px;
+    position: relative;
+    top: -2px;
+    padding: 2px 0px;
+}
+
+.folder-info-component .items div i{
+    font-size: 1.3rem;
+    margin:auto 15px auto 8px;
+    color: rgb(93, 93, 93);
+}
+
+.folder-info-component .items div .inner-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}

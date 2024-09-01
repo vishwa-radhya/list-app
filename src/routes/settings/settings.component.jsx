@@ -9,10 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { FolderNamesContext } from '../../contexts/folder-names-context.jsx';
 
 const Settings=()=>{
-    const imageUrl = auth.currentUser.photoURL;
-    const userName = auth.currentUser.displayName;
-    const userEmail = auth.currentUser.email;
-    const lastLoginAt = auth.currentUser.metadata.lastSignInTime.replace('GMT','');
+    const imageUrl = auth.currentUser?.photoURL;
+    const userName = auth.currentUser?.displayName;
+    const userEmail = auth.currentUser?.email;
+    const lastLoginAt = auth.currentUser?.metadata.lastSignInTime.replace('GMT','');
     const navigateRouter = useNavigate();
     const {folderNames}=useContext(FolderNamesContext);
     const {handleSetUser}=useContext(AuthContext);
