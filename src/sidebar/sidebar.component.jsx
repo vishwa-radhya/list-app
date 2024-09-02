@@ -173,7 +173,7 @@ const SideBar=()=>{
             </div>
              <div className='sidebar-user-div' onClick={handleSettingsRouting}>
                 <div>
-                    <img src={userImg} alt="user-image" width={35} />
+                    <img src={userImg} alt="user" width={35} />
                 </div>
                 <div className='p-div'>
                     <p>{displayName}</p>

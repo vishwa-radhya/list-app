@@ -9,15 +9,19 @@ const FolderInfo=()=>{
     const {folderName} = useParams();
     const userName = auth.currentUser.displayName;
     const [folderCreationTime,setFolderCreationTime]=useState('Sun Sep 00 0000 00:00:00');
+    const [numOfFolderItems,setNumOfFolderItems]=useState('0');
     const user = auth.currentUser;
+    const userId = user.uid;
 
     useEffect(()=>{
-        const folderRef = ref(database,`shoppingLists/${user.uid}/folders/${folderName}`)
+        const folderRef = ref(database,`shoppingLists/${userId}/folders/${folderName}`)
         get(folderRef).then((snapshot)=>{
-            const createdTime = snapshot.val().marker;
-            setFolderCreationTime(createdTime);
+            const folderItems = snapshot.val();
+            setFolderCreationTime(folderItems.marker);
+            setNumOfFolderItems(Object.keys(folderItems).length-1);
+            
         })
-    })
+    },[folderName,userId])
 
     return(
         <div className='folder-info-component'>
@@ -46,6 +50,13 @@ const FolderInfo=()=>{
                         <div className='inner-block'>
                             <p>Creation Time</p>
                             <span>{folderCreationTime}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <i className='fa-solid fa-layer-group'></i>
+                        <div className='inner-block'>
+                            <p>Items Count</p>
+                            <span>{numOfFolderItems}</span>
                         </div>
                     </div>
                     <div>
