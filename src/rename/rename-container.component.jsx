@@ -30,7 +30,8 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
     }
     // console.log('render rename container');
     return(
-        <div className='rename-container'>
+        <div className='overlaying' onClick={()=>handleRenameIconClick(false)}>
+        <div className='rename-container' onClick={(e)=>e.stopPropagation()}>
         <p>Rename the list item ?</p>
             <div className="rename-input-div">
             <input type="text" maxLength={35} value={inputValue} ref={inputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>renameEnterHandler(e.key)} />
@@ -45,6 +46,7 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
                 }}>Cancel</button>
                 <button onClick={handleOkClick}>Rename</button>
             </div>
+        </div>
         </div>
     )
 }
