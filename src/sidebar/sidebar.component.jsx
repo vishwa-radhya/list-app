@@ -158,7 +158,7 @@ const SideBar=()=>{
             <div className="side-bar" style={sideBarStyles} ref={sideBarRef}>
             {isSideBarItemsHidden && <div className='side-bar-items-div'>
                <Link to='/'> <div className='side-bar-items side-bar-home' onClick={()=>handleSetIsSideBarOpen(false)}><i className="fa-solid fa-house"></i>Home</div></Link>
-               <Link to='/fav'> <div className='side-bar-items' onClick={()=>handleSetIsSideBarOpen(false)}><i className="fa-solid fa-star" style={{color:'#CCB142'}} ></i>Favorites</div></Link>
+               <Link to='/fav'> <div className='side-bar-items' onClick={()=>handleSetIsSideBarOpen(false)}><i className="fa-solid fa-star" style={{color:'#CCB142'}} ></i>Selected</div></Link>
                <hr />
                <div className='side-bar-items add-folders-btn' ref={createFolderButtonRef} onClick={
                 ()=>{

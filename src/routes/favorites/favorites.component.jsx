@@ -8,7 +8,7 @@ const Favorites=()=>{
     return(
         <div className="fav-div-container">
             <Picture catImage={nFavCat} pictureWidth={150} />
-            <InputAndBtn placeHolder='Enter Favourites' buttonText='Add To Favourites' pushAsFav={true} dbReference='home' />
+            <InputAndBtn placeHolder='Enter Selected' buttonText='Add To Selected' pushAsFav={true} dbReference='home' />
             <ShoppingList isFavItemsOnly={true} dbReference='home' isFavOptionRequired={true} />
         </div>
     )
