@@ -62,6 +62,10 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
     }
     // console.log('render set folder dialog');
     return(
+        <div className='overlaying' onClick={(e)=>{
+            e.stopPropagation()
+            setIsCreateFolderDialogOpen(false);
+        }}>
         <div className="set-folder-name-dialog" ref={ref1} onClick={(e)=>e.stopPropagation()} >
             <p>Enter the name for the folder</p>
             <div className="set-folder-name-dialog-input-div">
@@ -82,6 +86,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
                 <button onClick={handleCreateClick}>Create</button>
              </div>
              {isFolderExisted && <p className='folder-dialog-error-msg' style={{fontSize:'0.7rem'}}>*Null and existed folder names are not allowed</p>}
+        </div>
         </div>
     )
 })

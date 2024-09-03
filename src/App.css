@@ -29,6 +29,7 @@ button:hover{
     background-color: rgba(0, 0, 0, 0.237);
     display: flex;
     justify-content: center;
+    z-index: 3;
 }
 
 @keyframes slide{

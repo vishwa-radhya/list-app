@@ -65,3 +65,6 @@
     position: relative;
     left: 3px;
 }
+.rename-container button:disabled{
+    color: gray;
+}

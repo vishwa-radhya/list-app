@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,handleRename,handleSetClickedItemIdToNull})=>{
     const inputRef = useRef(null);
     const [inputValue,setInputValue] = useState('');
+    const [isNameChanged,setIsNameChanged]=useState(false);
     
     useEffect(()=>{        
         setInputValue(clickedItemName ?? 'new name');
@@ -14,6 +15,10 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
             inputRef.current.focus();
         }
     },[isEditIconClicked]);
+
+    useEffect(()=>{
+        setIsNameChanged(inputValue.trim() !== clickedItemName.trim())
+    },[inputValue,clickedItemName])
     
     function inputChangeHandler(val){
         setInputValue(val);
@@ -44,7 +49,7 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
                     handleRenameIconClick(false)
                     handleSetClickedItemIdToNull(null);
                 }}>Cancel</button>
-                <button onClick={handleOkClick}>Rename</button>
+                <button onClick={handleOkClick} disabled={!isNameChanged || inputValue===''}>Rename</button>
             </div>
         </div>
         </div>

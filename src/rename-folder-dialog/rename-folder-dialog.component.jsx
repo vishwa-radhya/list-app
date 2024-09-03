@@ -92,6 +92,9 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
     }
     // console.log('render rename folder');
     return(
+        <div className='overlaying' onClick={(e)=>{
+            e.stopPropagation()
+        }}>
         <div className='rename-folder-dialog-div' ref={ref1} onClick={(e)=>e.stopPropagation()}>
         <fieldset>
             <legend>New name</legend>
@@ -108,6 +111,7 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
                 e.stopPropagation();
                 handleFolderRename()
             }} disabled={!isNameChanged || inputValue===''} >Rename</button>
+        </div>
         </div>
         </div>
     )
