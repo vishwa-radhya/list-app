@@ -9,6 +9,7 @@ import { FolderNamesContext } from '../contexts/folder-names-context';
 import { SideBarContext } from '../contexts/side-bar-context';
 import DeleteDialog from '../delete-dialog/delete-dialog.component';
 import RenameFolderDialog from '../rename-folder-dialog/rename-folder-dialog.component';
+import Loader from '../loader/loader.component';
 
 const SideBar=()=>{
     const sideBarRef = useRef(null);
@@ -30,6 +31,7 @@ const SideBar=()=>{
     const popupDeleteButtonRef = useRef(null);
     const [isSideBarItemsHidden,setIsSideBarItemsHidden]=useState(false);
     const [isScrolling,setIsScrolling]=useState(false);
+    const [isFoldersLoaded,setIsFoldersLoaded]=useState(true);
 
     useEffect(()=>{
         if(isSideBarOpen){
@@ -99,7 +101,6 @@ const SideBar=()=>{
         if(user){
             const dbFolderReference = ref(database,`shoppingLists/${user.uid}/folders`)
             onValue(dbFolderReference,(snapshot)=>{
-                // console.log('hit from folders match');
                 
                 const data = snapshot.val();
                 if(data){
@@ -108,7 +109,9 @@ const SideBar=()=>{
                 }else{
                     handleFolderNamesAdd([]);
                 }
+                setIsFoldersLoaded(false);
             })
+            
         }
     },[user,handleFolderNamesAdd])
 
@@ -152,7 +155,7 @@ const SideBar=()=>{
         navigateRouter('/settings');
         handleSetIsSideBarOpen(false);
     }
-    // console.log('render sidebar');
+    // console.log(showPopup);
     return(
         <Fragment>
             <div className="side-bar" style={sideBarStyles} ref={sideBarRef}>
@@ -165,6 +168,7 @@ const SideBar=()=>{
                     handleOpenCreateFolderDialog(true)}
             }><i className='fa-solid fa-folder-plus'></i>Create Folder</div>
             <div className='sidebar-folders-div' onScroll={handleFolderDivScroll}>
+            {isFoldersLoaded && <Loader/>}
                {
                 folderNames.map((folder,index)=>{
                     return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave}><i className='fa-solid fa-folder'></i>{folder}</div>

@@ -4,13 +4,16 @@ import App from './App.jsx';
 import { AuthProvider } from './contexts/authContext.jsx';
 import { FolderNamesProvider } from './contexts/folder-names-context.jsx';
 import { SideBarProvider } from './contexts/side-bar-context.jsx';
+import { ListItemsProvider } from './contexts/list-items-context.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
       <FolderNamesProvider>
         <SideBarProvider>
+          <ListItemsProvider>
             <App />
+          </ListItemsProvider>
         </SideBarProvider>
       </FolderNamesProvider>
     </AuthProvider>

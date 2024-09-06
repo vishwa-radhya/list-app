@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState,memo } from "react"
+import { Fragment, useEffect, useRef, useState,memo, useContext } from "react"
 import { onValue, ref, set } from "firebase/database";
 import { auth, database } from '../utils/firebase.js';
 import { isMobile } from "../utils/check-mobile.js";
@@ -7,11 +7,12 @@ import RenameContainer from "../rename/rename-container.component.jsx";
 import DeleteButton from "../delete-button/delete-button.component.jsx";
 import PropTypes from 'prop-types';
 import ListLoader from "../list-loader/list-loader.component.jsx";
+import { ListItemsContext } from "../contexts/list-items-context.jsx";
 
 const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const listRefs = useRef({});
     const starRefs = useRef({});
-    const [items,setItems]=useState([]);
+    // const [items,setItems]=useState([]);
     const [refsLoaded,setRefsLoaded]=useState(false);
     const [clickedItemId,setClickedItemId]=useState(null);
     const [clickedItemName,setClickedItemName]=useState(null);
@@ -19,6 +20,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const renameContainerRef = useRef(null);
     const user = auth.currentUser;
     const [contentLoaded,setContentLoaded]=useState(true);
+    const {items,handleSetItems}=useContext(ListItemsContext);
     
     useEffect(()=>{
         if(user){
@@ -32,14 +34,14 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
                     if(dbReference.includes('folders')){
                           newItemsArray = newItemsArray.filter(item => item.id !== 'marker')  
                     }
-                    setItems(newItemsArray);
+                    handleSetItems(newItemsArray);
                 }else{
-                    setItems([]);
+                    handleSetItems([]);
                 }
                 setContentLoaded(false);
             });
         }
-    },[user,isFavItemsOnly,dbReference]);
+    },[user,isFavItemsOnly,dbReference,handleSetItems]);
     
     function handleListOutSideClick(event){
         const listRefArray = Object.values(listRefs.current);

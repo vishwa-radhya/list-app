@@ -23,6 +23,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
 
     function inputChangeHandler(val){
         setInputValue(val);
+        if(isFolderExisted) handleFolderExistedError(false)
     }
 
     useEffect(()=>{
@@ -71,7 +72,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
             <div className="set-folder-name-dialog-input-div">
             <input type="text" maxLength={25} value={inputValue} ref={createFolderDialogInputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>createEnterHandler(e.key)} />
             <div className="input-len-indicator">
-            {inputValue ? inputValue.length : ''}/25
+            {inputValue ? inputValue.length : '0'}/25
             </div>
             </div>
             <div className='set-folder-name-dialog-btn-wrapper'>

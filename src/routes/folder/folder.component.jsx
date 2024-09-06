@@ -11,6 +11,7 @@ const FolderComponent=()=>{
     const [isFolderOptionsOpen,setIsFolderOptionsOpen]=useState(false);
     const folderComponentEllipsisRef = useRef(null);
     const folderOptionsDivRef = useRef(null);
+    const folderRef = useRef(null);
     const locationUrl = useLocation();
     const {handleSetRenameFolderDialog,handleSetDeleteFolderDialog,handleSetCurrentFolderName}=useContext(FolderNamesContext);
 
@@ -28,8 +29,16 @@ const FolderComponent=()=>{
         }
     },[isFolderOptionsOpen,handleSetDeleteFolderDialog,handleSetRenameFolderDialog])
 
+    useEffect(()=>{
+        if(folderRef.current){            
+            folderRef.current.classList.remove('animate__animated', 'animate__fadeIn')
+            void folderRef.current.offsetWidth;
+            folderRef.current.classList.add('animate__animated', 'animate__fadeIn')
+        }
+    },[folderName])
+
     return(
-        <div className="folder-component-container">
+        <div className="folder-component-container animate__animated animate__fadeIn" ref={folderRef}>
             <FolderTitle folderName={folderName} />
             <InputAndBtn placeHolder='Enter Items' buttonText='Add To Folder' pushAsFav={false} dbReference={`folders/${folderName}`} />
             <ShoppingList isFavItemsOnly={false} dbReference={`folders/${folderName}`} isFavOptionRequired={false} />
