@@ -1,9 +1,9 @@
 import './settings.styles.css';
 import {auth} from '../../utils/firebase.js';
-import settingsSvg from '../../assets/settings-svg.svg';
+import settingsSvg from '../../assets/settings-12.svg';
 import { signOutUser } from '../../utils/firebase.js';
 import { signInWithGoogle } from '../../utils/firebase.js';
-import { useContext,  useState } from 'react';
+import { useContext,useState } from 'react';
 import { AuthContext } from '../../contexts/authContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import { FolderNamesContext } from '../../contexts/folder-names-context.jsx';

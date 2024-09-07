@@ -12,7 +12,6 @@ import { ListItemsContext } from "../contexts/list-items-context.jsx";
 const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const listRefs = useRef({});
     const starRefs = useRef({});
-    // const [items,setItems]=useState([]);
     const [refsLoaded,setRefsLoaded]=useState(false);
     const [clickedItemId,setClickedItemId]=useState(null);
     const [clickedItemName,setClickedItemName]=useState(null);
@@ -20,7 +19,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const renameContainerRef = useRef(null);
     const user = auth.currentUser;
     const [contentLoaded,setContentLoaded]=useState(true);
-    const {items,handleSetItems}=useContext(ListItemsContext);
+    const {items,handleSetItems,handleSetMarkerValue}=useContext(ListItemsContext);
     
     useEffect(()=>{
         if(user){
@@ -29,6 +28,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
                 setContentLoaded(true);
                 const data = snapshot.val();
                 if(data){
+                    if(data.marker) handleSetMarkerValue(data.marker);
                     let itemsArray = Object.entries(data).map(([id,{isFavorite,value}])=>({id,isFavorite,value}));
                     let newItemsArray = isFavItemsOnly ? itemsArray.filter(item=>item.isFavorite) : itemsArray;
                     if(dbReference.includes('folders')){
@@ -41,7 +41,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
                 setContentLoaded(false);
             });
         }
-    },[user,isFavItemsOnly,dbReference,handleSetItems]);
+    },[user,isFavItemsOnly,dbReference,handleSetItems,handleSetMarkerValue]);
     
     function handleListOutSideClick(event){
         const listRefArray = Object.values(listRefs.current);

@@ -133,17 +133,42 @@ hr{
 .sidebar-user-div img{
     border-radius: 50%;
 }
+.sidebar-user-div img:hover{
+    cursor: pointer;
+}
 .sidebar-user-div p{
     font-size: 1.2rem;
     font-weight: 500;
 }
+.sidebar-user-div p:hover{
+    cursor: pointer;
+}
 .sidebar-user-div .p-div{
     flex: 1;
     margin-top: -2px;
+    border-radius: 8px;
 }
-.sidebar-user-div i{
-    font-size: 1.3rem;
+
+.sidebar-user-div .fa-folder{
+    font-size: 1.8rem;
+    padding: 13px;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(39, 36, 36);
+}
+.sidebar-user-div .fa-folder:hover{
+    background-color: #c3c2c2;
 }
 .sidebar-user-div:hover{
     background-color: #d7d7d7;
+}
+.sidebar-user-div .fa-gear{
+    position: absolute;
+    font-size: 0.75rem;
+    /* z-index: 7; */
+    color: rgb(39, 36, 36);
+    margin-top: 3px;
 }

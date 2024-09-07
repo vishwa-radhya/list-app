@@ -8,6 +8,7 @@ import FolderComponent from '../routes/folder/folder.component';
 import Settings from "../routes/settings/settings.component";
 import About from "../routes/about/about.component";
 import FolderInfo from "../routes/folder-info/folder-info.component";
+import FoldersOrg from "../components-2/folders-org/folders-org.componenet";
 import {  useEffect } from "react";
 
 const Container=()=>{
@@ -35,6 +36,7 @@ const Container=()=>{
                     <Route path="settings" element={<Settings/>} />
                     <Route path="about" element={<About/>}/>
                     <Route path="folders/:folderName/info" element={<FolderInfo/>} />
+                    <Route path="folders-org" element={<FoldersOrg/>} />
                 </Routes>
             <SideBar/>
         </div>

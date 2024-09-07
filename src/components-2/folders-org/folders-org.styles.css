@@ -1,0 +1,47 @@
+.folders-org-div{
+    /* border: 1px solid; */
+    width: 115%;
+    position: relative;
+    left: -8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+}
+.folders-org-div p{
+    font-weight: 520;
+    margin-top: -8px;
+}
+.folders-org-div .folders-div{
+    /* border: 1px solid; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7px;
+    position: relative;
+}
+.folders-div .folders{
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 3px;
+    padding: 10px;
+    border-radius: 2px;
+}
+.folders-org-div input{
+    border-radius: 2px;
+    height: 30px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid black;
+}
+.fa-magnifying-glass{
+    margin-right: 10px;
+}
+.no-srh-found{
+    position: absolute;
+    top: 40px;
+}

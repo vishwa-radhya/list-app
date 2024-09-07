@@ -175,14 +175,18 @@ const SideBar=()=>{
                 })
             }
             </div>
-             <div className='sidebar-user-div' onClick={handleSettingsRouting}>
-                <div>
+             <div className='sidebar-user-div'>
+                <div onClick={handleSettingsRouting}>
                     <img src={userImg} alt="user" width={35} />
                 </div>
-                <div className='p-div'>
+                <div className='p-div' onClick={handleSettingsRouting}>
                     <p>{displayName}</p>
                 </div>
-                <i className='fa-solid fa-ellipsis'></i>
+                <i className='fa-regular fa-folder' onClick={()=>{
+                    navigateRouter('/folders-org') 
+                    handleSetIsSideBarOpen(false)}}>
+                    <i className='fa-solid fa-gear'></i>
+                </i>
             </div>
                {showPopup && <div ref={popupRef} className='folder-options-div' style={{
                 top:popupPosition.top-19,

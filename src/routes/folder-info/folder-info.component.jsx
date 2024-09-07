@@ -1,27 +1,13 @@
 import { useParams } from 'react-router-dom';
 import './folder-info.styles.css';
 import { auth } from '../../utils/firebase';
-import { useEffect, useState } from 'react';
-import { ref,get} from 'firebase/database';
-import { database } from '../../utils/firebase';
+import { useContext } from 'react';
+import { ListItemsContext } from '../../contexts/list-items-context';
 
 const FolderInfo=()=>{
     const {folderName} = useParams();
     const userName = auth.currentUser.displayName;
-    const [folderCreationTime,setFolderCreationTime]=useState('Sun Sep 00 0000 00:00:00');
-    const [numOfFolderItems,setNumOfFolderItems]=useState('0');
-    const user = auth.currentUser;
-    const userId = user.uid;
-
-    useEffect(()=>{
-        const folderRef = ref(database,`shoppingLists/${userId}/folders/${folderName}`)
-        get(folderRef).then((snapshot)=>{
-            const folderItems = snapshot.val();
-            setFolderCreationTime(folderItems.marker);
-            setNumOfFolderItems(Object.keys(folderItems).length-1);
-            
-        })
-    },[folderName,userId])
+    const {markerValue,items}=useContext(ListItemsContext);
 
     return(
         <div className='folder-info-component'>
@@ -49,14 +35,14 @@ const FolderInfo=()=>{
                         <i className='fa-solid fa-clock'></i>
                         <div className='inner-block'>
                             <p>Creation Time</p>
-                            <span>{folderCreationTime}</span>
+                            <span>{markerValue}</span>
                         </div>
                     </div>
                     <div>
                         <i className='fa-solid fa-layer-group'></i>
                         <div className='inner-block'>
                             <p>Items Count</p>
-                            <span>{numOfFolderItems}</span>
+                            <span>{items.length}</span>
                         </div>
                     </div>
                     <div>
