@@ -7,7 +7,7 @@ import SearchNotFound from '../../assets/no-srh-found.png';
 import Loader from '../../components-3/loader/loader.component';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MultiDeleteFolderDialog from '../multi-delete-folder-dialog/multi-delete-folder-dialog.component';
+import MultiDeleteFolderDialog from '../../components-2/multi-delete-folder-dialog/multi-delete-folder-dialog.component';
 const FoldersOrg=()=>{
     const {folderNames}=useContext(FolderNamesContext);
     const [filteredFolderNames,setFilteredFolderNames]=useState(folderNames);
