@@ -11,7 +11,7 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
     const [inputValue,setInputValue]=useState('');
     const user = auth.currentUser;
     const [isNameChanged,setIsNameChanged]=useState(false);
-    const {handleSetRenameFolderDialog,isRenameFolderDialogOpen} =useContext(FolderNamesContext);
+    const {handleSetRenameFolderDialog,isRenameFolderDialogOpen,folderNames} =useContext(FolderNamesContext);
     const location = useLocation();
     const navigateRouter = useNavigate();
     const renameFolderDialogInputRef = useRef(null);
@@ -110,7 +110,7 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
             <button  onClick={(e)=>{
                 e.stopPropagation();
                 handleFolderRename()
-            }} disabled={!isNameChanged || inputValue===''} >Rename</button>
+            }} disabled={!isNameChanged || inputValue==='' || folderNames.includes(inputValue)}>Rename</button>
         </div>
         </div>
         </div>

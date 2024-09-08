@@ -15,12 +15,9 @@
     position: absolute;
     right:  19%;
     top: -11px;
-    /* border: 1px solid; */
-    /* padding: 2px 10px; */
     display: flex;
 }
 .folders-org-div .options-div .fa-solid{
-    /* border: 1px solid; */
     padding: 5px 10px;
     color: rgb(55, 55, 55);
     animation: slide 0.25s ease;
@@ -32,12 +29,13 @@
 }
 .folders-org-div .folder-select-btn-div{
     position: absolute;
-    right: 15px;
-    top: 20px;
+    right: 7px;
+    top: 22px;
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 10px 8px;
+    font-size: 1.1rem;
+    padding: 13px 8px;
     background-color: #f6f9f9;
     color: rgb(60, 59, 59);
     border-radius: 8px;
@@ -60,9 +58,9 @@
     align-items: center;
     border-radius: 3px;
     padding: 27px 10px 5px;
-    border-radius: 2px;
+    border-radius: 4px;
     position: relative;
-    box-shadow: 1.5px 1.5px 2px gray,-2px -2px 2px rgb(251, 232, 232);
+    box-shadow: 1.5px 1.5px 2px gray,-2px -2px 2px rgb(237, 245, 244);
 }
 .folders-div .folders .folder-select{
     position: absolute;
