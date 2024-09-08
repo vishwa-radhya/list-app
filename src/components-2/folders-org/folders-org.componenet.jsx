@@ -32,18 +32,19 @@ const FoldersOrg=()=>{
         setFilteredFolderNames(folderNames.filter(folder=>folder.toLowerCase().includes(e.target.value.toLowerCase())))        
     }
 
-    const hanldeFolderSelect=(folder,e)=>{
+    const hanldeFolderSelect=(folder)=>{
         setSelectedFoldersArray(prevState => {
             if (!Array.isArray(prevState)) {
                 prevState = []; 
             }
-            if (e.target.checked) {
-                return [...prevState, folder]; 
-            } else {
-                return prevState.filter(f => f !== folder); 
+            if(prevState.includes(folder)){
+                return prevState.filter(f=>f!==folder);
+            }else{
+                return [...prevState,folder];
             }
         });
     }
+    
     
     const handleFolderRenaming=()=>{
         if(selectedFoldersArray.length){
@@ -109,11 +110,11 @@ const FoldersOrg=()=>{
             </div>
             <div className='folders-div'>
                 {filteredFolderNames.map((folder,index)=>{
-                    return <div key={index} className='folders'>
-                        <img src={FolderImage} alt="folder" width={90} onClick={()=>navigateRouter(`/folders/${folder}`)} />
+                    return <div key={index} className='folders' onClick={()=>!isSelectClicked ? navigateRouter(`/folders/${folder}`) : hanldeFolderSelect(folder)} >
+                        <img src={FolderImage} alt="folder" width={90} />
                         <span>{folder}</span>
                         {isSelectClicked && 
-                            <input type="checkbox" className='folder-select' checked={selectedFoldersArray.includes(folder)} onChange={(e)=>hanldeFolderSelect(folder,e)} />
+                            <input type="checkbox" className='folder-select' checked={selectedFoldersArray.includes(folder)} onChange={()=>hanldeFolderSelect(folder)} />
                         }
                     </div>
                 })}
