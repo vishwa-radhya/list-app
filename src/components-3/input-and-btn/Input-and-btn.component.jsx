@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { useState } from "react";
 import { push,ref } from "firebase/database";
-import { database } from "../utils/firebase";
-import { auth } from "../utils/firebase";
+import { database } from "../../utils/firebase";
+import { auth } from "../../utils/firebase";
 import './input-and-btn.styles.css';
 import PropTypes from 'prop-types';
 const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference})=>{

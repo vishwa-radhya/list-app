@@ -1,6 +1,6 @@
 import { forwardRef, useContext } from 'react';
 import './folder-options.styles.css';
-import { FolderNamesContext } from '../contexts/folder-names-context';
+import { FolderNamesContext } from '../../contexts/folder-names-context';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const FolderOptions=forwardRef((props,ref1)=>{

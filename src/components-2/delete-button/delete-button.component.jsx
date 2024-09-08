@@ -1,6 +1,6 @@
-import { auth,database } from "../utils/firebase";
+import { auth,database } from "../../utils/firebase.js";
 import { ref,remove } from "firebase/database";
-import { isMobile } from "../utils/check-mobile.js";
+import { isMobile } from "../../utils/check-mobile.js";
 import PropTypes from 'prop-types';
 import './delete-button.styles.css';
 

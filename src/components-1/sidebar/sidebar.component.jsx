@@ -1,15 +1,15 @@
 import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import './sidebar.styles.css';
-import { auth } from "../utils/firebase";
-import SetFolderDialog from '../set-folder-dialog/set-folder-dialog.component';
-import { database } from "../utils/firebase";
+import { auth } from "../../utils/firebase";
+import SetFolderDialog from '../../components-2/set-folder-dialog/set-folder-dialog.component';
+import { database } from "../../utils/firebase";
 import { ref,onValue } from 'firebase/database';
-import { FolderNamesContext } from '../contexts/folder-names-context';
-import { SideBarContext } from '../contexts/side-bar-context';
-import DeleteDialog from '../delete-dialog/delete-dialog.component';
-import RenameFolderDialog from '../rename-folder-dialog/rename-folder-dialog.component';
-import Loader from '../loader/loader.component';
+import { FolderNamesContext } from '../../contexts/folder-names-context';
+import { SideBarContext } from '../../contexts/side-bar-context';
+import DeleteDialog from '../../components-2/delete-dialog/delete-dialog.component';
+import RenameFolderDialog from '../../components-2/rename-folder-dialog/rename-folder-dialog.component';
+import Loader from '../../components-3/loader/loader.component';
 
 const SideBar=()=>{
     const sideBarRef = useRef(null);

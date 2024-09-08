@@ -1,8 +1,8 @@
-import Picture from "../../picture/picture.component";
+import Picture from "../../components-3/picture/picture.component";
 import nFavCat from '../../assets/n-fav-cat.png';
 import './favorites.styles.css';
-import InputAndBtn from "../../input-and-btn/Input-and-btn.component";
-import ShoppingList from '../../shopping-list/shopping-list.component';
+import InputAndBtn from "../../components-3/input-and-btn/Input-and-btn.component";
+import ShoppingList from '../../components-1/shopping-list/shopping-list.component';
 const Favorites=()=>{
     // console.log('render favorites component');
     return(

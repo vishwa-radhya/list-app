@@ -1,4 +1,4 @@
-import Interactor from "../../interactor/interactor.component"
+import Interactor from "../../components-1/interactor/interactor.component"
 import './home.styles.css';
 const Home=()=>{
     // console.log('render home');

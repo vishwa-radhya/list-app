@@ -1,8 +1,8 @@
 import { forwardRef, useContext, useEffect } from 'react';
 import './delete-dialog.styles.css';
-import { FolderNamesContext } from '../contexts/folder-names-context';
+import { FolderNamesContext } from '../../contexts/folder-names-context';
 import { ref, remove } from "firebase/database";
-import { database,auth } from '../utils/firebase';
+import { database,auth } from '../../utils/firebase';
 import { useLocation,useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 

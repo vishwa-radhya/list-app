@@ -5,7 +5,7 @@ import FirebaseSvg from '../../assets/firebase-svg.svg';
 import FontAwesomeSvg from '../../assets/font-awesome-svgr.svg';
 import NetlifySvg from '../../assets/netlify-svg.svg';
 import { useEffect, useRef } from 'react';
-import ImgLoader from '../../img-loader/img-loader.component';
+import ImgLoader from '../../components-3/img-loader/img-loader.component';
 import { useState } from 'react';
 
 const About=()=>{

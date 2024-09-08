@@ -1,14 +1,14 @@
-import { auth } from "../utils/firebase";
+import { auth } from "../../utils/firebase";
 import { Route, Routes,useNavigate } from 'react-router-dom';
 import './container.styles.css';
-import Home from '../routes/home/home.component';
-import Favorites from '../routes/favorites/favorites.component';
+import Home from '../../routes/home/home.component';
+import Favorites from '../../routes/favorites/favorites.component';
 import SideBar from '../sidebar/sidebar.component';
-import FolderComponent from '../routes/folder/folder.component';
-import Settings from "../routes/settings/settings.component";
-import About from "../routes/about/about.component";
-import FolderInfo from "../routes/folder-info/folder-info.component";
-import FoldersOrg from "../components-2/folders-org/folders-org.componenet";
+import FolderComponent from '../../routes/folder/folder.component';
+import Settings from "../../routes/settings/settings.component";
+import About from "../../routes/about/about.component";
+import FolderInfo from "../../routes/folder-info/folder-info.component";
+import FoldersOrg from "../../components-2/folders-org/folders-org.componenet";
 import {  useEffect } from "react";
 
 const Container=()=>{

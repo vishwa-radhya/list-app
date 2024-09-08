@@ -1,13 +1,13 @@
 import { Fragment, useEffect, useRef, useState,memo, useContext } from "react"
 import { onValue, ref, set } from "firebase/database";
-import { auth, database } from '../utils/firebase.js';
-import { isMobile } from "../utils/check-mobile.js";
+import { auth, database } from '../../utils/firebase.js';
+import { isMobile } from "../../utils/check-mobile.js";
 import './shopping-list.styles.css';
-import RenameContainer from "../rename/rename-container.component.jsx";
-import DeleteButton from "../delete-button/delete-button.component.jsx";
+import RenameContainer from "../../components-2/rename/rename-container.component.jsx";
+import DeleteButton from "../../components-2/delete-button/delete-button.component.jsx";
 import PropTypes from 'prop-types';
-import ListLoader from "../list-loader/list-loader.component.jsx";
-import { ListItemsContext } from "../contexts/list-items-context.jsx";
+import ListLoader from "../../components-3/list-loader/list-loader.component.jsx";
+import { ListItemsContext } from "../../contexts/list-items-context.jsx";
 
 const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const listRefs = useRef({});

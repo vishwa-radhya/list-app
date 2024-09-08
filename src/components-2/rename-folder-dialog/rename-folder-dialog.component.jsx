@@ -1,8 +1,8 @@
 import { forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import './rename-folder-dialog.styles.css';
-import { database,auth } from '../utils/firebase';
+import { database,auth } from '../../utils/firebase';
 import { ref,get,remove,set } from 'firebase/database';
-import { FolderNamesContext } from '../contexts/folder-names-context';
+import { FolderNamesContext } from '../../contexts/folder-names-context';
 import PropTypes from 'prop-types';
 import { useLocation,useNavigate } from 'react-router-dom';
 

@@ -1,9 +1,9 @@
 import { useParams,useLocation } from "react-router-dom"
 import './folder.styles.css';
-import FolderTitle from "../../folder-title/folder-title.component";
-import InputAndBtn from "../../input-and-btn/Input-and-btn.component";
-import ShoppingList from "../../shopping-list/shopping-list.component";
-import FolderOptions from "../../folder-options/folder-options.component";
+import FolderTitle from "../../components-3/folder-title/folder-title.component";
+import InputAndBtn from "../../components-3/input-and-btn/Input-and-btn.component";
+import ShoppingList from "../../components-1/shopping-list/shopping-list.component";
+import FolderOptions from "../../components-3/folder-options/folder-options.component";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FolderNamesContext } from "../../contexts/folder-names-context";
 const FolderComponent=()=>{

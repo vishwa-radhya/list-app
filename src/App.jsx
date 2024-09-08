@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import './App.css'
-import Container from './container/container.component'
-import Auth from './auth/Auth.component';
+import Container from './components-1/container/container.component'
+import Auth from './components-1/auth/Auth.component';
 import {  onAuthStateChanged } from 'firebase/auth';
 import { auth } from './utils/firebase';
-import AuthLoader from './loader/auth-loader.component';
+import AuthLoader from './components-3/loader/auth-loader.component';
 import { AuthContext } from './contexts/authContext';
 import { BrowserRouter } from 'react-router-dom';
 function App() {

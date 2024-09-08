@@ -1,10 +1,10 @@
 import { forwardRef, useContext, useEffect, useRef } from 'react';
 import './set-folder-dialog.styles.css';
-import { database } from "../utils/firebase";
+import { database } from "../../utils/firebase";
 import { set,ref } from "firebase/database";
-import { auth } from "../utils/firebase";
+import { auth } from "../../utils/firebase";
 import { useState } from 'react';
-import { FolderNamesContext } from '../contexts/folder-names-context';
+import { FolderNamesContext } from '../../contexts/folder-names-context';
 import PropTypes from 'prop-types';
 
 

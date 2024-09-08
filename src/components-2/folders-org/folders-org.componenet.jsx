@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import FolderImage from '../../assets/folder.svg'
 import {FolderNamesContext} from '../../contexts/folder-names-context';
 import SearchNotFound from '../../assets/no-srh-found.png';
-import Loader from '../../loader/loader.component';
+import Loader from '../../components-3/loader/loader.component';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MultiDeleteFolderDialog from '../multi-delete-folder-dialog/multi-delete-folder-dialog.component';

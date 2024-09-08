@@ -1,9 +1,9 @@
 import { Fragment} from "react"
 import ShoppingList from "../shopping-list/shopping-list.component";
 import './interactor.styles.css';
-import Picture from '../picture/picture.component';
-import catImage from '../assets/cat.jpg'
-import InputAndBtn from "../input-and-btn/Input-and-btn.component";
+import Picture from '../../components-3/picture/picture.component';
+import catImage from '../../assets/cat.jpg'
+import InputAndBtn from "../../components-3/input-and-btn/Input-and-btn.component";
 const Interactor=()=>{ 
     // console.log('render interactor');
     return(
