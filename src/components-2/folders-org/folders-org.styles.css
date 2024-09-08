@@ -51,6 +51,7 @@
     justify-content: center;
     gap: 7px;
     position: relative;
+    margin-top: 20px;
 }
 .folders-div .folders{
     display: flex;

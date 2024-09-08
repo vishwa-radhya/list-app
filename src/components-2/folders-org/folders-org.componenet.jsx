@@ -7,8 +7,7 @@ import SearchNotFound from '../../assets/no-srh-found.png';
 import Loader from '../../loader/loader.component';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ref, remove } from 'firebase/database';
-import { auth, database } from '../../utils/firebase';
+import MultiDeleteFolderDialog from '../multi-delete-folder-dialog/multi-delete-folder-dialog.component';
 const FoldersOrg=()=>{
     const {folderNames}=useContext(FolderNamesContext);
     const [filteredFolderNames,setFilteredFolderNames]=useState(folderNames);
@@ -21,7 +20,9 @@ const FoldersOrg=()=>{
     const folderSelectBtnRef =useRef(null);
     const [selectedFoldersArray,setSelectedFoldersArray]=useState([]);
     const {handleSetRenameFolderDialog,handleSetCurrentFolderName}=useContext(FolderNamesContext);
-    const user = auth.currentUser;
+    const [isMultiFolderDeleteDialogOpen,setIsMultiFolderdeleteDialogOpen]=useState(false);
+    const multiFolderDeleteDialogRef = useRef(null);
+    const deleteIconRef = useRef(null);
     
     useEffect(()=>{
         setFilteredFolderNames(folderNames);
@@ -53,26 +54,6 @@ const FoldersOrg=()=>{
         }
     }
 
-    const handleFolderDeleting=()=>{
-        if(selectedFoldersArray.length){
-            deleteFolders();
-        }
-    }
-
-    const deleteFolders=async()=>{
-        const promises = selectedFoldersArray.map(folder=>{
-            const folderRef = ref(database,`shoppingLists/${user.uid}/folders/${folder}`)
-            return remove(folderRef);
-        });
-
-        try{
-            await Promise.all(promises);
-            // console.log('success');
-        }catch(e){
-            console.error('error deleting folders',e)
-        }
-    }
-
     useEffect(()=>{
         if(isEllipsisClicked){
             const handleClickOutSide=(event)=>{
@@ -85,13 +66,25 @@ const FoldersOrg=()=>{
         }
     },[isEllipsisClicked])
 
+    useEffect(()=>{
+        if(isMultiFolderDeleteDialogOpen){
+            const handleClickOutSide=(event)=>{
+                if(multiFolderDeleteDialogRef.current && !multiFolderDeleteDialogRef.current.contains(event.target) && deleteIconRef.current && !deleteIconRef.current.contains(event.target)){
+                    setIsMultiFolderdeleteDialogOpen(false);
+                }
+            }
+            document.addEventListener('click',handleClickOutSide);
+            return ()=>document.removeEventListener('click',handleClickOutSide);
+        }
+    },[isMultiFolderDeleteDialogOpen])
+
     return(
         <div className='folders-org-div'>
         <div className='options-div'>
                  {isSelectClicked && <i className='fa-solid fa-pen-to-square' 
                  style={{display:selectedFoldersArray.length===1 ? 'block' : 'none'}}
                   onClick={handleFolderRenaming}></i>} 
-                {isSelectClicked && <i className='fa-solid fa-trash' style={{display:selectedFoldersArray.length ? 'block' : 'none'}} onClick={handleFolderDeleting}></i>}
+                {isSelectClicked && <i className='fa-solid fa-trash' ref={deleteIconRef} style={{display:selectedFoldersArray.length ? 'block' : 'none'}} onClick={()=>setIsMultiFolderdeleteDialogOpen(true)}></i>}
                 <i className='fa-solid fa-ellipsis-vertical' ref={ellipsisRef} onClick={()=>setIsEllipsisClicked(true)}></i>
             
         </div>
@@ -124,6 +117,7 @@ const FoldersOrg=()=>{
                 <i className={!isSelectClicked ? 'fa-regular fa-square' :'fa-regular fa-square-check'}></i>
                 <span>Select...</span>
             </div>}
+            {isMultiFolderDeleteDialogOpen && <MultiDeleteFolderDialog folderArray={selectedFoldersArray} ref={multiFolderDeleteDialogRef} setIsMultiFolderdeleteDialogOpen={setIsMultiFolderdeleteDialogOpen} />}
         </div>
     )
 }
