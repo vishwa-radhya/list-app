@@ -10,7 +10,7 @@
     overflow: hidden;
     transition: .25s ease;
     box-shadow: 2px 2px 3px rgb(128, 126, 126);
-    padding: 15px;
+    padding: 15px 15px 5px;
     gap: 5px;
     font-weight: 500;
     animation: slide 0.2s ease;

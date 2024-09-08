@@ -5,7 +5,8 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
     const inputRef = useRef(null);
     const [inputValue,setInputValue] = useState('');
     const [isNameChanged,setIsNameChanged]=useState(false);
-    
+    const renameButtonRef = useRef(null);
+
     useEffect(()=>{        
         setInputValue(clickedItemName ?? 'new name');
     },[clickedItemName])
@@ -17,17 +18,19 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
     },[isEditIconClicked]);
 
     useEffect(()=>{
-        setIsNameChanged(inputValue.trim() !== clickedItemName.trim())
+        setIsNameChanged(inputValue?.trim() !== clickedItemName?.trim())
     },[inputValue,clickedItemName])
     
     function inputChangeHandler(val){
         setInputValue(val);
     }
     function handleOkClick(){
-        handleRename(inputValue);
-        inputRef.current.blur();
+        if(!renameButtonRef.current?.disabled){
+            handleRename(inputValue);
+            inputRef.current.blur();
+        }
     }
-
+    
     function renameEnterHandler(key){
         if(key === 'Enter'){
             handleOkClick();
@@ -49,7 +52,7 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
                     handleRenameIconClick(false)
                     handleSetClickedItemIdToNull(null);
                 }}>Cancel</button>
-                <button onClick={handleOkClick} disabled={!isNameChanged || inputValue===''}>Rename</button>
+                <button onClick={handleOkClick} ref={renameButtonRef} disabled={!isNameChanged || inputValue===''}>Rename</button>
             </div>
         </div>
         </div>

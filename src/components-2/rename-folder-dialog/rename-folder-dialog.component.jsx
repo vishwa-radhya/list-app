@@ -15,7 +15,8 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
     const location = useLocation();
     const navigateRouter = useNavigate();
     const renameFolderDialogInputRef = useRef(null);
-    
+    const renameBtnRef = useRef(null);
+
     useEffect(()=>{
         if(isRenameFolderDialogOpen){
             renameFolderDialogInputRef.current.focus();
@@ -86,11 +87,11 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
     }
     
     function handleFolderRenameKeyUp(key){
-        if(key === 'Enter'){
+        if(key === 'Enter' && !renameBtnRef.current?.disabled){
             handleFolderRename();
         }
     }
-    // console.log('render rename folder');
+    // console.log(renameBtnRef.current?.disabled);
     return(
         <div className='overlaying' onClick={(e)=>{
             e.stopPropagation()
@@ -110,7 +111,7 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
             <button  onClick={(e)=>{
                 e.stopPropagation();
                 handleFolderRename()
-            }} disabled={!isNameChanged || inputValue==='' || folderNames.includes(inputValue)}>Rename</button>
+            }} disabled={!isNameChanged || inputValue==='' || folderNames.includes(inputValue)} ref={renameBtnRef}>Rename</button>
         </div>
         </div>
         </div>
