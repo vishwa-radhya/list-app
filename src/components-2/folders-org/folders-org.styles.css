@@ -1,5 +1,4 @@
 .folders-org-div{
-    /* border: 1px solid; */
     width: 115%;
     position: relative;
     left: -8%;
@@ -12,8 +11,43 @@
     font-weight: 520;
     margin-top: -8px;
 }
-.folders-org-div .folders-div{
+.folders-org-div .options-div{
+    position: absolute;
+    right:  19%;
+    top: -11px;
     /* border: 1px solid; */
+    /* padding: 2px 10px; */
+    display: flex;
+}
+.folders-org-div .options-div .fa-solid{
+    /* border: 1px solid; */
+    padding: 5px 10px;
+    color: rgb(55, 55, 55);
+    animation: slide 0.25s ease;
+    z-index: 3;
+    border-radius: 8px;
+}
+.folders-org-div .options-div .fa-solid:hover{
+    background-color: rgb(224, 223, 223);
+}
+.folders-org-div .folder-select-btn-div{
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 8px;
+    background-color: #f6f9f9;
+    color: rgb(60, 59, 59);
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgb(168, 167, 167);
+    animation: slide 0.25s ease;
+}
+.folder-select-btn-div:active{
+    background-color: #d7d7d7;
+}
+.folders-org-div .folders-div{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -21,13 +55,23 @@
     position: relative;
 }
 .folders-div .folders{
-    border: 1px solid gray;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 3px;
-    padding: 10px;
+    padding: 27px 10px 5px;
     border-radius: 2px;
+    position: relative;
+    box-shadow: 1.5px 1.5px 2px gray,-2px -2px 2px rgb(251, 232, 232);
+}
+.folders-div .folders .folder-select{
+    position: absolute;
+    left: 0px;
+    top: 1px;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    animation: slide 0.25s ease;
 }
 .folders-org-div input{
     border-radius: 2px;
@@ -35,13 +79,23 @@
     font-family: inherit;
     font-size: 1rem;
     outline: none;
-    border: 0;
-    border-bottom: 1px solid black;
+    border: none;
+    width: 80%;
 }
 .fa-magnifying-glass{
     margin-right: 10px;
+    margin-left: 10px;
 }
 .no-srh-found{
     position: absolute;
     top: 40px;
+}
+.folder-cog-img{
+    width: 161px;
+    height: 161px;
+    position: relative;
+}
+.folders-org-div .input-div{
+    border: 1px solid;
+    border-radius: 20px;
 }
