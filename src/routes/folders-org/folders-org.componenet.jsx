@@ -4,14 +4,14 @@ import { useContext, useEffect, useState } from 'react';
 import FolderImage from '../../assets/folder.svg'
 import {FolderNamesContext} from '../../contexts/folder-names-context';
 import SearchNotFound from '../../assets/no-srh-found.png';
-import Loader from '../../components-3/loader/loader.component';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SvgWithLoader from '../../components-3/svg-with-loader/svg-with-loader.component';
 import MultiDeleteFolderDialog from '../../components-2/multi-delete-folder-dialog/multi-delete-folder-dialog.component';
 const FoldersOrg=()=>{
     const {folderNames}=useContext(FolderNamesContext);
     const [filteredFolderNames,setFilteredFolderNames]=useState(folderNames);
-    const [isImgLoaded,setIsImgLoaded]=useState(false);
+    const foldersOrgRef = useRef(null);
     const inputRef = useRef(null);
     const [isEllipsisClicked,setIsEllipsisClicked]=useState(false);
     const [isSelectClicked,setIsSelectClicked]=useState(false);
@@ -78,8 +78,16 @@ const FoldersOrg=()=>{
         }
     },[isMultiFolderDeleteDialogOpen])
 
+    useEffect(()=>{
+        if(foldersOrgRef.current){
+            foldersOrgRef.current.classList.remove('animate__animated', 'animate__fadeIn')
+            void foldersOrgRef.current.offsetWidth;
+            foldersOrgRef.current.classList.add('animate__animated', 'animate__fadeIn')
+        }
+    },[])
+
     return(
-        <div className='folders-org-div'>
+        <div className='folders-org-div animate__animated animate__fadeIn' ref={foldersOrgRef}>
         <div className='options-div'>
                  {isSelectClicked && <i className='fa-solid fa-pen-to-square' 
                  style={{display:selectedFoldersArray.length===1 ? 'block' : 'none'}}
@@ -88,10 +96,7 @@ const FoldersOrg=()=>{
                 <i className='fa-solid fa-ellipsis-vertical' ref={ellipsisRef} onClick={()=>setIsEllipsisClicked(true)}></i>
             
         </div>
-            <div className='folder-cog-img'>
-            {!isImgLoaded && <Loader/>}
-            <img src={FolderCog} width={160} alt="" onLoad={()=>setIsImgLoaded(true)} />
-            </div>
+            <SvgWithLoader svgimg={FolderCog} />
             <p>Folders Management</p>
             <div className='input-div'>
             <i className="fa-solid fa-magnifying-glass"></i>

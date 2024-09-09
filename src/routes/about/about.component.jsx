@@ -11,6 +11,7 @@ import { useState } from 'react';
 const About=()=>{
     const [imgLoaded,setImgLoaded]=useState(false);
     const githubProfilePicRef = useRef(null);
+    const aboutDivRef = useRef(null);
 
     function handleChangeOfImg(){
         if(githubProfilePicRef.current){
@@ -27,8 +28,16 @@ const About=()=>{
         img.onload=()=>setImgLoaded(true);
     },[])
 
+    useEffect(()=>{
+        if(aboutDivRef.current){
+            aboutDivRef.current.classList.remove('animate__animated', 'animate__fadeIn')
+            void aboutDivRef.current.offsetWidth;
+            aboutDivRef.current.classList.add('animate__animated', 'animate__fadeIn')
+        }
+    })
+
     return (
-        <div className='about-div'>
+        <div className='about-div animate__animated animate__fadeIn' ref={aboutDivRef}>
             <p className='description'>Our Shopping List App, a simple and efficient tool designed to help you organize and manage your shopping needs.</p>
             <h5>Developed By</h5>
             <div className='dev-info'>

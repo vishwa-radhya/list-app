@@ -10,6 +10,7 @@ import About from "../../routes/about/about.component";
 import FolderInfo from "../../routes/folder-info/folder-info.component";
 import FoldersOrg from "../../routes/folders-org/folders-org.componenet";
 import {  useEffect } from "react";
+import FolderPrivacy from "../../routes/folder-privacy/folder-privacy.component";
 
 const Container=()=>{
     const navigateRouter = useNavigate();
@@ -37,6 +38,7 @@ const Container=()=>{
                     <Route path="about" element={<About/>}/>
                     <Route path="folders/:folderName/info" element={<FolderInfo/>} />
                     <Route path="folders-org" element={<FoldersOrg/>} />
+                    <Route path="folder-privacy" element={<FolderPrivacy/>} />
                 </Routes>
             <SideBar/>
         </div>

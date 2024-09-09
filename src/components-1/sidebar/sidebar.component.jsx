@@ -175,6 +175,20 @@ const SideBar=()=>{
                 })
             }
             </div>
+            <div className='additional-options-div'>
+                <div><i className='fa-solid fa-microphone'></i>
+                </div>
+                <div><i className='fa-solid fa-paper-plane'></i>
+                </div>
+                <div onClick={()=>{
+                    navigateRouter('/folder-privacy')
+                    handleSetIsSideBarOpen(false)
+                }
+                }><i className='fa-solid fa-lock'></i>
+                </div>
+                <div><i className='fa-solid fa-wand-magic-sparkles'></i>
+                </div>
+            </div>
              <div className='sidebar-user-div'>
                 <div onClick={handleSettingsRouting}>
                     <img src={userImg} alt="user" width={35} />
