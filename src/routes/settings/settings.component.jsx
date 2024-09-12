@@ -3,7 +3,7 @@ import {auth} from '../../utils/firebase.js';
 import settingsSvg from '../../assets/settings-12.svg';
 import { signOutUser } from '../../utils/firebase.js';
 import { signInWithGoogle } from '../../utils/firebase.js';
-import { useContext,useEffect,useRef,useState } from 'react';
+import { useContext,useState } from 'react';
 import { AuthContext } from '../../contexts/authContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import { FolderNamesContext } from '../../contexts/folder-names-context.jsx';
@@ -15,7 +15,6 @@ const Settings=()=>{
     const lastLoginAt = auth.currentUser?.metadata.lastSignInTime.replace('GMT','');
     const navigateRouter = useNavigate();
     const {folderNames}=useContext(FolderNamesContext);
-    const settingsDivRef = useRef(null);
     const {handleSetUser}=useContext(AuthContext);
     const [landingRoute,setLandingRoute]=useState(()=>{
         return localStorage.getItem('landingRoute') || 'Home';
@@ -30,16 +29,8 @@ const Settings=()=>{
         localStorage.setItem('landingRoute',selectedValue);
     }
 
-    useEffect(()=>{
-        if(settingsDivRef.current){
-            settingsDivRef.current.classList.remove('animate__animated', 'animate__fadeIn')
-            void settingsDivRef.current.offsetWidth;
-            settingsDivRef.current.classList.add('animate__animated', 'animate__fadeIn')
-        }
-    },[])
-
     return(
-        <div className='settings-div animate__animated animate__fadeIn' ref={settingsDivRef}>
+        <div className='settings-div animate__animated animate__fadeIn'>
         <div className='settings-img'>
             <img src={settingsSvg} alt="settings-image" />
             <p>Settings</p>

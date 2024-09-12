@@ -1,0 +1,16 @@
+.dialpad-key{
+    border-radius: 5px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: ghostwhite;
+}
+.dialpad-key span{
+    font-size: 1.5rem;
+}
+.dialpad-key:active{
+    background-color: ghostwhite;
+    color: black;
+}

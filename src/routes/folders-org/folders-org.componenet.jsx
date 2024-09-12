@@ -11,7 +11,6 @@ import MultiDeleteFolderDialog from '../../components-2/multi-delete-folder-dial
 const FoldersOrg=()=>{
     const {folderNames}=useContext(FolderNamesContext);
     const [filteredFolderNames,setFilteredFolderNames]=useState(folderNames);
-    const foldersOrgRef = useRef(null);
     const inputRef = useRef(null);
     const [isEllipsisClicked,setIsEllipsisClicked]=useState(false);
     const [isSelectClicked,setIsSelectClicked]=useState(false);
@@ -78,16 +77,8 @@ const FoldersOrg=()=>{
         }
     },[isMultiFolderDeleteDialogOpen])
 
-    useEffect(()=>{
-        if(foldersOrgRef.current){
-            foldersOrgRef.current.classList.remove('animate__animated', 'animate__fadeIn')
-            void foldersOrgRef.current.offsetWidth;
-            foldersOrgRef.current.classList.add('animate__animated', 'animate__fadeIn')
-        }
-    },[])
-
     return(
-        <div className='folders-org-div animate__animated animate__fadeIn' ref={foldersOrgRef}>
+        <div className='folders-org-div animate__animated animate__fadeIn'>
         <div className='options-div'>
                  {isSelectClicked && <i className='fa-solid fa-pen-to-square' 
                  style={{display:selectedFoldersArray.length===1 ? 'block' : 'none'}}
