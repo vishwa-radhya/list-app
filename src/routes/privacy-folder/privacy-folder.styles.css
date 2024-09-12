@@ -1,0 +1,10 @@
+.privacy-folder-div{
+    display: flex;
+    flex-direction: column;
+    margin-top: 180px;
+    gap: 10px;
+}
+.privacy-folder-div p{
+    text-align: center;
+    font-size: 1.2rem;
+}

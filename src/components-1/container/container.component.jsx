@@ -11,6 +11,7 @@ import FolderInfo from "../../routes/folder-info/folder-info.component";
 import FoldersOrg from "../../routes/folders-org/folders-org.componenet";
 import {  useEffect } from "react";
 import FolderPrivacy from "../../routes/folder-privacy/folder-privacy.component";
+import PrivacyFolder from "../../routes/privacy-folder/privacy-folder.component";
 
 const Container=()=>{
     const navigateRouter = useNavigate();
@@ -23,7 +24,11 @@ const Container=()=>{
         }
     },[])
 
-    
+    // useEffect(()=>{
+    //     console.log('hit');
+        
+    // },[])
+
     return(
         <div className="container">
         <div className="s-out-pic-container">
@@ -39,6 +44,7 @@ const Container=()=>{
                     <Route path="folders/:folderName/info" element={<FolderInfo/>} />
                     <Route path="folders-org" element={<FoldersOrg/>} />
                     <Route path="folder-privacy" element={<FolderPrivacy/>} />
+                    <Route path="privacy-folder" element={<PrivacyFolder/>} />
                 </Routes>
             <SideBar/>
         </div>

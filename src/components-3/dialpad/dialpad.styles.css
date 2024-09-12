@@ -1,13 +1,20 @@
 .dialpad-div{
-    /* border: 1px solid; */
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 5px;
+    position: relative;
 }
 
+.dialpad-div .incorrect-span{
+    position: absolute;
+    top: -13px;
+    left: 0px;
+    animation: slide 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
 .dialpad{
-    /* border: 1px solid; */
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 20px;
