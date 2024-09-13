@@ -33,7 +33,7 @@ export const AditionalInfoProvider=({children})=>{
         }
 
     },[storedPrivacyPin])
-    console.log(storedPrivacyPin);
+    // console.log(storedPrivacyPin);
     
     return (
         <AditionalInfoContext.Provider value={{storedPrivacyPin}}>

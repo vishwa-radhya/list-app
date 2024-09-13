@@ -8,3 +8,9 @@
     text-align: center;
     font-size: 1.2rem;
 }
+.privacy-folder-components{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* gap: 3px; */
+}
