@@ -18,6 +18,8 @@ export const AditionalInfoProvider=({children})=>{
                 unsubscribeFromDb = onValue(aditionalInfoInDbRef,(snapshot)=>{
                     if(snapshot.exists()){
                         setStoredPrivacyPin(...Object.values(snapshot.val()))
+                    }else{
+                        setStoredPrivacyPin(null);
                     }
                 })
         }
@@ -33,7 +35,7 @@ export const AditionalInfoProvider=({children})=>{
         }
 
     },[storedPrivacyPin])
-    // console.log(storedPrivacyPin);
+    // console.log("storedPrivacyPin:",storedPrivacyPin);
     
     return (
         <AditionalInfoContext.Provider value={{storedPrivacyPin}}>

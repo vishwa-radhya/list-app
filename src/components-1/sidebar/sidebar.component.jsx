@@ -52,8 +52,8 @@ const SideBar=()=>{
     
 
     const user=auth.currentUser;
-    const userImg = auth.currentUser?.photoURL;
-    const displayName = auth.currentUser?.displayName;
+    // const userImg = auth.currentUser?.photoURL;
+    // const displayName = auth.currentUser?.displayName;
     
     function sideBarToggleHandler(){
         handleSetIsSideBarOpen(!isSideBarOpen);
@@ -151,10 +151,10 @@ const SideBar=()=>{
         setIsScrolling(false);
     }
 
-    function handleSettingsRouting(){
-        navigateRouter('/settings');
-        handleSetIsSideBarOpen(false);
-    }
+    // function handleSettingsRouting(){
+    //     navigateRouter('/settings');
+    //     handleSetIsSideBarOpen(false);
+    // }
     // console.log(showPopup);
     return(
         <Fragment>
@@ -175,27 +175,12 @@ const SideBar=()=>{
                 })
             }
             </div>
-            <div className='additional-options-div'>
-                <div><i className='fa-solid fa-microphone'></i>
-                </div>
-                <div><i className='fa-solid fa-paper-plane'></i>
-                </div>
-                <div onClick={()=>{
-                    navigateRouter('/folder-privacy')
-                    handleSetIsSideBarOpen(false)
-                }
-                }><i className='fa-solid fa-lock'></i>
-                </div>
-                <div><i className='fa-solid fa-wand-magic-sparkles'></i>
-                </div>
-            </div>
              <div className='sidebar-user-div'>
-                <div onClick={handleSettingsRouting}>
-                    <img src={userImg} alt="user" width={35} />
+             <div className='addons-container'>
+             <div className='addons-div'>
+                    <i className='fa-solid fa-shapes'></i>
                 </div>
-                <div className='p-div' onClick={handleSettingsRouting}>
-                    <p>{displayName}</p>
-                </div>
+             </div> 
                 <i className='fa-regular fa-folder' onClick={()=>{
                     navigateRouter('/folders-org') 
                     handleSetIsSideBarOpen(false)}}>

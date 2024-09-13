@@ -46,18 +46,22 @@ const FolderPrivacy=()=>{
             <p style={{textAlign:'center'}}>Must be 4 digits</p>
             <div>
                 <label>Choose Pin</label>
-                <input type='password' maxLength={4} 
+                <input type='text' maxLength={4} value={choosePin}
                 onChange={
-                    (e)=>{setChoosePin(e.target.value)
+                    (e)=>{
+                        const val = e.target.value;
+                        if(/^\d*$/.test(val))setChoosePin(val)
                         if(isIncorrectPin) setIsIncorrectPin(false)
                     }
                     } />
             </div>
             <div>
                 <label>Confirm Pin</label>
-                <input type='password' maxLength={4} 
+                <input type='text' maxLength={4}  value={confirmPin}
                 onChange={
-                    (e)=>{setConfirmPin(e.target.value)
+                    (e)=>{
+                        const val =e.target.value;
+                        if(/^\d*$/.test(val))setConfirmPin(val)
                         if(isIncorrectPin) setIsIncorrectPin(false)
                     }
                     } />
