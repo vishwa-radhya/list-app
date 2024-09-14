@@ -156,6 +156,21 @@ hr{
     color: rgb(39, 36, 36);
     margin-top: 3px;
 }
-
-
+/* .sidebar-user-div .feature-picker{
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 30px;
+    gap: 10px;
+    /* justify-content: center; */
+/* } */
+/* .feature-picker div{
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red;
+    height: 100%;
+}  */
 

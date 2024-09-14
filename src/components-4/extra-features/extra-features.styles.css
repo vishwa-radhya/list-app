@@ -9,10 +9,11 @@
     grid-template-columns: repeat(2,1fr);
     gap: 20px;
     width: 80%;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    
 }
-.feature-tile div{
+.feature-tile .svg-with-loader-div{
     padding: 10px;
     display: flex;
     align-items: center;
@@ -28,8 +29,9 @@
     flex-direction: column;
     gap: 10px;
     transition: 0.25s ease;
+    position: relative;
 }
 .feature-tile:hover{
-    scale: 1.05;
+    scale: 1.10;
     cursor: pointer;
 }

@@ -26,7 +26,7 @@ const ExtraFeatures=({addonsDivRef,isExtraFeaturesOpen,setIsExtraFeaturesOpen})=
     },[isExtraFeaturesOpen,addonsDivRef,setIsExtraFeaturesOpen])
     
     return(
-        <div className='extra-features-div' ref={featureDivRef}>
+        <div className='extra-features-div animate__animated animate__zoomIn' ref={featureDivRef}>
         <div className='feature-tile' 
         onClick={
             ()=>{
