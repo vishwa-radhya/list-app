@@ -1,0 +1,35 @@
+.extra-features-div{
+    z-index: 11;
+    position: absolute;
+    top: 210px;
+    padding: 33px;
+    border-radius: 20px;
+    background-color: rgba(229, 229, 231, 0.764);
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+    width: 80%;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+.feature-tile div{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    border-radius: 30px;
+    width: 70px;
+    height: 70px;
+}
+.feature-tile {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: 0.25s ease;
+}
+.feature-tile:hover{
+    scale: 1.05;
+    cursor: pointer;
+}

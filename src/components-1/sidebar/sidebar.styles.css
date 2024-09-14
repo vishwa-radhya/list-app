@@ -134,22 +134,7 @@ hr{
     padding: 0 10px;
     border-radius: 10px;
 }
-.sidebar-user-div .addons-div{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-}
-.addons-div i{
-    font-size: 1.5rem;
-}
-.sidebar-user-div .addons-container{
-    border-radius: 8px;
-    padding: 13px;
-}
-.sidebar-user-div .addons-container:hover{
-    background-color: #d7d7d7;
-}
+
 .sidebar-user-div .fa-folder{
     font-size: 1.8rem;
     padding: 13px;
@@ -164,13 +149,10 @@ hr{
     background-color: #d7d7d7;
     cursor: pointer;
 }
-/* .sidebar-user-div:hover{
-    background-color: #d7d7d7;
-} */
+
 .sidebar-user-div .fa-gear{
     position: absolute;
     font-size: 0.75rem;
-    /* z-index: 7; */
     color: rgb(39, 36, 36);
     margin-top: 3px;
 }

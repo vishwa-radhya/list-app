@@ -9,7 +9,7 @@ export const SideBarProvider =({children})=>{
     const handleSetIsSideBarOpen=(bool)=>{
         setIsSideBarOpen(bool);
     }
-
+    
     return(
         <SideBarContext.Provider value={{isSideBarOpen,handleSetIsSideBarOpen}}>
             {children}

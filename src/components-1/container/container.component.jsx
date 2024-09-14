@@ -9,14 +9,17 @@ import Settings from "../../routes/settings/settings.component";
 import About from "../../routes/about/about.component";
 import FolderInfo from "../../routes/folder-info/folder-info.component";
 import FoldersOrg from "../../routes/folders-org/folders-org.componenet";
-import {  useEffect } from "react";
+import {   useEffect, useRef, useState } from "react";
 import FolderPrivacy from "../../routes/folder-privacy/folder-privacy.component";
 import PrivacyFolder from "../../routes/privacy-folder/privacy-folder.component";
+import ExtraFeatures from "../../components-4/extra-features/extra-features.componenet";
 
 const Container=()=>{
     const navigateRouter = useNavigate();
     const userImg = auth.currentUser?.photoURL;
-    
+    const [isExtraFeaturesOpen,setIsExtraFeaturesOpen]=useState(false);
+    const addonsDivRef = useRef(null);
+
     useEffect(()=>{        
         const routePath = localStorage.getItem('landingRoute');
         if(routePath && routePath !== '/'){    
@@ -32,6 +35,9 @@ const Container=()=>{
     return(
         <div className="container">
         <div className="s-out-pic-container">
+        <div className="addons-div" onClick={()=>setIsExtraFeaturesOpen(true)} ref={addonsDivRef}>
+            <i className="fa-solid fa-shapes"></i>
+        </div>
         <div onClick={()=>navigateRouter('/settings')}>
         {userImg && <img src={userImg} alt="." width={25}></img> }</div>
         </div>
@@ -46,7 +52,8 @@ const Container=()=>{
                     <Route path="folder-privacy" element={<FolderPrivacy/>} />
                     <Route path="privacy-folder" element={<PrivacyFolder/>} />
                 </Routes>
-            <SideBar/>
+            <SideBar  />
+             {isExtraFeaturesOpen && <ExtraFeatures addonsDivRef={addonsDivRef} isExtraFeaturesOpen={isExtraFeaturesOpen} setIsExtraFeaturesOpen={setIsExtraFeaturesOpen} />}
         </div>
     )
 }

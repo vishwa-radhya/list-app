@@ -52,8 +52,6 @@ const SideBar=()=>{
     
 
     const user=auth.currentUser;
-    // const userImg = auth.currentUser?.photoURL;
-    // const displayName = auth.currentUser?.displayName;
     
     function sideBarToggleHandler(){
         handleSetIsSideBarOpen(!isSideBarOpen);
@@ -151,11 +149,6 @@ const SideBar=()=>{
         setIsScrolling(false);
     }
 
-    // function handleSettingsRouting(){
-    //     navigateRouter('/settings');
-    //     handleSetIsSideBarOpen(false);
-    // }
-    // console.log(showPopup);
     return(
         <Fragment>
             <div className="side-bar" style={sideBarStyles} ref={sideBarRef}>
@@ -176,11 +169,6 @@ const SideBar=()=>{
             }
             </div>
              <div className='sidebar-user-div'>
-             <div className='addons-container'>
-             <div className='addons-div'>
-                    <i className='fa-solid fa-shapes'></i>
-                </div>
-             </div> 
                 <i className='fa-regular fa-folder' onClick={()=>{
                     navigateRouter('/folders-org') 
                     handleSetIsSideBarOpen(false)}}>

@@ -12,7 +12,7 @@
     top: -18px;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: space-between;
 }
 
 .s-out-pic-container div{
@@ -32,4 +32,14 @@
     &:hover{
         cursor: pointer;
     }
+}
+.s-out-pic-container .addons-div{
+    z-index: 3;
+    margin-left: 45px;
+}
+.s-out-pic-container .addons-div i{
+    font-size: 1.2rem;
+}
+.s-out-pic-container .addons-div:hover{
+    background-color: #dfdcdc;
 }

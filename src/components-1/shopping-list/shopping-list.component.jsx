@@ -22,9 +22,10 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const {items,handleSetItems,handleSetMarkerValue}=useContext(ListItemsContext);
     
     useEffect(()=>{
+        let unsubscribeFromDb = null;
         if(user){
             const shoppingListRef = ref(database,`shoppingLists/${user.uid}/${dbReference}`);
-            onValue(shoppingListRef,(snapshot)=>{
+            unsubscribeFromDb = onValue(shoppingListRef,(snapshot)=>{
                 setContentLoaded(true);
                 const data = snapshot.val();
                 if(data){
@@ -41,6 +42,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
                 setContentLoaded(false);
             });
         }
+        return ()=>{if(unsubscribeFromDb)unsubscribeFromDb()}
     },[user,isFavItemsOnly,dbReference,handleSetItems,handleSetMarkerValue]);
     
     function handleListOutSideClick(event){
