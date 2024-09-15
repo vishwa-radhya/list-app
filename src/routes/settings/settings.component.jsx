@@ -93,6 +93,13 @@ const Settings=()=>{
                                     return <option value={`folders/${folderName}`} key={folderName}>{folderName}</option>
                                 })}
                             </select>
+                            <div className='clickable gray-bg' onClick={()=>navigateRouter('/change-privacy-pin')}>
+                                <i className='fa-solid fa-lock'></i>
+                                <div className='inner-block'>
+                                    <p>Change Privacy Pin</p>
+                                    <span>Click to change privacy pin</span>
+                                </div>
+                            </div>
                     </div>
             </div>
             <div className='info-div'>

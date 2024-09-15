@@ -11,7 +11,8 @@ const Dialpad = ({handleSetIsVerified}) => {
     const [maskedInput,setMaskedInput]=useState('');
     const {storedPrivacyPin}=useContext(AditionalInfoContext);
     const [isIncorrectPin,setIsIncorrectPin]=useState(false);
-
+    // console.log(storedPrivacyPin);   
+    
    const hanldeInputChange=(value)=>{
     if(inputValue.length<4){
          setInputValue(prev=>prev+value);
@@ -32,8 +33,13 @@ const Dialpad = ({handleSetIsVerified}) => {
    const handleOkClick=()=>{
         if(inputValue === storedPrivacyPin){
             handleSetIsVerified(true);
+            setMaskedInput('')
+            setInputValue('')
         }else{
             setIsIncorrectPin(true);
+            if(navigator.vibrate){
+                navigator.vibrate(100);
+            }
         }
    }
 //    console.log('render');

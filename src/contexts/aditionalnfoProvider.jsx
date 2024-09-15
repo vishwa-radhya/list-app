@@ -17,7 +17,7 @@ export const AditionalInfoProvider=({children})=>{
                 const aditionalInfoInDbRef = ref(database,`shoppingLists/${user.uid}/additionalInfo/privacyPin`);
                 unsubscribeFromDb = onValue(aditionalInfoInDbRef,(snapshot)=>{
                     if(snapshot.exists()){
-                        setStoredPrivacyPin(...Object.values(snapshot.val()))
+                        setStoredPrivacyPin(snapshot.val())
                     }else{
                         setStoredPrivacyPin(null);
                     }

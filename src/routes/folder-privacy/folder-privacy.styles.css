@@ -1,5 +1,4 @@
 .folder-privacy-div{
-    /* border: 1px solid; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,29 +14,4 @@
 }
 .folder-privacy-div button:hover{
     cursor: pointer;
-}
-.folder-privacy-div .inputs-div{
-    border: 1px solid;
-    border-radius: 7px;
-    margin-top: 30px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    animation: slide 0.25s ease;
-}
-.folder-privacy-div .inputs-div div{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.folder-privacy-div .inputs-div label{
-    text-align: left;
-    font-size: 1.1rem;
-}
-.folder-privacy-div .inputs-div input{
-    outline: none;
-    border: 0;
-    border-bottom: 1px solid black;
-    font-size: 1.2rem;
 }

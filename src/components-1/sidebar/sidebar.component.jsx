@@ -174,12 +174,16 @@ const SideBar=()=>{
                     handleSetIsSideBarOpen(false)}}>
                     <i className='fa-solid fa-gear'></i>
                 </i>
-                {/* <div className='feature-picker'>
-                    <div><i className='fa-solid fa-lock'></i></div>
-                    <div><i className='fa-solid fa-lock'></i></div>
-                    <div><i className='fa-solid fa-lock'></i></div>
-                    <div><i className='fa-solid fa-lock'></i></div>
-                </div> */}
+                <div className='feature-picker'>
+                    <div className='feature-picker-tile' 
+                    onClick={()=>
+                    {navigateRouter('/folder-privacy')
+                        handleSetIsSideBarOpen(false)
+                    }}><i className='fa-solid fa-lock'></i></div>
+                    <div className='feature-picker-tile'><i className='fa-solid fa-paper-plane'></i></div>
+                    <div className='feature-picker-tile'><i className='fa-solid fa-microphone'></i></div>
+                    <div className='feature-picker-tile'><i className='fa-solid fa-wand-magic-sparkles'></i></div>
+                </div>
             </div>
                {showPopup && <div ref={popupRef} className='folder-options-div' style={{
                 top:popupPosition.top-19,

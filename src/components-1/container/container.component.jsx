@@ -13,6 +13,7 @@ import {   useEffect, useRef, useState } from "react";
 import FolderPrivacy from "../../routes/folder-privacy/folder-privacy.component";
 import PrivacyFolder from "../../routes/privacy-folder/privacy-folder.component";
 import ExtraFeatures from "../../components-4/extra-features/extra-features.componenet";
+import ChangePrivacyPin from "../../components-4/change-privacy-pin/change-privacy-pin.component";
 
 const Container=()=>{
     const navigateRouter = useNavigate();
@@ -26,12 +27,7 @@ const Container=()=>{
             navigateRouter(routePath);
         }
     },[])
-
-    // useEffect(()=>{
-    //     console.log('hit');
-        
-    // },[])
-
+    
     return(
         <div className="container">
         <div className="s-out-pic-container">
@@ -51,6 +47,7 @@ const Container=()=>{
                     <Route path="folders-org" element={<FoldersOrg/>} />
                     <Route path="folder-privacy" element={<FolderPrivacy/>} />
                     <Route path="privacy-folder" element={<PrivacyFolder/>} />
+                    <Route path="change-privacy-pin" element={<ChangePrivacyPin/>} />
                 </Routes>
             <SideBar  />
              {isExtraFeaturesOpen && <ExtraFeatures addonsDivRef={addonsDivRef} isExtraFeaturesOpen={isExtraFeaturesOpen} setIsExtraFeaturesOpen={setIsExtraFeaturesOpen} />}
