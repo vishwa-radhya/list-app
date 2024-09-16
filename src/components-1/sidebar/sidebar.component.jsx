@@ -179,7 +179,8 @@ const SideBar=()=>{
                     onClick={()=>
                     {navigateRouter('/folder-privacy')
                         handleSetIsSideBarOpen(false)
-                    }}><i className='fa-solid fa-lock'></i></div>
+                    }}
+                    ><i className='fa-solid fa-lock'></i></div>
                     <div className='feature-picker-tile'><i className='fa-solid fa-paper-plane'></i></div>
                     <div className='feature-picker-tile'><i className='fa-solid fa-microphone'></i></div>
                     <div className='feature-picker-tile'><i className='fa-solid fa-wand-magic-sparkles'></i></div>
