@@ -2,7 +2,7 @@
 .side-bar a{
     text-decoration: none;
 }
-.side-bar i{
+.side-bar .sb-i{
     font-size: 1.3rem;
 }
 .side-bar{
@@ -63,7 +63,7 @@
     top: -15px;
 }
 
-.side-bar-toggle .fa-solid{
+.side-bar-toggle .sb-t{
  font-size: 1.1rem;
 }
 
@@ -135,7 +135,7 @@ hr{
 }
 
 .sidebar-user-div .fa-folder{
-    font-size: 1.8rem;
+    font-size: 2rem;
     padding: 13px;
     border-radius: 8px;
     position: relative;
@@ -143,18 +143,13 @@ hr{
     justify-content: center;
     align-items: center;
     color: rgb(39, 36, 36);
+    left: -10px;
 }
 .sidebar-user-div .fa-folder:hover{
     background-color: #d7d7d7;
     cursor: pointer;
 }
 
-.sidebar-user-div .fa-gear{
-    position: absolute;
-    font-size: 0.75rem;
-    color: rgb(39, 36, 36);
-    margin-top: 3px;
-}
  .feature-picker, 
  .feature-picker-tile{
     height: 40px;
@@ -168,6 +163,7 @@ hr{
    cursor: pointer;
    border-radius: 5px;
    padding: 3px;
+   align-items: center;
    border: none;
 }
 .feature-picker::before{
@@ -191,6 +187,8 @@ hr{
    align-items: center;
    scroll-snap-align: center;
    margin-right: 15px;
+   font-size: 1.3rem;
+   height: 27px;
 }
 .feature-picker ::-webkit-scrollbar{
     display: none;

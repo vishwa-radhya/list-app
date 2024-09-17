@@ -43,7 +43,7 @@
     top: -2px;
     padding: 2px 0px;
 }
-.settings-div .items div i{
+.settings-div .items div .st-i{
     font-size: 1.3rem;
     margin:auto 15px auto 8px;
     color: rgb(93, 93, 93);

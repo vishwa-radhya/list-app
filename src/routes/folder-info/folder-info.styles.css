@@ -10,7 +10,7 @@
     margin-top: 20px;
 }
 
-.folder-info-component .folder-img i{
+.folder-info-component .folder-img .fi-b{
     font-size: 80px;
     color: rgb(66, 66, 66);
 }
@@ -30,7 +30,7 @@
     padding: 2px 0px;
 }
 
-.folder-info-component .items div i{
+.folder-info-component .items div .fi-s{
     font-size: 1.3rem;
     margin:auto 15px auto 8px;
     color: rgb(93, 93, 93);

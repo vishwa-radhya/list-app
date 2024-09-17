@@ -8,6 +8,9 @@ import DeleteButton from "../../components-2/delete-button/delete-button.compone
 import PropTypes from 'prop-types';
 import ListLoader from "../../components-3/list-loader/list-loader.component.jsx";
 import { ListItemsContext } from "../../contexts/list-items-context.jsx";
+import { FaRegPenToSquare } from "react-icons/fa6";
+import { FaRegStar } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa6";
 
 const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
     const listRefs = useRef({});
@@ -141,14 +144,28 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
             }
             const starDivStyles={
                 width:clickedItemId === item.id ? 'auto' : '0',
-                padding:clickedItemId === item.id ? '5px' : '0'
+                padding:clickedItemId === item.id ? '5px' : '0',
             }
            
            const renameIconClass = isMobile() ? 'rename-icon mobile' : 'rename-icon';
-           const starIconClass = item.isFavorite ? 'fa-solid fa-star animate__animated animate__rubberBand' : 'fa-regular fa-star';
          return (
             <div className="list-wrapper" key={item.id}>
-            {isFavOptionRequired && <div className={starIconClass} ref={el => starRefs.current[item.id]=el} style={starDivStyles} onClick={()=>handleStarClick(item.isFavorite,item.id,item.value)}></div>}
+            {isFavOptionRequired && (
+                <div ref={el => starRefs.current[item.id]=el} style={starDivStyles} onClick={(e)=>
+                {   e.stopPropagation()
+                    handleStarClick(item.isFavorite,item.id,item.value)}
+                }>
+                    {
+                        item.isFavorite ? (
+                            <FaStar className="fa-solid animate__animated animate__rubberBand" />
+                        ) : (
+                            <FaRegStar/>
+                        )
+                    }
+
+                </div>
+            )
+            }
             <li 
                 key={item.id}
                 onClick={()=>showIcons(item.id,item.value)}
@@ -163,9 +180,9 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
                     handleRenameIconClick(true)
                 }
             }>
-            <i 
-                className="fa-regular fa-pen-to-square">
-            </i>
+            <FaRegPenToSquare 
+                className="li-pts">
+            </FaRegPenToSquare>
             </div>
             {item.value}
             <DeleteButton itemId={item.id} setIsEditIconClicked={setIsEditIconClicked} clickedItemId={clickedItemId} dbReference={dbReference}  />

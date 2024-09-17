@@ -14,6 +14,7 @@ import FolderPrivacy from "../../routes/folder-privacy/folder-privacy.component"
 import PrivacyFolder from "../../routes/privacy-folder/privacy-folder.component";
 import ExtraFeatures from "../../components-4/extra-features/extra-features.componenet";
 import ChangePrivacyPin from "../../components-4/change-privacy-pin/change-privacy-pin.component";
+import { FaShapes } from "react-icons/fa6";
 
 const Container=()=>{
     const navigateRouter = useNavigate();
@@ -32,7 +33,7 @@ const Container=()=>{
         <div className="container">
         <div className="s-out-pic-container">
         <div className="addons-div" onClick={()=>setIsExtraFeaturesOpen(true)} ref={addonsDivRef}>
-            <i className="fa-solid fa-shapes"></i>
+            <FaShapes className="fa-solid fa-shapes"></FaShapes>
         </div>
         <div onClick={()=>navigateRouter('/settings')}>
         {userImg && <img src={userImg} alt="." width={25}></img> }</div>

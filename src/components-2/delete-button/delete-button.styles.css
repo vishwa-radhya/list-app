@@ -13,7 +13,7 @@
     overflow: hidden;
 }
 
-.delete-icon i{
+.delete-icon .db-tc{
     color: rgba(0, 0, 0, 0.581);
 }
 
@@ -21,7 +21,7 @@
     background-color: #ffc7c7;
 }
 
-.delete-icon:hover i{
+.delete-icon:hover .db-tc{
     color: rgb(238, 70, 70);
 }
 
@@ -29,6 +29,6 @@
     background-color: #ffc7c7;
 }
 
-.delete-icon.mobile i{
+.delete-icon.mobile .db-tc{
     color: rgb(238, 70, 70);
 }

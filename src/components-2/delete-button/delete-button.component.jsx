@@ -3,6 +3,7 @@ import { ref,remove } from "firebase/database";
 import { isMobile } from "../../utils/check-mobile.js";
 import PropTypes from 'prop-types';
 import './delete-button.styles.css';
+import { FaRegTrashCan } from "react-icons/fa6";
 
 const DeleteButton=({itemId,setIsEditIconClicked,clickedItemId,dbReference})=>{
     const user = auth.currentUser;
@@ -28,9 +29,9 @@ const DeleteButton=({itemId,setIsEditIconClicked,clickedItemId,dbReference})=>{
                 handleRemove(itemId)
              }
             }>
-            <i 
-                className="fa-regular fa-trash-can" >
-            </i>
+            <FaRegTrashCan 
+                className="db-tc" >
+            </FaRegTrashCan>
             </div>
     )
 }

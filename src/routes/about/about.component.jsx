@@ -7,6 +7,7 @@ import NetlifySvg from '../../assets/netlify-svg.svg';
 import { useEffect, useRef } from 'react';
 import ImgLoader from '../../components-3/img-loader/img-loader.component';
 import { useState } from 'react';
+import { FaSquareGithub } from 'react-icons/fa6';
 
 const About=()=>{
     const [imgLoaded,setImgLoaded]=useState(false);
@@ -36,7 +37,8 @@ const About=()=>{
             {!imgLoaded && <ImgLoader/>}
                 <img src="https://github.com/vishwa-radhya.png" ref={githubProfilePicRef} className='animate__animated animate__rubberBand' alt="dev-gh-img" width={180} onClick={handleChangeOfImg} style={{display:imgLoaded ? 'block' : 'none'}} />
                 <a href="https://github.com/vishwa-radhya/list-app" target='_blank'>
-                <p><i className='fa-brands fa-square-github'></i><span>Vishwa Radhya</span></p>
+                <p><FaSquareGithub className='fa-square-github' />
+                <span>Vishwa Radhya</span></p>
                 </a>
             </div>
             <h5>Powered By</h5>

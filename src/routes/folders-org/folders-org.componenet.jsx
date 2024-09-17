@@ -8,6 +8,13 @@ import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SvgWithLoader from '../../components-3/svg-with-loader/svg-with-loader.component';
 import MultiDeleteFolderDialog from '../../components-2/multi-delete-folder-dialog/multi-delete-folder-dialog.component';
+import { BiSearch } from 'react-icons/bi';
+import { FaEllipsisVertical } from 'react-icons/fa6';
+import { FaPenToSquare } from 'react-icons/fa6';
+import { FaTrash } from 'react-icons/fa6';
+import { FaRegSquare } from 'react-icons/fa';
+import { FaRegSquareCheck } from 'react-icons/fa6';
+
 const FoldersOrg=()=>{
     const {folderNames}=useContext(FolderNamesContext);
     const [filteredFolderNames,setFilteredFolderNames]=useState(folderNames);
@@ -76,21 +83,24 @@ const FoldersOrg=()=>{
             return ()=>document.removeEventListener('click',handleClickOutSide);
         }
     },[isMultiFolderDeleteDialogOpen])
-
+    
     return(
         <div className='folders-org-div animate__animated animate__fadeIn'>
         <div className='options-div'>
-                 {isSelectClicked && <i className='fa-solid fa-pen-to-square' 
+                 {isSelectClicked && <FaPenToSquare className='fa-solid fa-pen-to-square' 
                  style={{display:selectedFoldersArray.length===1 ? 'block' : 'none'}}
-                  onClick={handleFolderRenaming}></i>} 
-                {isSelectClicked && <i className='fa-solid fa-trash' ref={deleteIconRef} style={{display:selectedFoldersArray.length ? 'block' : 'none'}} onClick={()=>setIsMultiFolderdeleteDialogOpen(true)}></i>}
-                <i className='fa-solid fa-ellipsis-vertical' ref={ellipsisRef} onClick={()=>setIsEllipsisClicked(true)}></i>
-            
+                  onClick={handleFolderRenaming}></FaPenToSquare>} 
+                {isSelectClicked && 
+                <div ref={deleteIconRef}>
+                <FaTrash className='fa-solid fa-trash'  style={{display:selectedFoldersArray.length ? 'block' : 'none'}} onClick={()=>setIsMultiFolderdeleteDialogOpen(true)}></FaTrash></div>}
+                <div ref={ellipsisRef}>
+                <FaEllipsisVertical className='fa-solid fa-ellip-vert'  onClick={()=>setIsEllipsisClicked(true)} />
+                </div>
         </div>
             <SvgWithLoader svgimg={FolderCog} />
             <p>Folders Management</p>
             <div className='input-div'>
-            <i className="fa-solid fa-magnifying-glass"></i>
+            <BiSearch className='fa-magnifying-glass' />
             <input type="search" name="" id="" ref={inputRef} placeholder='search folders' onChange={handleFilterFolder} maxLength={30} onKeyUp={(e)=>{
                 if(e.key === 'Enter') {
                     if(inputRef.current) inputRef.current.blur()
@@ -110,7 +120,7 @@ const FoldersOrg=()=>{
                 {!filteredFolderNames.length && <img src={SearchNotFound} alt="" className='no-srh-found' width={150} />}
             </div>
             {isEllipsisClicked && <div className='folder-select-btn-div' ref={folderSelectBtnRef} onClick={()=>setIsSelectClicked(!isSelectClicked)}>
-                <i className={!isSelectClicked ? 'fa-regular fa-square' :'fa-regular fa-square-check'}></i>
+                {!isSelectClicked ? <FaRegSquare/> : <FaRegSquareCheck/>}
                 <span>Select...</span>
             </div>}
             {isMultiFolderDeleteDialogOpen && <MultiDeleteFolderDialog folderArray={selectedFoldersArray} ref={multiFolderDeleteDialogRef} setIsMultiFolderdeleteDialogOpen={setIsMultiFolderdeleteDialogOpen} />}

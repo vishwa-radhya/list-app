@@ -10,6 +10,12 @@ import { SideBarContext } from '../../contexts/side-bar-context';
 import DeleteDialog from '../../components-2/delete-dialog/delete-dialog.component';
 import RenameFolderDialog from '../../components-2/rename-folder-dialog/rename-folder-dialog.component';
 import Loader from '../../components-3/loader/loader.component';
+import { PiFolderLockFill } from 'react-icons/pi';
+import { FaRegPaperPlane,FaBars,FaHouse,FaStar,FaFolderPlus,FaFolder,FaRegTrashCan,FaRegPenToSquare } from 'react-icons/fa6';
+import { TiMicrophoneOutline } from 'react-icons/ti';
+import { BsStars } from 'react-icons/bs';
+import { RiFolderSettingsLine } from 'react-icons/ri';
+
 
 const SideBar=()=>{
     const sideBarRef = useRef(null);
@@ -153,49 +159,49 @@ const SideBar=()=>{
         <Fragment>
             <div className="side-bar" style={sideBarStyles} ref={sideBarRef}>
             {isSideBarItemsHidden && <div className='side-bar-items-div'>
-               <Link to='/'> <div className='side-bar-items side-bar-home' onClick={()=>handleSetIsSideBarOpen(false)}><i className="fa-solid fa-house"></i>Home</div></Link>
-               <Link to='/fav'> <div className='side-bar-items' onClick={()=>handleSetIsSideBarOpen(false)}><i className="fa-solid fa-star" style={{color:'#CCB142'}} ></i>Selected</div></Link>
+               <Link to='/'> <div className='side-bar-items side-bar-home' onClick={()=>handleSetIsSideBarOpen(false)}><FaHouse className="sb-i"></FaHouse>Home</div></Link>
+               <Link to='/fav'> <div className='side-bar-items' onClick={()=>handleSetIsSideBarOpen(false)}><FaStar className="sb-i" style={{color:'#CCB142'}} ></FaStar>Selected</div></Link>
                <hr />
                <div className='side-bar-items add-folders-btn' ref={createFolderButtonRef} onClick={
                 ()=>{
                     handleOpenCreateFolderDialog(true)}
-            }><i className='fa-solid fa-folder-plus'></i>Create Folder</div>
+            }><FaFolderPlus className='sb-i'></FaFolderPlus>Create Folder</div>
             <div className='sidebar-folders-div' onScroll={handleFolderDivScroll}>
             {isFoldersLoaded && <Loader/>}
                {
                 folderNames.map((folder,index)=>{
-                    return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave}><i className='fa-solid fa-folder'></i>{folder}</div>
+                    return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave}><FaFolder className='sb-i'></FaFolder>{folder}</div>
                 })
             }
             </div>
              <div className='sidebar-user-div'>
-                <i className='fa-regular fa-folder' onClick={()=>{
+                <RiFolderSettingsLine className='fa-folder'
+                    onClick={()=>{
                     navigateRouter('/folders-org') 
-                    handleSetIsSideBarOpen(false)}}>
-                    <i className='fa-solid fa-gear'></i>
-                </i>
+                    handleSetIsSideBarOpen(false)}}
+                />
                 <div className='feature-picker'>
-                    <div className='feature-picker-tile' 
-                    onClick={()=>
+                    <PiFolderLockFill className='feature-picker-tile' fontSize={'2px'}
+                       onClick={()=>
                     {navigateRouter('/folder-privacy')
                         handleSetIsSideBarOpen(false)
-                    }}
-                    ><i className='fa-solid fa-lock'></i></div>
-                    <div className='feature-picker-tile'><i className='fa-solid fa-paper-plane'></i></div>
-                    <div className='feature-picker-tile'><i className='fa-solid fa-microphone'></i></div>
-                    <div className='feature-picker-tile'><i className='fa-solid fa-wand-magic-sparkles'></i></div>
+                    }} 
+                     />
+                     <FaRegPaperPlane className='feature-picker-tile' style={{height:'20px'}} />
+                     <TiMicrophoneOutline className='feature-picker-tile' />
+                     <BsStars className='feature-picker-tile' />
                 </div>
             </div>
                {showPopup && <div ref={popupRef} className='folder-options-div' style={{
                 top:popupPosition.top-19,
                 left:'85px',
                }}>
-                <div onClick={()=>handleSetRenameFolderDialog(true)} ref={popupRenameButtonRef}><i className='fa-regular fa-pen-to-square'></i>Rename</div>
-                <div onClick={()=>handleSetDeleteFolderDialog(true)} ref={popupDeleteButtonRef}><i className='fa-regular fa-trash-can'></i>Delete</div>
+                <div onClick={()=>handleSetRenameFolderDialog(true)} ref={popupRenameButtonRef}><FaRegPenToSquare className='sb-i'></FaRegPenToSquare>Rename</div>
+                <div onClick={()=>handleSetDeleteFolderDialog(true)} ref={popupDeleteButtonRef}><FaRegTrashCan className='sb-i'></FaRegTrashCan>Delete</div>
                </div>}
                </div>}
             </div>
-            <div className='side-bar-toggle' ref={sideBarToggleRef}><i className={isSideBarOpen ? '' : 'fa-solid fa-bars'} onClick={sideBarToggleHandler}></i></div>
+            <div className='side-bar-toggle' ref={sideBarToggleRef}><FaBars className={'sb-t'} onClick={sideBarToggleHandler}></FaBars></div>
             { isCreateFolderDialogOpen && <SetFolderDialog setIsCreateFolderDialogOpen={setIsCreateFolderDialogOpen} isCreateFolderDialogOpen={isCreateFolderDialogOpen} ref={createFolderDialogRef} createFolderButtonRef={createFolderButtonRef} />}
              { isDeleteFolderDialogOpen && <DeleteDialog ref={deleteDialogRef} currentFolderName={currentFolderName} setShowPopup={setShowPopup} popupDeleteButtonRef={popupDeleteButtonRef} />}
              {isRenameFolderDialogOpen && <RenameFolderDialog ref={renameDialogref} popupRenameButtonRef={popupRenameButtonRef} currentFolderName={currentFolderName} setShowPopup={setShowPopup} />}

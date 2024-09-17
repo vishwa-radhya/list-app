@@ -36,7 +36,7 @@ ul li{
     overflow: hidden;
 }
 
-.rename-icon i{
+.rename-icon .li-pts{
     color: rgba(0, 0, 0, 0.581);
 }
 
@@ -44,7 +44,7 @@ ul li{
     background-color: #a6e9fc;
 }
 
-.rename-icon:hover i{
+.rename-icon:hover .li-pts{
     color: rgb(70, 165, 238);
 }
 
@@ -52,7 +52,7 @@ ul li{
     background-color: #a6e9fc;
 }
 
-.rename-icon.mobile i{
+.rename-icon.mobile .li-pts{
     color: rgb(70, 165, 238);
 }
 

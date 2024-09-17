@@ -2,6 +2,9 @@ import { forwardRef, useContext } from 'react';
 import './folder-options.styles.css';
 import { FolderNamesContext } from '../../contexts/folder-names-context';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FaCircleInfo } from 'react-icons/fa6';
+import { FaPen } from 'react-icons/fa6';
+import { FaTrash } from 'react-icons/fa6';
 
 const FolderOptions=forwardRef((props,ref1)=>{
     const {handleSetRenameFolderDialog,handleSetDeleteFolderDialog}=useContext(FolderNamesContext);
@@ -14,16 +17,16 @@ const FolderOptions=forwardRef((props,ref1)=>{
 
     return(
         <div className='folder-options-division' ref={ref1}>
-            <div onClick={handleFolderInfoRouting}><i className='fa-solid fa-circle-info'></i>Details</div>
+            <div onClick={handleFolderInfoRouting}><FaCircleInfo className='frfa'></FaCircleInfo>Details</div>
             <hr />
             <div onClick={()=>{
                 handleSetDeleteFolderDialog(false);
                 handleSetRenameFolderDialog(true)
-            }}><i className='fa-solid fa-pen'></i>Rename</div>
+            }}><FaPen className='frfa'></FaPen>Rename</div>
             <div onClick={()=>{
                 handleSetRenameFolderDialog(false);
                 handleSetDeleteFolderDialog(true)
-            }}><i className='fa-solid fa-trash'></i>Delete</div>
+            }}><FaTrash className='frfa'></FaTrash>Delete</div>
         </div>
     )
 })

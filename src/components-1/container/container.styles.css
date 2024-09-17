@@ -37,7 +37,7 @@
     z-index: 3;
     margin-left: 45px;
 }
-.s-out-pic-container .addons-div i{
+.s-out-pic-container .addons-div .fa-shapes{
     font-size: 1.2rem;
     color: rgb(68, 68, 68);
 }

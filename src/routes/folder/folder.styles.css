@@ -6,12 +6,12 @@
 }
 .folder-component-ellipsis{
     position: absolute;
-    left: 77.5%;
+    left: 76.5%;
     top: -13.7px;
-    padding: 5px 10px;
+    padding: 5px;
     border-radius: 10px;
 }
-.folder-component-ellipsis i{
+.folder-component-ellipsis .fa-ellipsis-vertical{
     font-size: 1.1rem;
 }
 .folder-component-ellipsis:hover{

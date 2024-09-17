@@ -4,6 +4,7 @@ import DialpadKey from '../dialpad-key/dialpad-key.component';
 import './dialpad.styles.css';
 import { AditionalInfoContext } from '../../contexts/aditionalnfoProvider';
 import PropTypes from 'prop-types';
+import { FaDeleteLeft } from 'react-icons/fa6';
 
 const Dialpad = ({handleSetIsVerified}) => {
 
@@ -58,7 +59,7 @@ const Dialpad = ({handleSetIsVerified}) => {
                 <DialpadKey num={'7'} setInputValue={hanldeInputChange} />
                 <DialpadKey num={'8'} setInputValue={hanldeInputChange} />
                 <DialpadKey num={'9'} setInputValue={hanldeInputChange} />
-                <div onClick={hanldeInputDelete}><i className='fa-solid fa-delete-left'></i></div>
+                <div onClick={hanldeInputDelete}><FaDeleteLeft className='fa-del'></FaDeleteLeft></div>
                 <DialpadKey num={'0'} setInputValue={hanldeInputChange} />
                 <div onClick={handleOkClick}><span>OK</span></div>
             </div>

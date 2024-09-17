@@ -7,6 +7,9 @@ import { useContext,useState } from 'react';
 import { AuthContext } from '../../contexts/authContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import { FolderNamesContext } from '../../contexts/folder-names-context.jsx';
+import { MdOutlineEmail } from 'react-icons/md';
+import { FaRegClock,FaRegUser,FaRocket,FaLock,FaCircleInfo } from 'react-icons/fa6';
+import { PiSignOutBold } from 'react-icons/pi';
 
 const Settings=()=>{
     const imageUrl = auth.currentUser?.photoURL;
@@ -43,21 +46,21 @@ const Settings=()=>{
                 <h5>Account</h5>
                 <div className='items'>
                     <div>
-                        <i className='fa-regular fa-envelope'></i>
+                        <MdOutlineEmail className='st-i'></MdOutlineEmail>
                         <div className='inner-block'>
                             <p>Email</p>
                             <span>{userEmail}</span>
                         </div>
                     </div>
                     <div>
-                        <i className='fa-regular fa-clock'></i>
+                        <FaRegClock className='st-i'></FaRegClock>
                         <div className='inner-block'>
                             <p>Last Login</p>
                             <span>{lastLoginAt}</span>
                         </div>
                     </div>
                     <div className='clickable gray-bg' onClick={signInWithGoogle}>
-                        <i className='fa-regular fa-user' ></i>
+                        <FaRegUser className='st-i' ></FaRegUser>
                         <div className='inner-block'>
                             <p >Switch</p>
                             <span >Click to switch user accounts</span>
@@ -68,7 +71,7 @@ const Settings=()=>{
                             handleSignOutUser()
                             handleSetUser(null);
                     }}>
-                        <i className='fa-solid fa-arrow-right-from-bracket' style={{color:'#FF6768'}}></i>
+                        <PiSignOutBold className='st-i' style={{color:'#FF6768'}}></PiSignOutBold>
                         <div className='inner-block '>
                             <p style={{color:'#FF6768'}}>Sign Out</p>
                             <span style={{color:'#FF6768'}}>Click to sign out</span>
@@ -80,7 +83,7 @@ const Settings=()=>{
                     <h5>App</h5>
                     <div className="items">
                         <div>
-                            <i className='fa-solid fa-rocket'></i>
+                            <FaRocket className='st-i'></FaRocket>
                             <div className='inner-block'>
                                 <p>Landing Place</p>
                                 <span>Select a default landing place from below.</span>
@@ -94,7 +97,7 @@ const Settings=()=>{
                                 })}
                             </select>
                             <div className='clickable gray-bg' onClick={()=>navigateRouter('/change-privacy-pin')}>
-                                <i className='fa-solid fa-lock'></i>
+                                <FaLock className='st-i'></FaLock>
                                 <div className='inner-block'>
                                     <p>Change Privacy Pin</p>
                                     <span>Click to change privacy pin</span>
@@ -106,7 +109,7 @@ const Settings=()=>{
                     <h5>About</h5>
                     <div className='items'>
                             <div onClick={()=>navigateRouter('/about')} className='gray-bg clickable'>
-                            <i className='fa-solid fa-circle-info'></i>
+                            <FaCircleInfo className='st-i'></FaCircleInfo>
                             <div className='inner-block'>
                                 <p>App Info</p>
                                 <span>Click to view app info</span>

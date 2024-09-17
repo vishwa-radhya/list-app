@@ -26,8 +26,11 @@
     justify-content: center;
     border-radius: 5px;
 }
-.dialpad div span,i{
+.dialpad div span, .fa-del{
     font-size: 1.5rem;
+}
+.fa-del{
+    font-size: 1.9rem;
 }
 .dialpad div:active{
     scale: 0.8;

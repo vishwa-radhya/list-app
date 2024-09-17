@@ -6,6 +6,9 @@ import ShoppingList from "../../components-1/shopping-list/shopping-list.compone
 import FolderOptions from "../../components-3/folder-options/folder-options.component";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FolderNamesContext } from "../../contexts/folder-names-context";
+import { FaEllipsisVertical } from 'react-icons/fa6';
+
+
 const FolderComponent=()=>{
     const {folderName} = useParams();
     const [isFolderOptionsOpen,setIsFolderOptionsOpen]=useState(false);
@@ -45,7 +48,7 @@ const FolderComponent=()=>{
             <div className="folder-component-ellipsis" ref={folderComponentEllipsisRef} onClick={
                 ()=>{setIsFolderOptionsOpen(!isFolderOptionsOpen)
                     handleSetCurrentFolderName(locationUrl.pathname.slice(9).replaceAll('%20',' '))}
-            }><i className="fa-solid fa-ellipsis-vertical"></i></div>
+            }><FaEllipsisVertical className="fa-solid fa-ellipsis-vertical"></FaEllipsisVertical></div>
             {isFolderOptionsOpen && <FolderOptions ref={folderOptionsDivRef}/>}
         </div>
     )

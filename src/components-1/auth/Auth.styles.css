@@ -11,7 +11,11 @@
     gap: 15px;
 }
 .fa-keycdn{
-    margin-right: 5px;
+    margin-right: 7px;
+    margin-top: 2px;
+}
+.au-h2{
+    display: flex;
 }
 .auth-container p{
     font-size: 1rem;
@@ -30,6 +34,7 @@
     font-size: 20px;
     text-align: center;
     cursor: pointer;
+    align-items: center;
 }
 .ggl-pop-up-btn:hover{
     background-color: rgb(48, 137, 200);
