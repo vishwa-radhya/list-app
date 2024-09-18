@@ -2,7 +2,6 @@ import './about.styles.css';
 import ReactSvg from '../../assets/react-svg.svg';
 import ViteSvg from '../../assets/vite-svg.svg';
 import FirebaseSvg from '../../assets/firebase-svg.svg';
-import FontAwesomeSvg from '../../assets/font-awesome-svgr.svg';
 import NetlifySvg from '../../assets/netlify-svg.svg';
 import { useEffect, useRef } from 'react';
 import ImgLoader from '../../components-3/img-loader/img-loader.component';
@@ -55,7 +54,6 @@ const About=()=>{
             <div className='powered-by'>
                 <div>
                     <a href="https://firebase.google.com/" target='_blank'><img src={FirebaseSvg} alt="firebase" /></a>
-                    <a href="https://fontawesome.com/" target='_blank'><img src={FontAwesomeSvg} alt="font-awesome" /></a>
                 </div>
             </div>
         </div>
