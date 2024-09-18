@@ -23,6 +23,8 @@
     animation: slide 0.25s ease;
     z-index: 3;
     border-radius: 8px;
+    display: flex;
+    align-items: center;
 }
 .fa-ellip-vert{
     margin-top: -1px;
