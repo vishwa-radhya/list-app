@@ -4,6 +4,7 @@ import { FolderNamesContext } from '../../contexts/folder-names-context';
 import { ref, remove } from "firebase/database";
 import { database,auth } from '../../utils/firebase';
 import { useLocation,useNavigate } from 'react-router-dom';
+import FolderImg from '../../assets/folder.svg';
 import PropTypes from 'prop-types';
 
 const DeleteDialog=forwardRef(({currentFolderName,setShowPopup,popupDeleteButtonRef},ref1)=>{
@@ -47,7 +48,11 @@ const DeleteDialog=forwardRef(({currentFolderName,setShowPopup,popupDeleteButton
     return(
         <div className='overlaying'>
         <div className="delete-folder-dialog" ref={ref1} onClick={(e)=>e.stopPropagation()}>
-            <p>Are you sure you want to delete this folder?<span>  {currentFolderName}</span> </p>
+            <p>Delete this folder?</p>
+            <div className='dfd-folder-div'>
+                <img src={FolderImg} width={70} />
+                <p>{currentFolderName}</p>
+            </div>
             <div className="btn-wrapper">
             <button className='dfd-cnl' onClick={
                 (e)=>{

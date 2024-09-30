@@ -12,6 +12,7 @@ img{
 
 button:hover{
   background-color: #6dd5a6;
+  cursor: pointer;
 }
 
 .content-loader{

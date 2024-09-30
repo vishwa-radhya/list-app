@@ -1,0 +1,86 @@
+.item-exchange-div{
+    width: 112%;
+    margin-top: 50px;
+    position: relative;
+    left: -6%;
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.ied-intro-div{
+    display: flex;
+    gap: 8px;
+}
+.ied-intro-div .img{
+    justify-self: flex-start;
+}
+.ied-intro-div .greet{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.ied-intro-div .greet .span-1{
+    color: rgb(56, 56, 56);
+    font-size: 0.95rem;
+    margin-left: -3px;
+}
+.ied-intro-div .greet .span-2{
+    font-size: 1.4rem;
+    text-overflow: ellipsis;
+}
+.ied-intro-div .avatar{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.item-exchange-div .options{
+    margin-top: auto;
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+}
+.item-exchange-div .options .tile{
+    border-radius: 3px;
+    padding: 3px 3px 15px;
+    text-align: center;
+    width: 200px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.item-exchange-div .sent{
+    background-color: #3b3a3a;
+    color: ghostwhite;
+    box-shadow: 2px 2px 2px #8b8989;
+}
+
+.item-exchange-div .received{
+    background-color: #e3e0e0;
+    box-shadow: 2px 2px 3px #c2c0c0;
+}
+.item-exchange-div .add-receipents{
+    background-color: rgb(26, 25, 25);
+    color: ghostwhite;
+    border-radius: 5px;
+    padding: 7px;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 15px;
+}
+.item-exchange-div .people{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    overflow: auto;
+    gap: 10px;
+}
+.item-exchange-div .people span{
+    font-size: 1.2rem;
+}

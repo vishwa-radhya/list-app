@@ -36,7 +36,13 @@ const ExtraFeatures=({addonsDivRef,isExtraFeaturesOpen,setIsExtraFeaturesOpen})=
         <SvgWithLoader svgimg={ImageForPrivacy} svgWidth={45} />
         <span>Privacy Folder</span>
         </div>
-        <div className='feature-tile'>
+        <div className='feature-tile'
+        onClick={
+            ()=>{
+                setIsExtraFeaturesOpen(false)
+                navigateRouter('/item-transfer')
+            }
+        }>
         <SvgWithLoader svgimg={ImageForTransfer} svgWidth={58} />
         <span>Item Transfer</span>
         </div>

@@ -25,6 +25,12 @@
     gap: 5px;
     font-weight: 550;
 }
+.multi-folder-delete-dialog .folder-array-div span{
+    display: flex;
+    align-items: center;
+    /* border: 1px solid; */
+    gap: 10px;
+}
 .multi-folder-delete-dialog .btn-wrapper{
     display: flex;
     padding: 2px;

@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getAuth,GoogleAuthProvider,signInWithPopup,signOut } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -13,8 +14,16 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+// realtime databse
 export const database = getDatabase(app);
+
+// firestore
+export const firestoreDatabase = getFirestore(app);
+
 export const auth = getAuth(app);
+
+// google sign in popup
 const provider = new GoogleAuthProvider();
 export const signInWithGoogle=async()=>{
   try{
@@ -24,6 +33,7 @@ export const signInWithGoogle=async()=>{
   }
 }
 
+// google signout
 export const signOutUser = async()=>{
   try{
     await signOut(auth);
