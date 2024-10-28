@@ -36,6 +36,7 @@ const ItemTransfer = () => {
                         userName:enteredUserName,
                         email:auth.currentUser.email,
                         selectedAvatarLetter:selectedAvatar,
+                        friends:{},
                     })
                 }
         }catch(e){
@@ -56,7 +57,7 @@ const ItemTransfer = () => {
              <button className='black-btn' onClick={()=>setIsGetStartedClicked(true)}>Get Started</button>
             {isGetStartedClicked && <div className='it-form'>
                 <label>Enter a user name</label>
-                <input type='text' spellCheck='false' maxLength={20} ref={getStartedInputRef} onChange={inputChangeHandler} />
+                <input type='text' spellCheck='false' maxLength={15} ref={getStartedInputRef} onChange={inputChangeHandler} />
                 <div className='username-exist-indicator-div'>
                {isSimilarUsernameExists && <span> <FaCircleXmark style={{color:'#e93317'}} />  similar username exists. </span>}
                 </div>

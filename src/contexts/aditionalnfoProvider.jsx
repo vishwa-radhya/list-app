@@ -10,7 +10,7 @@ export const AditionalInfoContext= createContext();
 export const AditionalInfoProvider=({children})=>{
 
     const [storedPrivacyPin,setStoredPrivacyPin]=useState(null);
-    const [itemExchangeInfo,setItemExchangeInfo]=useState( {userName:null,selectedAvatar:null});
+    const [itemExchangeInfo,setItemExchangeInfo]=useState( {userName:null,selectedAvatar:null,userFriends:{}});
 
     useEffect(()=>{
         let unsubscribeFromDb=null;
@@ -48,8 +48,8 @@ export const AditionalInfoProvider=({children})=>{
 
                 unsubscribeFromFirestore = onSnapshot (itemExchangeInfoRef,(userSnapshot)=>{
                     if(userSnapshot.exists()){
-                        const {userName,selectedAvatarLetter}= userSnapshot.data()
-                        setItemExchangeInfo({userName:userName,selectedAvatar:selectedAvatarLetter})
+                        const {userName,selectedAvatarLetter,friends}= userSnapshot.data()
+                        setItemExchangeInfo({userName:userName,selectedAvatar:selectedAvatarLetter,userFriends:friends})
                     }else{
                         setItemExchangeInfo({userName:null,selectedAvatar:null});
                     }
@@ -70,7 +70,7 @@ export const AditionalInfoProvider=({children})=>{
             if(unsubscribeFromFirestore)unsubscribeFromFirestore();
         }
     },[])
-
+    
     return (
         <AditionalInfoContext.Provider value={{storedPrivacyPin,itemExchangeInfo}}>
             {children}
