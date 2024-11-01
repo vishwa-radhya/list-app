@@ -51,7 +51,7 @@ export const AditionalInfoProvider=({children})=>{
                         const {userName,selectedAvatarLetter,friends}= userSnapshot.data()
                         setItemExchangeInfo({userName:userName,selectedAvatar:selectedAvatarLetter,userFriends:friends})
                     }else{
-                        setItemExchangeInfo({userName:null,selectedAvatar:null});
+                        setItemExchangeInfo({userName:null,selectedAvatar:null,userFriends:{}});
                     }
                 })
                 

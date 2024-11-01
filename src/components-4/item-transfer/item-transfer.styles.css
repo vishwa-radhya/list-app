@@ -29,8 +29,10 @@
 .item-transfer-div .avatars-div{
     display: grid;
     grid-template-columns: repeat(5,1fr);
-    gap: 10px;
+    gap: 8px;
     padding: 10px;
+    overflow: auto;
+    height: 115px;
 }
 
 .it-form input{

@@ -18,6 +18,8 @@ const ItemTransfer = () => {
     const {itemExchangeInfo} = useContext(AditionalInfoContext);
     const {userName}=itemExchangeInfo;
     const [isSimilarUsernameExists,setIsSimilarUsernameExists]=useState(false);
+    const avatarNames=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+      
     
     const handleSetUserIdForItemExchange=async()=>{
 
@@ -63,36 +65,11 @@ const ItemTransfer = () => {
                 </div>
                 <label>Select an avatar</label>
                 <div className='avatars-div'>
-                <div className='avatar-tile' onClick={()=>setSelectedAvatar('a')}>
-                <AvatarTile name='a' variant='beam' size={39} selectedAvatar={selectedAvatar} />
-                </div>
-                <div className='avatar-tile' onClick={()=>setSelectedAvatar('b')}>
-                <AvatarTile name='b' variant='beam' size={39} selectedAvatar={selectedAvatar} />
-                </div>
-                <div className='avatar-tile' onClick={()=>setSelectedAvatar('c')}>
-                <AvatarTile name='c' variant='beam' size={39} selectedAvatar={selectedAvatar} />
-                </div>
-                <div className='avatar-tile' onClick={()=>setSelectedAvatar('d')}>
-                <AvatarTile name='d' variant='beam' size={39} selectedAvatar={selectedAvatar} />
-                </div>
-                <div className='avatar-tile' onClick={()=>setSelectedAvatar('e')}>
-                <AvatarTile name='e' variant='beam' size={39} selectedAvatar={selectedAvatar} />
-                </div>
-                <div className='avatar-tile' onClick={()=>setSelectedAvatar('f')}>
-                <AvatarTile name='f'  size={39} variant='beam' selectedAvatar={selectedAvatar} />
-                </div>
-                <div className='avatar-tile' onClick={()=>setSelectedAvatar('g')}>
-                <AvatarTile name='g'  size={39} variant='beam' selectedAvatar={selectedAvatar} />
-                </div>
-                <div className='avatar-tile' onClick={()=>setSelectedAvatar('h')}>
-                <AvatarTile name='h'  size={39} variant='beam' selectedAvatar={selectedAvatar} />
-                </div>
-                <div className='avatar-tile' onClick={()=>setSelectedAvatar('i')}>
-                <AvatarTile name='i'  size={39} variant='beam' selectedAvatar={selectedAvatar} />
-                </div>
-                <div className='avatar-tile' onClick={()=>setSelectedAvatar('j')}>
-                <AvatarTile name='j'  size={39} variant='beam' selectedAvatar={selectedAvatar} />
-                </div>  
+                {avatarNames.map((letter,index)=>{
+                    return <div key={`variant-${index}`} className='avatar-tile' onClick={()=>setSelectedAvatar(letter)}>
+                        <AvatarTile name={letter} variant='beam' size={39} selectedAvatar={selectedAvatar} />
+                    </div>
+                })}
                 </div>
                 <button className='black-btn' onClick={handleSetUserIdForItemExchange}>Complete</button>
             </div>}

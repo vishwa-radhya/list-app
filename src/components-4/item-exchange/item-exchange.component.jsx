@@ -1,7 +1,7 @@
 import './item-exchange.styles.css';
 import PropTypes from 'prop-types';
 import AvatarTile from '../avatar/avatar.component';
-import { Fragment, useContext, useRef, useState } from 'react';
+import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import { AditionalInfoContext } from '../../contexts/aditionalnfoProvider';
 import ChatImg from '../../assets/chatv.png';
 import SentItemsImg from '../../assets/it-sent.svg';
@@ -12,23 +12,34 @@ import SvgWithLoader from '../../components-3/svg-with-loader/svg-with-loader.co
 import AddPeopleDialog from '../../components-2/add-people-dialog/add-people-dialog.component';
 import Avatar from 'boring-avatars';
 import { IoIosRemoveCircle } from "react-icons/io";
+import RemovePeopleDialog from '../../components-2/remove-people-dialog/remove-people-dialog.component';
 
 const ItemExchange=()=>{
     
     const {itemExchangeInfo}=useContext(AditionalInfoContext);
     const {userName,selectedAvatar,userFriends}=itemExchangeInfo;
     const [isAddPeopleDialogOpen,setIsAddPeopleDialogOpen]=useState(false);
+    const [isRemovePeopleDialogOpen,setIsRemovePeopleDialogOpen]=useState(false);
     const addPeopleBtnRef = useRef(null);
-    const userFriendsArray = Object.values(userFriends);
+    const [userFriendsMap,setUserFriendsMap]=useState([]);
     const [isRemovePeopleBtnClicked,setIsRemovePeopleBtnClicked]=useState(false);
+    const [removalObject,setRemovalObject]=useState({});
 
     const handleSetIsAddPeopleDialogOpen=(bool)=>{
         setIsAddPeopleDialogOpen(bool);
     }
-    
-    const handleFriendRemoval=()=>{
-        console.log('hit friend removal');
+
+    const handleSetIsRemovePeopleDialogOpen=(bool)=>{
+        setIsRemovePeopleDialogOpen(bool);
     }
+    
+    
+
+    useEffect(()=>{
+        setUserFriendsMap(Object.entries(userFriends).map(([fUID,{userName,avatarLetter}])=>({fUID,userName,avatarLetter})));
+    },[userFriends])
+
+    // console.log(removalObject)
 
     return(
         <div className='item-exchange-div animate__animated animate__fadeIn'>
@@ -49,14 +60,20 @@ const ItemExchange=()=>{
            <button className='remove-receipents-btn it-btn' onClick={()=>{setIsRemovePeopleBtnClicked(prev=>!prev)}}><FaUserMinus />remove</button>
            </div>
            <div className='people'>
-                {userFriendsArray.length ===0 ? <Fragment>
+                {userFriendsMap.length ===0 ? <Fragment>
                 <SvgWithLoader svgimg={NoPeople} svgWidth={200} />
                 <span className='nrp'>No Receipents Yet!</span>
-                </Fragment> : <div className='user-friends-div'>{userFriendsArray.map((obj,index)=>{
+                </Fragment> : <div className='user-friends-div'>{userFriendsMap.map((obj,index)=>{
                     return <div key={`userFriends-${index}`}>
-                    <Avatar name={`${obj.userName}-${index}`} variant='beam' square style={{borderRadius:"15%",boxShadow:'2px 2px 2px #ABACAB'}}  size={55} ></Avatar>
+                    <Avatar name={obj.avatarLetter} variant='beam' square style={{borderRadius:"15%",boxShadow:'2px 2px 2px #ABACAB'}}  size={55} ></Avatar>
                     <span>{obj.userName}</span>
-                    {isRemovePeopleBtnClicked && <IoIosRemoveCircle className='circle-remove' onClick={handleFriendRemoval} />}
+                    {isRemovePeopleBtnClicked && <IoIosRemoveCircle  className='circle-remove' 
+                    onClick={
+                        ()=>{
+                            setRemovalObject(obj)
+                            setIsRemovePeopleDialogOpen(true)
+                            }
+                        } />}
                     </div>
                 })}</div>}
            </div>
@@ -71,6 +88,7 @@ const ItemExchange=()=>{
             </div>
            </div>
            {isAddPeopleDialogOpen && <AddPeopleDialog addPeopleBtnRef={addPeopleBtnRef} handleSetIsAddPeopleDialogOpen={handleSetIsAddPeopleDialogOpen} isAddPeopleDialogOpen={isAddPeopleDialogOpen} />}
+           {isRemovePeopleDialogOpen && <RemovePeopleDialog  handleSetIsRemovePeopleDialogOpen={handleSetIsRemovePeopleDialogOpen} removalObject={removalObject}   />}
         </div>
     )
 }

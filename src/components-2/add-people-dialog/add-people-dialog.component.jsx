@@ -30,11 +30,11 @@ const AddPeopleDialog=({addPeopleBtnRef,handleSetIsAddPeopleDialogOpen,isAddPeop
         }
     },[addPeopleBtnRef,handleSetIsAddPeopleDialogOpen,isAddPeopleDialogOpen])
 
-    const pushFriendToDb=async(friendUid,enteredValue)=>{
+    const pushFriendToDb=async(friendUid,enteredValue,friendAvatarLetter)=>{
         try{
             await setDoc(doc(firestoreDatabase,"users",auth.currentUser.uid),{
                 friends:{
-                    [friendUid]:{userName:enteredValue}
+                    [friendUid]:{userName:enteredValue,avatarLetter:friendAvatarLetter}
                 }
             },{merge:true})
             setIsLoading(false);
@@ -54,10 +54,11 @@ const AddPeopleDialog=({addPeopleBtnRef,handleSetIsAddPeopleDialogOpen,isAddPeop
             const usersRef = collection(firestoreDatabase,"users");
             const userNameQuery = query(usersRef,where("userName","==",enteredValue));
             const querySnapShot = await getDocs(userNameQuery);
+            const friendAvatarLetter = querySnapShot.docs[0].data().selectedAvatarLetter;
             if(!querySnapShot.empty){
                 const friendUid = querySnapShot.docs[0].id;
                 if(!Object.keys(userFriends).length){
-                    pushFriendToDb(friendUid,enteredValue);
+                    pushFriendToDb(friendUid,enteredValue,friendAvatarLetter);
                     return;
                 }else{
                     if(userFriends[friendUid]){
@@ -65,7 +66,7 @@ const AddPeopleDialog=({addPeopleBtnRef,handleSetIsAddPeopleDialogOpen,isAddPeop
                         setIsLoading(false);
                         return;
                     }else{
-                        pushFriendToDb(friendUid,enteredValue);
+                        pushFriendToDb(friendUid,enteredValue,friendAvatarLetter);
                         return;
                     }
                 }

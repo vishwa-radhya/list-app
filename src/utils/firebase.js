@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import { getAuth,GoogleAuthProvider,signInWithPopup,signOut } from "firebase/auth";
+import { getAuth,GoogleAuthProvider,signInWithPopup,signOut,setPersistence,browserLocalPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -41,3 +41,15 @@ export const signOutUser = async()=>{
     console.log('error signing out',e);
   }
 }
+
+//setting local persistence for faster auth load
+const initializeAuth =async()=>{
+  if(auth._isPersistenceConfigured) return;
+  try{
+    await setPersistence(auth,browserLocalPersistence);
+    auth._isPersistenceConfigured=true;
+  }catch(e){
+    console.error('error setting persistence:',e)
+  }
+}
+initializeAuth();
