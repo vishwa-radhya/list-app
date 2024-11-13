@@ -1,0 +1,70 @@
+.ie-sent-div{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 95.5vh;
+    width: 117.5%;
+    left: -9%;
+}
+.select-receipent-dialog-div{
+    position: absolute;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px 15px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 3px rgb(128, 126, 126);
+    transition: 0.45s ease;
+    gap: 10px;
+    animation: slide 0.2s ease;
+    width: 70%;
+    margin-left: 10%;
+    margin-top: 20%;
+    height: 290px;
+}
+.select-receipent-dialog-div .receipents-avatars{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
+        overflow: auto;
+        justify-content: center;
+        position: relative;
+}
+.receipents-avatars .tile{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.select-receipent-dialog-div .head{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    span{
+        text-align: center;
+        padding: 3px 7px;
+        font-size: 1.1rem;
+    }
+    .xmark{
+        cursor: pointer;
+    }
+}
+
+    
+.select-receipent-dialog-div .head .xmark{
+    position: absolute;
+    right: -10px;
+    font-size: 1.2rem;
+}
+.select-receipent-dialog-div button{
+        padding: 5px;
+        background-color: black;
+        color: white;
+        font-family: inherit;
+}

@@ -7,6 +7,9 @@ import { auth } from './utils/firebase';
 import AuthLoader from './components-3/loader/auth-loader.component';
 import { AuthContext } from './contexts/authContext';
 import { BrowserRouter } from 'react-router-dom';
+import '@fontsource/inter';
+import 'animate.css';
+
 function App() {
     const {user,handleSetUser}=useContext(AuthContext);
     const [loading,setLoading] = useState(true);

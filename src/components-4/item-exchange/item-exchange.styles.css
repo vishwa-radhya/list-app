@@ -62,6 +62,9 @@
 .item-exchange-div .received{
     background-color: #e3e0e0;
     box-shadow: 2px 2px 3px #c2c0c0;
+    img{
+        transform: scaleX(-1);
+    }
 }
 
 .item-exchange-div .btn-options{

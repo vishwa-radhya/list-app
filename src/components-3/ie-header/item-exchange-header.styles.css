@@ -1,0 +1,18 @@
+.ie-header-div{
+    margin-top: 25px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+}
+
+.ie-header-div .icon{
+ cursor: pointer;
+ padding: 7px;
+ border-radius: 50%;
+ background-color: rgb(240, 240, 240);
+ margin-left: 24px;
+ transition: .25s ease;
+ &:hover{
+    scale: 1.1;
+ }
+}

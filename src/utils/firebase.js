@@ -37,19 +37,24 @@ export const signInWithGoogle=async()=>{
 export const signOutUser = async()=>{
   try{
     await signOut(auth);
+    localStorage.removeItem('persistenceConfigured');
   }catch(e){
     console.log('error signing out',e);
   }
 }
 
 //setting local persistence for faster auth load
-const initializeAuth =async()=>{
-  if(auth._isPersistenceConfigured) return;
-  try{
-    await setPersistence(auth,browserLocalPersistence);
-    auth._isPersistenceConfigured=true;
-  }catch(e){
-    console.error('error setting persistence:',e)
+const initializeAuth = async () => {
+  const isConfigured = localStorage.getItem('persistenceConfigured');
+
+  if (isConfigured) return;
+
+  try {
+    console.log('set local persistence');
+    await setPersistence(auth, browserLocalPersistence);
+    localStorage.setItem('persistenceConfigured', 'true');
+  } catch (e) {
+    console.error('error setting persistence:', e);
   }
-}
+};
 initializeAuth();

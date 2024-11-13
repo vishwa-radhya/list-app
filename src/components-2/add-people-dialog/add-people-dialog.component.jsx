@@ -54,8 +54,8 @@ const AddPeopleDialog=({addPeopleBtnRef,handleSetIsAddPeopleDialogOpen,isAddPeop
             const usersRef = collection(firestoreDatabase,"users");
             const userNameQuery = query(usersRef,where("userName","==",enteredValue));
             const querySnapShot = await getDocs(userNameQuery);
-            const friendAvatarLetter = querySnapShot.docs[0].data().selectedAvatarLetter;
             if(!querySnapShot.empty){
+                const friendAvatarLetter = querySnapShot.docs[0].data().selectedAvatarLetter;
                 const friendUid = querySnapShot.docs[0].id;
                 if(!Object.keys(userFriends).length){
                     pushFriendToDb(friendUid,enteredValue,friendAvatarLetter);

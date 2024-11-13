@@ -13,6 +13,7 @@ import AddPeopleDialog from '../../components-2/add-people-dialog/add-people-dia
 import Avatar from 'boring-avatars';
 import { IoIosRemoveCircle } from "react-icons/io";
 import RemovePeopleDialog from '../../components-2/remove-people-dialog/remove-people-dialog.component';
+import { useNavigate } from 'react-router-dom';
 
 const ItemExchange=()=>{
     
@@ -24,6 +25,7 @@ const ItemExchange=()=>{
     const [userFriendsMap,setUserFriendsMap]=useState([]);
     const [isRemovePeopleBtnClicked,setIsRemovePeopleBtnClicked]=useState(false);
     const [removalObject,setRemovalObject]=useState({});
+    const navigateRouter = useNavigate();
 
     const handleSetIsAddPeopleDialogOpen=(bool)=>{
         setIsAddPeopleDialogOpen(bool);
@@ -32,14 +34,11 @@ const ItemExchange=()=>{
     const handleSetIsRemovePeopleDialogOpen=(bool)=>{
         setIsRemovePeopleDialogOpen(bool);
     }
-    
-    
 
     useEffect(()=>{
         setUserFriendsMap(Object.entries(userFriends).map(([fUID,{userName,avatarLetter}])=>({fUID,userName,avatarLetter})));
     },[userFriends])
 
-    // console.log(removalObject)
 
     return(
         <div className='item-exchange-div animate__animated animate__fadeIn'>
@@ -78,12 +77,12 @@ const ItemExchange=()=>{
                 })}</div>}
            </div>
            <div className='options'>
-            <div className='tile sent'>
+            <div className='tile sent' onClick={()=>navigateRouter('/ie-sent')}>
                 <img src={SentItemsImg} />
                 <span>SENT</span>
             </div>
             <div className='tile received'>
-                <img src={ReceivedItemsImg} />
+                <img src={ReceivedItemsImg} onClick={()=>navigateRouter('/ie-received')} />
                 <span>RECEIVED</span>
             </div>
            </div>
