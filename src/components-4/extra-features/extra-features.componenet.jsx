@@ -50,9 +50,15 @@ const ExtraFeatures=({addonsDivRef,isExtraFeaturesOpen,setIsExtraFeaturesOpen})=
         <SvgWithLoader svgimg={ImageForVoice} svgWidth={52} />
         <span>Voice Access</span>
         </div>
-        <div className='feature-tile'>
+        <div className='feature-tile' 
+        onClick={
+            ()=>{
+                setIsExtraFeaturesOpen(false)
+                navigateRouter('/ai-chat')
+            }
+        }>
         <SvgWithLoader svgimg={ImageForAi} svgWidth={45} />
-        <span>???</span>
+        <span>Ai</span>
         </div>
         </div>
     )

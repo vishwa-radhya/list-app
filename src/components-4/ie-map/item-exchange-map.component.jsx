@@ -18,20 +18,20 @@ const ItemExchangeMap=({fetchAt,role})=>{
     const [hasMore, setHasMore] = useState(true);
     const {user} = useContext(AuthContext);
     
-    useEffect(()=>{
-        //init fetch 10
-        const fetchInitialMessages=async()=>{
-            setLoading(true)
-            const messagesRef = collection(firestoreDatabase,'messages',user.uid,fetchAt);
-            const q = query(messagesRef,orderBy('timeStamp','desc'),limit(10));
-            const snapShot = await getDocs(q);
-            const initialMessages = snapShot.docs.map(doc=>({id:doc.id,...doc.data(),timeStamp: doc.data().timeStamp.toDate().toLocaleString()}))
-            setMessages(initialMessages);
-            setLastDoc(snapShot.docs[snapShot.docs.length-1]);
-            setLoading(false);
-        }
-        fetchInitialMessages();
-    },[user.uid])
+    // useEffect(()=>{
+    //     //init fetch 10
+    //     const fetchInitialMessages=async()=>{
+    //         setLoading(true)
+    //         const messagesRef = collection(firestoreDatabase,'messages',user.uid,fetchAt);
+    //         const q = query(messagesRef,orderBy('timeStamp','desc'),limit(10));
+    //         const snapShot = await getDocs(q);
+    //         const initialMessages = snapShot.docs.map(doc=>({id:doc.id,...doc.data(),timeStamp: doc.data().timeStamp.toDate().toLocaleString()}))
+    //         setMessages(initialMessages);
+    //         setLastDoc(snapShot.docs[snapShot.docs.length-1]);
+    //         setLoading(false);
+    //     }
+    //     fetchInitialMessages();
+    // },[user.uid])
     
     return(
         <div className='ie-map-div'>
@@ -48,6 +48,7 @@ const ItemExchangeMap=({fetchAt,role})=>{
                     <span className='time'> <FaClockRotateLeft/> {obj.timeStamp}</span>
                 </div>
             })}
+            {messages.length >= 10 && <button className='load-more-btn'>Load More</button>}
             {loading && <DataLoader/>}
         </div>
     )

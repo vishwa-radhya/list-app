@@ -1,0 +1,65 @@
+.ai-chat-div{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 90.5vh;
+    gap: 20px;
+}
+.ai-chat-div .img-div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+.ai-chat-div .sender{
+    margin-top: auto;
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 30px;
+    background-color: rgb(236, 236, 236);
+    box-shadow: 2px 2px 3px rgb(186, 186, 186);
+    z-index: 5;
+    position: relative;
+    input{
+        flex: 1;
+        outline: none;
+        background-color: inherit;
+        border: none;
+        font-family: inherit;
+    }
+    .cent{
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .flyer{
+        padding: 9px;
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: 2px 2px 3px rgb(186, 186, 186);
+        background-color: rgb(220, 220, 220);
+        border: none;
+
+        &:hover{
+            background-color: rgb(239, 239, 239);
+        }
+        &:active{
+            box-shadow: 1px 1px 3px rgb(186, 186, 186);
+        }
+    }
+}
+.ai-chat-div .content{
+    padding: 10px;
+    flex: 1;
+    overflow: auto;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.ai-chat-div .content::-webkit-scrollbar{
+    width: 0;
+}

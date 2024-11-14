@@ -192,7 +192,10 @@ const SideBar=()=>{
                         handleSetIsSideBarOpen(false)
                     }} />
                      <TiMicrophoneOutline className='feature-picker-tile' />
-                     <BsStars className='feature-picker-tile' />
+                     <BsStars className='feature-picker-tile' onClick={()=>
+                    {navigateRouter('/ai-chat')
+                        handleSetIsSideBarOpen(false)
+                    }} />
                 </div>
             </div>
                {showPopup && <div ref={popupRef} className='folder-options-div' style={{

@@ -47,3 +47,12 @@
 .tile .head div .name{
     /* border: 1px solid; */
 }
+.ie-map-div .load-more-btn{
+    background-color: black;
+    font-family: inherit;
+    color: white;
+    padding: 4px;
+    width: fit-content;
+    align-self: center;
+    border-radius: 4px;
+}

@@ -36,6 +36,7 @@ const SelectReceipentDialog=({setIsSelectReceipentDialogOpen,setSelectedFriend,s
     
     
     return(
+        <div className='overlaying'>
         <div className='select-receipent-dialog-div'>
             <div className='head'>
                 <span>select receipents</span>
@@ -52,6 +53,7 @@ const SelectReceipentDialog=({setIsSelectReceipentDialogOpen,setSelectedFriend,s
             <button onClick={()=>{
                 selectedFriend && setIsSelectReceipentDialogOpen(false)
             }}>Confirm</button>
+        </div>
         </div>
     )
 }

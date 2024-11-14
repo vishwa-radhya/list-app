@@ -18,6 +18,7 @@ import ItemTransfer from "../../components-4/item-transfer/item-transfer.compone
 import { FaShapes } from "react-icons/fa6";
 import ItemExchangeSent from "../../routes/ie-sent/item-exchange-sent.component";
 import ItemExchangeReceived from "../../routes/ie-received/item-exchange-received.component";
+import AiChat from "../../routes/ai-chat/ai-chat.component";
 
 const Container=()=>{
     const navigateRouter = useNavigate();
@@ -55,6 +56,7 @@ const Container=()=>{
                     <Route path="item-transfer" element={<ItemTransfer/>} />
                     <Route path="ie-sent" element={<ItemExchangeSent/>} />
                     <Route path="ie-received" element={<ItemExchangeReceived/>}  />
+                    <Route path="ai-chat" element={<AiChat/>}  />
                 </Routes>
             <SideBar  />
              {isExtraFeaturesOpen && <ExtraFeatures addonsDivRef={addonsDivRef} isExtraFeaturesOpen={isExtraFeaturesOpen} setIsExtraFeaturesOpen={setIsExtraFeaturesOpen} />}
