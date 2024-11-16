@@ -3,6 +3,7 @@
     padding: 2px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .ie-header-div .icon{
@@ -10,9 +11,14 @@
  padding: 7px;
  border-radius: 50%;
  background-color: rgb(240, 240, 240);
- margin-left: 24px;
  transition: .25s ease;
  &:hover{
     scale: 1.1;
  }
+}
+.ie-header-div .back{
+ margin-left: 24px;
+}
+.ie-header-div .refresh{
+ margin-right: 24px;
 }

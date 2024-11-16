@@ -10,7 +10,7 @@ import { FaClockRotateLeft } from "react-icons/fa6";
 import { FaRegListAlt } from "react-icons/fa";
 import PropTypes from 'prop-types';
 
-const ItemExchangeMap=({fetchAt,role})=>{
+const ItemExchangeMap=({fetchAt,role,fetchTrigger})=>{
 
     const [messages,setMessages]=useState([]);
     const [lastDoc,setLastDoc]=useState(null);
@@ -18,21 +18,22 @@ const ItemExchangeMap=({fetchAt,role})=>{
     const [hasMore, setHasMore] = useState(true);
     const {user} = useContext(AuthContext);
     
-    // useEffect(()=>{
-    //     //init fetch 10
-    //     const fetchInitialMessages=async()=>{
-    //         setLoading(true)
-    //         const messagesRef = collection(firestoreDatabase,'messages',user.uid,fetchAt);
-    //         const q = query(messagesRef,orderBy('timeStamp','desc'),limit(10));
-    //         const snapShot = await getDocs(q);
-    //         const initialMessages = snapShot.docs.map(doc=>({id:doc.id,...doc.data(),timeStamp: doc.data().timeStamp.toDate().toLocaleString()}))
-    //         setMessages(initialMessages);
-    //         setLastDoc(snapShot.docs[snapShot.docs.length-1]);
-    //         setLoading(false);
-    //     }
-    //     fetchInitialMessages();
-    // },[user.uid])
+    useEffect(()=>{
+        //init fetch 10
+        fetchInitialMessages();
+    },[user.uid,fetchTrigger])
     
+    const fetchInitialMessages=async()=>{
+        setLoading(true)
+        const messagesRef = collection(firestoreDatabase,'messages',user.uid,fetchAt);
+        const q = query(messagesRef,orderBy('timeStamp','desc'),limit(10));
+        const snapShot = await getDocs(q);
+        const initialMessages = snapShot.docs.map(doc=>({id:doc.id,...doc.data(),timeStamp: doc.data().timeStamp.toDate().toLocaleString()}))
+        setMessages(initialMessages);
+        setLastDoc(snapShot.docs[snapShot.docs.length-1]);
+        setLoading(false);
+    }
+
     return(
         <div className='ie-map-div'>
             {messages.map(obj=>{
@@ -40,7 +41,7 @@ const ItemExchangeMap=({fetchAt,role})=>{
                     <div className='head'>
                         <Avatar name={obj.avatarLetter} variant='beam' size={26} />
                         <div>
-                        <span className='heading'>{fetchAt === 'sent' ? 'sent to' : 'sent by' }</span>
+                        <span className='heading'>{fetchAt === 'sent' ? 'sent to' : 'received from' }</span>
                         <span className='name'>{obj[role]}</span>
                         </div>
                     </div>
@@ -56,6 +57,6 @@ const ItemExchangeMap=({fetchAt,role})=>{
 ItemExchangeMap.propTypes={
     fetchAt:PropTypes.string,
     role:PropTypes.string,
-
+    fetchTrigger:PropTypes.bool,
 }
 export default ItemExchangeMap;

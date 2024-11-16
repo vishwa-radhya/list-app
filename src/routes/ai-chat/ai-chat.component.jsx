@@ -4,29 +4,43 @@ import AiImage from '../../assets/image-for-ai.png';
 import { BsFillSendFill } from "react-icons/bs";
 import { BsStars } from "react-icons/bs";
 import AiChatMessage from '../../components-4/ai-chat-message/ai-chat-message.component';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState,useContext } from 'react';
 import ChatLoader from '../../components-4/chat-loader/chat-loader.component';
+import { HelperContext } from '../../contexts/helper-context.context';
+import { CohereClientV2 } from 'cohere-ai';
 
 const AiChat = () => {
 
-    const [messages,setMessages]=useState([]);
     const [inputValue,setInputValue]=useState('');
     const contentRef = useRef(null);
     const [isSenderReady,setIsSenderReady]=useState(true);
     const [loading,setLoading]=useState(false);
+    const {aiChatMessages,setAiChatMessages}=useContext(HelperContext);
 
-    const handleMessageSend=()=>{
-        if(inputValue.trim().length !== 0 ){
-            fetchChatFromApi({"inputs":inputValue}).then((response)=>{
-                console.log(response)
-                const responseText = response[0].generated_text || '';
-                const formattedText = responseText.replace(/\n/g,' ').trim();
-                setMessages((prevMessages)=>{
-                    return [...prevMessages,{content:inputValue,isUser:true},{content:formattedText,isUser:false}]
-                })
-            })
+    const cohere = new CohereClientV2({
+        token:import.meta.env.VITE_COHERE_API_KEY,
+    })
+
+    const handleMessageSend=async()=>{
+        const trimmedInputValue = inputValue.trim();
+        if(trimmedInputValue.length !== 0 ){
+            setAiChatMessages((prevMessages)=>(
+                [...prevMessages,{content:trimmedInputValue,isUser:true}]
+            ))
             setInputValue('')
-            
+            try{
+            const response =await fetchChatFromApi(inputValue.trim())
+            const result = response.message.content[0].text;
+            setAiChatMessages((prevMessages)=>{
+                return [...prevMessages,{content:result,isUser:false}]
+            })
+            setLoading(false);
+            setIsSenderReady(true)
+        }catch(e){
+            console.error('something went wrong at setting response to chat',e);
+            setLoading(false);
+            setIsSenderReady(true)
+        }
         }
     }
 
@@ -34,31 +48,18 @@ const AiChat = () => {
         try{
             setLoading(true);
             setIsSenderReady(false)
-            const response = await fetch(
-                "https://api-inference.huggingface.co/models/google/gemma-2-2b-it",
-                {
-                    headers: {
-                        Authorization: "Bearer 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",
-                        "Content-Type": "application/json",
-                    },
-                    method: "POST",
-                    body: JSON.stringify(data),
-                }
-            )
-            const result = await response.json();
-            setLoading(false);
-            setIsSenderReady(true)
-            if (result.error) {
-                setMessages((prevMessages) => [
-                    ...prevMessages,
-                    { content: "Sorry, the AI model is currently busy. Please try again later.", isUser: false }
-                ]);
-                console.error(result.error);
-                return null; // or return result.error if you want to pass it up
-            }
-            return result;
+            const response = await cohere.chat({
+                model: 'command-r-plus',
+                messages: [
+              {
+                role: 'user',
+                content: data,
+              },
+            ],
+            })
+            return response;
         }catch(e){
-            console.error('error text generation from api')
+            console.error('error in text generation from api')
             setLoading(false);
             setIsSenderReady(true)
         }
@@ -68,16 +69,16 @@ const AiChat = () => {
         if(contentRef.current){
             contentRef.current.scrollTop = contentRef.current.scrollHeight;
         }
-    },[messages])
+    },[aiChatMessages])
 
     return ( 
-        <div className="ai-chat-div">
+        <div className="ai-chat-div animate__animated animate__fadeIn">
             <div className='img-div'>
             <SvgWithLoader svgimg={AiImage} svgWidth={120} />
             <span>Artificial Intelligence</span>
             </div>
             <div className='content' ref={contentRef}>
-                {messages.map((messageObj,idx)=>(
+                {aiChatMessages.map((messageObj,idx)=>(
                     <AiChatMessage key={`ai-chat-msg-${idx}`} content={messageObj.content} isUser={messageObj.isUser} />
                 ))}
             </div>

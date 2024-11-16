@@ -12,12 +12,17 @@ const ItemExchangeSent=()=>{
 
     const [isSelectReceipentDialogOpen,setIsSelectReceipentDialogOpen] =useState(false);
     const [selectedFriend,setSelectedFriend]=useState('');
+    const [fetchTrigger,setFetchTrigger]=useState(false);
+
+    const handleFetchTrigger=()=>{
+        setFetchTrigger(prev=>!prev);
+    }
 
     return(
         <div className='animate__animated animate__fadeIn ie-sent-div'>
-            <ItemExchangeHeader/>
+            <ItemExchangeHeader handleFetchTrigger={handleFetchTrigger} />
             { isSelectReceipentDialogOpen && <SelectReceipentDialog setIsSelectReceipentDialogOpen={setIsSelectReceipentDialogOpen} selectedFriend={selectedFriend} setSelectedFriend={setSelectedFriend} />}
-            <ItemExchangeMap fetchAt={'sent'} role={'receiver'} />
+            <ItemExchangeMap fetchAt={'sent'} role={'receiver'} fetchTrigger={fetchTrigger} />
             <ItemExchangeSender setIsSelectReceipentDialogOpen={setIsSelectReceipentDialogOpen} selectedFriend={selectedFriend} setSelectedFriend={setSelectedFriend} />
         </div>
     )
