@@ -30,7 +30,7 @@ const AiChat = () => {
             setInputValue('')
             try{
             const response =await fetchChatFromApi(inputValue.trim())
-            console.log(response)
+            // console.log(response)
             const result = response.message.content[0].text;
             setAiChatMessages((prevMessages)=>{
                 return [...prevMessages,{content:result,isUser:false}]
