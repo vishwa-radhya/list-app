@@ -3,6 +3,7 @@ import './multi-delete-folder-dialog.styles.css';
 import PropTypes from 'prop-types';
 import { ref, remove } from 'firebase/database';
 import { auth, database } from '../../utils/firebase';
+import { RiFolder3Fill } from 'react-icons/ri';
 
 const MultiDeleteFolderDialog=forwardRef(({folderArray,setIsMultiFolderdeleteDialogOpen},ref1)=>{
 
@@ -36,7 +37,7 @@ const MultiDeleteFolderDialog=forwardRef(({folderArray,setIsMultiFolderdeleteDia
             <div className='title'>Delete the following folders</div>
             <div className='folder-array-div'>
                 {folderArray.map((folder,index)=>{
-                    return <span key={index}>{index+1+'. '}{folder}</span>
+                    return <span key={index}><RiFolder3Fill/> {folder}</span>
                 })}
             </div>
             <div className='btn-wrapper'>

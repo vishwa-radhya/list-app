@@ -39,7 +39,7 @@ const Settings=()=>{
             <p>Settings</p>
         </div>
             <div className='settings-div-user-img'>
-                <img src={imageUrl} alt="user-profile-pic" width={30} />
+                <img src={imageUrl} alt="user" width={30} />
                 <p>{userName}</p>
             </div>
             <div className='account-div'>

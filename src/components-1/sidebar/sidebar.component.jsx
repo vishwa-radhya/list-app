@@ -187,9 +187,15 @@ const SideBar=()=>{
                         handleSetIsSideBarOpen(false)
                     }} 
                      />
-                     <FaRegPaperPlane className='feature-picker-tile' style={{height:'20px'}} />
+                     <FaRegPaperPlane className='feature-picker-tile' style={{height:'20px'}} onClick={()=>
+                    {navigateRouter('/item-transfer')
+                        handleSetIsSideBarOpen(false)
+                    }} />
                      <TiMicrophoneOutline className='feature-picker-tile' />
-                     <BsStars className='feature-picker-tile' />
+                     <BsStars className='feature-picker-tile' onClick={()=>
+                    {navigateRouter('/ai-chat')
+                        handleSetIsSideBarOpen(false)
+                    }} />
                 </div>
             </div>
                {showPopup && <div ref={popupRef} className='folder-options-div' style={{

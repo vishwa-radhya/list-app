@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import { getAuth,GoogleAuthProvider,signInWithPopup,signOut } from "firebase/auth";
+import { getAuth,GoogleAuthProvider,signInWithPopup,signOut,setPersistence,browserLocalPersistence } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -13,8 +14,16 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+// realtime databse
 export const database = getDatabase(app);
+
+// firestore
+export const firestoreDatabase = getFirestore(app);
+
 export const auth = getAuth(app);
+
+// google sign in popup
 const provider = new GoogleAuthProvider();
 export const signInWithGoogle=async()=>{
   try{
@@ -24,10 +33,28 @@ export const signInWithGoogle=async()=>{
   }
 }
 
+// google signout
 export const signOutUser = async()=>{
   try{
     await signOut(auth);
+    localStorage.removeItem('persistenceConfigured');
   }catch(e){
     console.log('error signing out',e);
   }
 }
+
+//setting local persistence for faster auth load
+const initializeAuth = async () => {
+  const isConfigured = localStorage.getItem('persistenceConfigured');
+
+  if (isConfigured) return;
+
+  try {
+    console.log('set local persistence');
+    await setPersistence(auth, browserLocalPersistence);
+    localStorage.setItem('persistenceConfigured', 'true');
+  } catch (e) {
+    console.error('error setting persistence:', e);
+  }
+};
+initializeAuth();

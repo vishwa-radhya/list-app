@@ -1,28 +1,23 @@
 .delete-folder-dialog{
     background-color: whitesmoke;
     position: absolute;
-    top: 35rem;
+    top: 30%;
     z-index: 10;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 10px 20px 15px;
     border-radius: 20px;
     box-shadow: 2px 2px 3px rgb(128, 126, 126);
     transition: 0.45s ease;
     overflow: hidden;
     font-weight: 500;
     animation: slide 0.2s ease;
-    width: 330px;
 }
-.delete-folder-dialog span{
-    color: rgb(19, 194, 89);
-}
-
 .delete-folder-dialog .btn-wrapper{
     display: flex;
-    justify-content: flex-end;
     gap: 10px;
     height: 30px;
+    justify-content: space-between;
 }
 .delete-folder-dialog .btn-wrapper button{
     font-family: inherit;
@@ -30,10 +25,10 @@
     font-size: 0.9rem;
     height: 100%;
     font-weight: 600;
-    border-radius: 15px;
+    border-radius: 3px;
     border: 0;
     text-align: center;
-    padding: 15px;
+    padding: 17px 20px;
     display: flex;
     align-items: center;
 }
@@ -47,4 +42,16 @@
 }
 .dfd-cnl:hover{
     background-color: rgb(225, 226, 226);
+}
+
+.dfd-folder-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+.dfd-folder-div p{
+    position: relative;
+    top: -10px;
+    color: rgb(95, 94, 94);
 }

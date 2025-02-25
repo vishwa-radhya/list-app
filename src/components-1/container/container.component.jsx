@@ -14,7 +14,11 @@ import FolderPrivacy from "../../routes/folder-privacy/folder-privacy.component"
 import PrivacyFolder from "../../routes/privacy-folder/privacy-folder.component";
 import ExtraFeatures from "../../components-4/extra-features/extra-features.componenet";
 import ChangePrivacyPin from "../../components-4/change-privacy-pin/change-privacy-pin.component";
+import ItemTransfer from "../../components-4/item-transfer/item-transfer.component";
 import { FaShapes } from "react-icons/fa6";
+import ItemExchangeSent from "../../routes/ie-sent/item-exchange-sent.component";
+import ItemExchangeReceived from "../../routes/ie-received/item-exchange-received.component";
+import AiChat from "../../routes/ai-chat/ai-chat.component";
 
 const Container=()=>{
     const navigateRouter = useNavigate();
@@ -49,6 +53,10 @@ const Container=()=>{
                     <Route path="folder-privacy" element={<FolderPrivacy/>} />
                     <Route path="privacy-folder" element={<PrivacyFolder/>} />
                     <Route path="change-privacy-pin" element={<ChangePrivacyPin/>} />
+                    <Route path="item-transfer" element={<ItemTransfer/>} />
+                    <Route path="ie-sent" element={<ItemExchangeSent/>} />
+                    <Route path="ie-received" element={<ItemExchangeReceived/>}  />
+                    <Route path="ai-chat" element={<AiChat/>}  />
                 </Routes>
             <SideBar  />
              {isExtraFeaturesOpen && <ExtraFeatures addonsDivRef={addonsDivRef} isExtraFeaturesOpen={isExtraFeaturesOpen} setIsExtraFeaturesOpen={setIsExtraFeaturesOpen} />}

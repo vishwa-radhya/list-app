@@ -1,0 +1,17 @@
+.ai-chat-message-div{
+    padding: 10px;
+    border-radius: 6px;
+}
+.ai-chat-message-div.user{
+    background-color: rgb(230, 230, 230);
+    width: fit-content;
+    max-width: 40%;
+    height: auto;
+}
+.ai-chat-message-div.api{
+    width: fit-content;
+    max-width: 70%;
+    margin-left: auto;
+    background-color: rgb(25, 25, 25);
+    color: white;
+}

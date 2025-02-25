@@ -16,7 +16,7 @@ const FolderInfo=()=>{
     const {markerValue,items}=useContext(ListItemsContext);
 
     return(
-        <div className='folder-info-component'>
+        <div className='folder-info-component animate__animated animate__fadeIn'>
             <div className='folder-img'>
                 <FaRegFolderOpen className="fi-b"></FaRegFolderOpen>
             </div>

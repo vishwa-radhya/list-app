@@ -75,7 +75,7 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
             await set(databaseFoldersRef,data);
             handleSetRenameFolderDialog(false);
             setShowPopup(false);
-            if(currentFolderName === localStorage.getItem('landingRoute').slice(8)){
+            if(currentFolderName === localStorage.getItem('landingRoute')?.slice(8)){
                 localStorage.setItem('landingRoute','/');
             }
             renameFolderDialogInputRef.current.blur();

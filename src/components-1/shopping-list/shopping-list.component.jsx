@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, useState,memo, useContext } from "react"
-import { onValue, ref, set } from "firebase/database";
+import { onValue, ref, set,update } from "firebase/database";
 import { auth, database } from '../../utils/firebase.js';
 import { isMobile } from "../../utils/check-mobile.js";
 import './shopping-list.styles.css';
@@ -126,11 +126,11 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
         }
     }
 
-    function handleStarClick(fav,id,name){
+    function handleStarClick(fav,id){
         if(id){
             const itemRef = ref(database,`shoppingLists/${user.uid}/${dbReference}/${id}`);
-            set(itemRef,{value:name,isFavorite:!fav}).catch((e)=>console.log(e));
-            setIsEditIconClicked(false);
+            update(itemRef,{isFavorite:!fav})
+            .then(()=>setIsEditIconClicked(false)).catch(e=>console.log(e))
         }
     }
     
@@ -153,7 +153,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
             {isFavOptionRequired && (
                 <div ref={el => starRefs.current[item.id]=el} style={starDivStyles} onClick={(e)=>
                 {   e.stopPropagation()
-                    handleStarClick(item.isFavorite,item.id,item.value)}
+                    handleStarClick(item.isFavorite,item.id)}
                 }>
                     {
                         item.isFavorite ? (

@@ -1,0 +1,58 @@
+.ie-map-div{
+    /* border: 1px solid; */
+    height: 86%;
+    overflow: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.ie-map-div .tile{
+    /* border: 1px solid; */
+    padding: 13px;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(237, 237, 237);
+    box-shadow: 1px 1px 3px rgb(128, 126, 126);
+}
+.ie-map-div .tile .head{
+    /* border: 1px solid; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.ie-map-div .tile .time{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    color: rgb(75, 75, 75);
+}
+.ie-map-div .tile .content{
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+}
+.tile .head div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.tile .head div .heading{
+    font-size: 0.8rem;
+    color: rgb(70, 70, 70);
+}
+.tile .head div .name{
+    /* border: 1px solid; */
+}
+.ie-map-div .load-more-btn{
+    background-color: black;
+    font-family: inherit;
+    color: white;
+    padding: 4px;
+    width: fit-content;
+    align-self: center;
+    border-radius: 4px;
+}

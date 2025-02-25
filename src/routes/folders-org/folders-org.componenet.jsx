@@ -91,10 +91,10 @@ const FoldersOrg=()=>{
                  style={{display:selectedFoldersArray.length===1 ? 'block' : 'none'}}
                   onClick={handleFolderRenaming}></FaPenToSquare>} 
                 {isSelectClicked && 
-                <div ref={deleteIconRef}>
-                <FaTrash className='fa-solid fa-trash'  style={{display:selectedFoldersArray.length ? 'block' : 'none'}} onClick={()=>setIsMultiFolderdeleteDialogOpen(true)}></FaTrash></div>}
-                <div ref={ellipsisRef}>
-                <FaEllipsisVertical className='fa-solid fa-ellip-vert'  onClick={()=>setIsEllipsisClicked(true)} />
+                <div ref={deleteIconRef} className='fa-solid' onClick={()=>setIsMultiFolderdeleteDialogOpen(true)}>
+                <FaTrash className=' fa-trash'  style={{display:selectedFoldersArray.length ? 'block' : 'none'}} ></FaTrash></div>}
+                <div ref={ellipsisRef} onClick={()=>setIsEllipsisClicked(true)} >
+                <FaEllipsisVertical className='fa-solid fa-ellip-vert'  />
                 </div>
         </div>
             <SvgWithLoader svgimg={FolderCog} />
