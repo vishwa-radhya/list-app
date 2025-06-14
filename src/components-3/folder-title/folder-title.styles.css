@@ -13,3 +13,8 @@
     font-size: 1.3rem;
     margin-top: -3px;
 }
+.folder-title-container .invoice-folder{
+    padding-top: 15px;
+    width: 120px;
+    margin-bottom: 20px;
+}

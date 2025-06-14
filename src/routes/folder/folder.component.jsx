@@ -16,8 +16,9 @@ const FolderComponent=()=>{
     const folderOptionsDivRef = useRef(null);
     const folderRef = useRef(null);
     const locationUrl = useLocation();
+    const folderType = locationUrl.state?.val?.folderInstanceType;
     const {handleSetRenameFolderDialog,handleSetDeleteFolderDialog,handleSetCurrentFolderName}=useContext(FolderNamesContext);
-
+    
     useEffect(()=>{
         if(isFolderOptionsOpen){
             const handleClickOutSide=(event)=>{
@@ -42,8 +43,8 @@ const FolderComponent=()=>{
 
     return(
         <div className="folder-component-container animate__animated animate__fadeIn" ref={folderRef}>
-            <FolderTitle folderName={folderName} />
-            <InputAndBtn placeHolder='Enter Items' buttonText='Add To Folder' pushAsFav={false} dbReference={`folders/${folderName}`} />
+            <FolderTitle folderName={folderName} folderInstanceType={folderType} />
+            <InputAndBtn placeHolder='Enter Items' buttonText='Add To Folder' pushAsFav={false} dbReference={`folders/${folderName}`} isFavOptionRequired={false} />
             <ShoppingList isFavItemsOnly={false} dbReference={`folders/${folderName}`} isFavOptionRequired={false} />
             <div className="folder-component-ellipsis" ref={folderComponentEllipsisRef} onClick={
                 ()=>{setIsFolderOptionsOpen(!isFolderOptionsOpen)

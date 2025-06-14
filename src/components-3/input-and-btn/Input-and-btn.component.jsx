@@ -5,11 +5,11 @@ import { database } from "../../utils/firebase";
 import { auth } from "../../utils/firebase";
 import './input-and-btn.styles.css';
 import PropTypes from 'prop-types';
-const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference})=>{
+const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference,isFavOptionRequired})=>{
 
     const [inputValue,setInputValue]=useState('');
     const user= auth.currentUser;
-
+   
 
     function inputChangeHandler(val){
         setInputValue(val);
@@ -24,10 +24,12 @@ const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference})=>{
     
     function pushToDB(){
         const shoppingListRef = ref(database,`shoppingLists/${user.uid}/${dbReference}`);
-        if(!pushAsFav){
+        if(!pushAsFav && isFavOptionRequired){
             push(shoppingListRef,{value:inputValue,isFavorite:false});
-        }else{
+        }else if(pushAsFav && isFavOptionRequired){
             push(shoppingListRef,{value:inputValue,isFavorite:true});
+        }else if(!isFavOptionRequired){
+            push(shoppingListRef,{value:inputValue});
         }
         clearInputField();
      }
@@ -54,5 +56,6 @@ InputAndBtn.propTypes={
     buttonText:PropTypes.string,
     pushAsFav:PropTypes.bool,
     dbReference:PropTypes.string,
+    isFavOptionRequired:PropTypes.bool
 }
 export default InputAndBtn;

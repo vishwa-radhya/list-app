@@ -50,6 +50,10 @@
     align-items: center;
     overflow: hidden;
 }
+.dfd-folder-div .invoice-img{
+    width: 55px;
+    margin-bottom: 5px;
+}
 .dfd-folder-div p{
     position: relative;
     top: -10px;

@@ -45,6 +45,20 @@
     margin-left: -10px;
     height: 30px;
 }
+.set-folder-name-dialog-btn-wrapper .select-div{
+    margin-right: auto;
+    margin-left: 10px;
+    select{
+        text-align: center;
+        font-family: inherit;
+        outline: none;
+        height: 1.6rem;
+        border-radius: 6px;
+        background-color: inherit;
+        font-weight: 500;
+        border: 1px solid black;
+    }
+}
 .set-folder-name-dialog-btn-wrapper button{
     font-family: inherit;
     background-color: inherit;
