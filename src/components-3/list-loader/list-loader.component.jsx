@@ -1,5 +1,7 @@
+
 import ContentLoader from "react-content-loader";
 const ListLoader=(props)=>{
+    
     return(
         <ContentLoader viewBox="0 0 320 116" width={320} height={116} speed={2} className="content-loader" backgroundColor="rgb(237,237,237)"
         foregroundColor="rgb(199,199,199)" {...props}>

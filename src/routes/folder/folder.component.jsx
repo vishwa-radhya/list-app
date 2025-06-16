@@ -7,6 +7,8 @@ import FolderOptions from "../../components-3/folder-options/folder-options.comp
 import { useContext, useEffect, useRef, useState } from "react";
 import { FolderNamesContext } from "../../contexts/folder-names-context";
 import { FaEllipsisVertical } from 'react-icons/fa6';
+import InvoiceInputBtn from "../../components-3/invoice-input-btn/invoice-input-btn.component";
+import InvoiceList from "../../components-1/invoice-list/invoice-list.component";
 
 
 const FolderComponent=()=>{
@@ -40,17 +42,17 @@ const FolderComponent=()=>{
             folderRef.current.classList.add('animate__animated', 'animate__fadeIn')
         }
     },[folderName])
-
+    
     return(
         <div className="folder-component-container animate__animated animate__fadeIn" ref={folderRef}>
             <FolderTitle folderName={folderName} folderInstanceType={folderType} />
-            <InputAndBtn placeHolder='Enter Items' buttonText='Add To Folder' pushAsFav={false} dbReference={`folders/${folderName}`} isFavOptionRequired={false} />
-            <ShoppingList isFavItemsOnly={false} dbReference={`folders/${folderName}`} isFavOptionRequired={false} />
+            {!folderType ? <InputAndBtn placeHolder='Enter Items' buttonText='Add To Folder' pushAsFav={false} dbReference={`folders/${folderName}`} isFavOptionRequired={false}/> : <InvoiceInputBtn placeHolder={'Enter Items'} buttonText={'Add To Invoice'} dbReference={`folders/${folderName}`} />}
+            {!folderType ? <ShoppingList isFavItemsOnly={false} dbReference={`folders/${folderName}`} isFavOptionRequired={false} /> : <InvoiceList dbReference={`folders/${folderName}`} />}
             <div className="folder-component-ellipsis" ref={folderComponentEllipsisRef} onClick={
                 ()=>{setIsFolderOptionsOpen(!isFolderOptionsOpen)
                     handleSetCurrentFolderName(locationUrl.pathname.slice(9).replaceAll('%20',' '))}
             }><FaEllipsisVertical className="fa-solid fa-ellipsis-vertical"></FaEllipsisVertical></div>
-            {isFolderOptionsOpen && <FolderOptions ref={folderOptionsDivRef}/>}
+            {isFolderOptionsOpen && <FolderOptions ref={folderOptionsDivRef} folderInstanceType={folderType} />}
         </div>
     )
 }

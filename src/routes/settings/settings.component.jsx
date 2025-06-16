@@ -93,7 +93,7 @@ const Settings=()=>{
                                 <option value="/">Home</option>
                                 <option value="fav">Favorites</option>
                                 {folderNames.map(folderName=>{
-                                    return <option value={`folders/${folderName}`} key={folderName}>{folderName}</option>
+                                    return <option value={`folders/${folderName?.key}`} key={folderName?.key}>{folderName?.key}</option>
                                 })}
                             </select>
                             <div className='clickable gray-bg' onClick={()=>navigateRouter('/change-privacy-pin')}>

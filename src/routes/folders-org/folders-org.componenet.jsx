@@ -110,11 +110,11 @@ const FoldersOrg=()=>{
             </div>
             <div className='folders-div'>
                 {filteredFolderNames.map((folder,index)=>{
-                    return <div key={index} className='folders' onClick={()=>!isSelectClicked ? navigateRouter(`/folders/${folder?.key}`,{state:folder}) : hanldeFolderSelect(folder)} >
+                    return <div key={index} className='folders' onClick={()=>!isSelectClicked ? navigateRouter(`/folders/${folder?.key}`,{state:folder}) : hanldeFolderSelect(folder?.key)} >
                       <img src={folder?.val?.folderInstanceType ? InvoiceImage :FolderImage} className={folder?.val?.folderInstanceType ? "invoice-folder":""} alt="folder" width={90} />    
                         <span>{folder?.key}</span>
                         {isSelectClicked && 
-                            <input type="checkbox" className='folder-select' checked={selectedFoldersArray.includes(folder)} onChange={()=>hanldeFolderSelect(folder)} />
+                            <input type="checkbox" className='folder-select' checked={selectedFoldersArray.includes(folder?.key)} onChange={()=>hanldeFolderSelect(folder?.key)} />
                         }
                     </div>
                 })}

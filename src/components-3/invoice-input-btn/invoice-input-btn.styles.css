@@ -1,0 +1,52 @@
+.invoice-input-btn-container .input-text-field{
+        color: #432000;
+        background-color: #dce1eb;
+        font-family: inherit;
+        border: 0;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 20px;
+        text-align: center;
+        margin: 10px 0;
+        margin-top: 20px;
+}
+.invoice-input-btn-container .group-field{
+    display: flex;
+    gap: 10px;
+    width: 93%;
+}
+.invoice-input-btn-container .group-field input{
+    color: #432000;
+    background-color: #dce1eb;
+    font-family: inherit;
+    border: 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    width: 40%;
+}
+.invoice-input-btn-container .group-field button{
+    color: #fdfdfd;
+    background-color: #45c48b;
+    font-family: inherit;
+    border: 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    flex-grow: 1;
+}
+.invoice-input-btn-container{
+    position: relative;
+}
+.invoice-input-btn-container .total{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 0.9rem;
+    width: 89%;
+    margin-top: -33px;
+    color: rgb(72, 72, 72);
+}

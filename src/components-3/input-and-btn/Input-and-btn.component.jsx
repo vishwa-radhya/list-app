@@ -25,11 +25,11 @@ const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference,isFavOptionRequ
     function pushToDB(){
         const shoppingListRef = ref(database,`shoppingLists/${user.uid}/${dbReference}`);
         if(!pushAsFav && isFavOptionRequired){
-            push(shoppingListRef,{value:inputValue,isFavorite:false});
+            push(shoppingListRef,{value:inputValue.trim(),isFavorite:false});
         }else if(pushAsFav && isFavOptionRequired){
-            push(shoppingListRef,{value:inputValue,isFavorite:true});
+            push(shoppingListRef,{value:inputValue.trim(),isFavorite:true});
         }else if(!isFavOptionRequired){
-            push(shoppingListRef,{value:inputValue});
+            push(shoppingListRef,{value:inputValue.trim()});
         }
         clearInputField();
      }
@@ -43,10 +43,10 @@ const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference,isFavOptionRequ
             pushToDB();
         }
     }
-    // console.log('render input and btn');
+    
     return(
         <Fragment>
-        <input type="text" name="" id="input-field" maxLength={35} placeholder={placeHolder} value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>keyUpHandler(e.key)} />
+        <input type="text" name="" id="input-field" maxLength={45} placeholder={placeHolder} value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>keyUpHandler(e.key)} />
             <button id="add-btn" onClick={buttonClickHandler}>{buttonText}</button>
             </Fragment>
     )
