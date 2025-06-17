@@ -78,6 +78,13 @@
     border-radius: 3px;
     animation: slide 0.25s ease;
 }
+.folders-div .folders span{
+    margin-top: auto;
+}
+.folders-div .folders .invoice-folder{
+    height: 70px;
+    margin-top: 10px;
+}
 .folders-org-div input{
     border-radius: 2px;
     height: 30px;

@@ -7,6 +7,8 @@ import FolderOptions from "../../components-3/folder-options/folder-options.comp
 import { useContext, useEffect, useRef, useState } from "react";
 import { FolderNamesContext } from "../../contexts/folder-names-context";
 import { FaEllipsisVertical } from 'react-icons/fa6';
+import InvoiceInputBtn from "../../components-3/invoice-input-btn/invoice-input-btn.component";
+import InvoiceList from "../../components-1/invoice-list/invoice-list.component";
 
 
 const FolderComponent=()=>{
@@ -16,8 +18,9 @@ const FolderComponent=()=>{
     const folderOptionsDivRef = useRef(null);
     const folderRef = useRef(null);
     const locationUrl = useLocation();
+    const folderType = locationUrl.state?.val?.folderInstanceType;
     const {handleSetRenameFolderDialog,handleSetDeleteFolderDialog,handleSetCurrentFolderName}=useContext(FolderNamesContext);
-
+    
     useEffect(()=>{
         if(isFolderOptionsOpen){
             const handleClickOutSide=(event)=>{
@@ -39,17 +42,17 @@ const FolderComponent=()=>{
             folderRef.current.classList.add('animate__animated', 'animate__fadeIn')
         }
     },[folderName])
-
+    
     return(
         <div className="folder-component-container animate__animated animate__fadeIn" ref={folderRef}>
-            <FolderTitle folderName={folderName} />
-            <InputAndBtn placeHolder='Enter Items' buttonText='Add To Folder' pushAsFav={false} dbReference={`folders/${folderName}`} />
-            <ShoppingList isFavItemsOnly={false} dbReference={`folders/${folderName}`} isFavOptionRequired={false} />
+            <FolderTitle folderName={folderName} folderInstanceType={folderType} />
+            {!folderType ? <InputAndBtn placeHolder='Enter Items' buttonText='Add To Folder' pushAsFav={false} dbReference={`folders/${folderName}`} isFavOptionRequired={false}/> : <InvoiceInputBtn placeHolder={'Enter Items'} buttonText={'Add To Invoice'} dbReference={`folders/${folderName}`} />}
+            {!folderType ? <ShoppingList isFavItemsOnly={false} dbReference={`folders/${folderName}`} isFavOptionRequired={false} /> : <InvoiceList dbReference={`folders/${folderName}`} />}
             <div className="folder-component-ellipsis" ref={folderComponentEllipsisRef} onClick={
                 ()=>{setIsFolderOptionsOpen(!isFolderOptionsOpen)
                     handleSetCurrentFolderName(locationUrl.pathname.slice(9).replaceAll('%20',' '))}
             }><FaEllipsisVertical className="fa-solid fa-ellipsis-vertical"></FaEllipsisVertical></div>
-            {isFolderOptionsOpen && <FolderOptions ref={folderOptionsDivRef}/>}
+            {isFolderOptionsOpen && <FolderOptions ref={folderOptionsDivRef} folderInstanceType={folderType} />}
         </div>
     )
 }

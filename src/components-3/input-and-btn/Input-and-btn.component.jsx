@@ -5,11 +5,11 @@ import { database } from "../../utils/firebase";
 import { auth } from "../../utils/firebase";
 import './input-and-btn.styles.css';
 import PropTypes from 'prop-types';
-const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference})=>{
+const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference,isFavOptionRequired})=>{
 
     const [inputValue,setInputValue]=useState('');
     const user= auth.currentUser;
-
+   
 
     function inputChangeHandler(val){
         setInputValue(val);
@@ -24,10 +24,12 @@ const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference})=>{
     
     function pushToDB(){
         const shoppingListRef = ref(database,`shoppingLists/${user.uid}/${dbReference}`);
-        if(!pushAsFav){
-            push(shoppingListRef,{value:inputValue,isFavorite:false});
-        }else{
-            push(shoppingListRef,{value:inputValue,isFavorite:true});
+        if(!pushAsFav && isFavOptionRequired){
+            push(shoppingListRef,{value:inputValue.trim(),isFavorite:false});
+        }else if(pushAsFav && isFavOptionRequired){
+            push(shoppingListRef,{value:inputValue.trim(),isFavorite:true});
+        }else if(!isFavOptionRequired){
+            push(shoppingListRef,{value:inputValue.trim()});
         }
         clearInputField();
      }
@@ -41,10 +43,10 @@ const InputAndBtn=({placeHolder,buttonText,pushAsFav,dbReference})=>{
             pushToDB();
         }
     }
-    // console.log('render input and btn');
+    
     return(
         <Fragment>
-        <input type="text" name="" id="input-field" maxLength={35} placeholder={placeHolder} value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>keyUpHandler(e.key)} />
+        <input type="text" name="" id="input-field" maxLength={45} placeholder={placeHolder} value={inputValue} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>keyUpHandler(e.key)} />
             <button id="add-btn" onClick={buttonClickHandler}>{buttonText}</button>
             </Fragment>
     )
@@ -54,5 +56,6 @@ InputAndBtn.propTypes={
     buttonText:PropTypes.string,
     pushAsFav:PropTypes.bool,
     dbReference:PropTypes.string,
+    isFavOptionRequired:PropTypes.bool
 }
 export default InputAndBtn;

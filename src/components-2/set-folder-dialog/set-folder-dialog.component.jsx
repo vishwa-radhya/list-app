@@ -14,6 +14,7 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
     const user=auth.currentUser;
     const {folderNames,isFolderExisted,handleFolderExistedError}=useContext(FolderNamesContext);
     const createFolderDialogInputRef = useRef(null);
+    const [folderType,setFolderType] = useState('default');
     
     useEffect(()=>{                
         if(isCreateFolderDialogOpen){
@@ -47,10 +48,15 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
         if(inputValue.trim() && !folderNames.includes(inputValue.trim())){
             const dbReference = ref(database,`shoppingLists/${user.uid}/folders/${inputValue}/marker`);
             set(dbReference,Date().split('GMT')[0]);
+            if(folderType === 'invoice'){
+                const dbRef = ref(database,`shoppingLists/${user.uid}/folders/${inputValue}/folderInstanceType`);
+                set(dbRef,'invoice');
+            }
             setIsCreateFolderDialogOpen(false);
             setInputValue('');
             handleFolderExistedError(false);
             createFolderDialogInputRef.current.blur();
+
         }else{
             handleFolderExistedError(true);
         }
@@ -76,6 +82,12 @@ const SetFolderDialog=forwardRef(({setIsCreateFolderDialogOpen,isCreateFolderDia
             </div>
             </div>
             <div className='set-folder-name-dialog-btn-wrapper'>
+                <div className='select-div'>
+                    <select value={folderType} onChange={(e)=>setFolderType(e.target.value)}>
+                        <option value={'default'}>Default list</option>
+                        <option value={'invoice'}>Invoice list</option>
+                    </select>
+                </div>
                 <button onClick={
                     (e)=>{
                         e.stopPropagation();

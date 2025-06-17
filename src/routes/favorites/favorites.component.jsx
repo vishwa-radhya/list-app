@@ -9,7 +9,7 @@ const Favorites=()=>{
     return(
         <div className="fav-div-container animate__animated animate__fadeIn">
             <Picture catImage={nFavCat} pictureWidth={150} />
-            <InputAndBtn placeHolder='Enter Selected' buttonText='Add To Selected' pushAsFav={true} dbReference='home' />
+            <InputAndBtn placeHolder='Enter Selected' buttonText='Add To Selected' pushAsFav={true} dbReference='home' isFavOptionRequired={true} />
             <ShoppingList isFavItemsOnly={true} dbReference='home' isFavOptionRequired={true} />
         </div>
     )

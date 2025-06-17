@@ -17,15 +17,16 @@ const Settings=()=>{
     const userEmail = auth.currentUser?.email;
     const lastLoginAt = auth.currentUser?.metadata.lastSignInTime.replace('GMT','');
     const navigateRouter = useNavigate();
-    const {folderNames}=useContext(FolderNamesContext);
+    const {folderNames,invoiceFolderNames}=useContext(FolderNamesContext);
     const {handleSetUser}=useContext(AuthContext);
+    const excludeLandingRouteFolders=invoiceFolderNames.map(e=>e?.key)
     const [landingRoute,setLandingRoute]=useState(()=>{
         return localStorage.getItem('landingRoute') || 'Home';
     })
     async function handleSignOutUser(){
         await signOutUser();
     }
-
+    
     const handleSelectChange=(e)=>{
         const selectedValue = e.target.value;   
         setLandingRoute(selectedValue);
@@ -92,8 +93,8 @@ const Settings=()=>{
                             <select name="landing-place-select" id="landing-place-select" onChange={handleSelectChange} value={landingRoute}>
                                 <option value="/">Home</option>
                                 <option value="fav">Favorites</option>
-                                {folderNames.map(folderName=>{
-                                    return <option value={`folders/${folderName}`} key={folderName}>{folderName}</option>
+                                {folderNames.filter(f=>!excludeLandingRouteFolders.includes(f?.key)).map(folderName=>{
+                                    return <option value={`folders/${folderName?.key}`} key={folderName?.key}>{folderName?.key}</option>
                                 })}
                             </select>
                             <div className='clickable gray-bg' onClick={()=>navigateRouter('/change-privacy-pin')}>

@@ -39,7 +39,7 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
     },[isRenameFolderDialogOpen,popupRenameButtonRef,ref1,handleSetRenameFolderDialog]);
 
     useEffect(()=>{
-        setInputValue(currentFolderName ?? '');
+        setInputValue(currentFolderName.trim() ?? '');
     },[currentFolderName]);
 
     useEffect(()=>{
@@ -49,7 +49,7 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
     async function handleFolderRename(){        
         if(currentFolderName && inputValue.trim()){                        
             try{
-            const folderRefPath = ref(database,`shoppingLists/${user.uid}/folders/${currentFolderName}`);
+            const folderRefPath = ref(database,`shoppingLists/${user.uid}/folders/${currentFolderName.trim()}`);
             const snapshot = await get(folderRefPath);
             if(snapshot.exists()){
                 const folderData = snapshot.val();
@@ -71,7 +71,7 @@ const RenameFolderDialog=forwardRef(({popupRenameButtonRef,currentFolderName,set
 
     async function handleFolderRenameStepPush(data){                
         if(data){            
-            const databaseFoldersRef = ref(database,`shoppingLists/${user.uid}/folders/${inputValue}`);
+            const databaseFoldersRef = ref(database,`shoppingLists/${user.uid}/folders/${inputValue.trim()}`);
             await set(databaseFoldersRef,data);
             handleSetRenameFolderDialog(false);
             setShowPopup(false);

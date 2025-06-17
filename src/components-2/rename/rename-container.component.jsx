@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import './rename-container.styles.css';
 import PropTypes from 'prop-types';
-const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,handleRename,handleSetClickedItemIdToNull})=>{
+const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,handleRename,handleSetClickedItemIdToNull,folderType,clickedItemPrice})=>{
     const inputRef = useRef(null);
     const [inputValue,setInputValue] = useState('');
+    const [priceValue,setPriceValue] = useState('');
     const [isNameChanged,setIsNameChanged]=useState(false);
     const renameButtonRef = useRef(null);
 
     useEffect(()=>{        
         setInputValue(clickedItemName ?? 'new name');
-    },[clickedItemName])
+        setPriceValue(clickedItemPrice ?? '0');
+    },[clickedItemName,clickedItemPrice])
     
     useEffect(()=>{
         if(isEditIconClicked){
@@ -18,15 +20,17 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
     },[isEditIconClicked]);
 
     useEffect(()=>{
-        setIsNameChanged(inputValue?.trim() !== clickedItemName?.trim())
-    },[inputValue,clickedItemName])
+        let isChanged=inputValue?.trim() !== clickedItemName?.trim() || priceValue?.trim() !== clickedItemPrice?.trim()
+        setIsNameChanged(isChanged)
+
+    },[inputValue,clickedItemName,priceValue,clickedItemPrice])
     
     function inputChangeHandler(val){
         setInputValue(val);
     }
     function handleOkClick(){
         if(!renameButtonRef.current?.disabled){
-            handleRename(inputValue);
+            handleRename(inputValue,priceValue);
             inputRef.current.blur();
         }
     }
@@ -39,7 +43,7 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
     // console.log('render rename container');
     return(
         <div className='overlaying' onClick={()=>handleRenameIconClick(false)}>
-        <div className='rename-container' onClick={(e)=>e.stopPropagation()}>
+        <div className='rename-container' style={{height:!folderType ? '80px' : '100px'}} onClick={(e)=>e.stopPropagation()}>
         <p>Rename the list item ?</p>
             <div className="rename-input-div">
             <input type="text" maxLength={35} value={inputValue} ref={inputRef} onChange={(e)=>inputChangeHandler(e.target.value)} onKeyUp={(e)=>renameEnterHandler(e.key)} />
@@ -47,12 +51,15 @@ const RenameContainer=({isEditIconClicked,handleRenameIconClick,clickedItemName,
             {inputValue ? inputValue.length : ''}/35
             </div>
             </div>
-            <div className='rename-container-btn-wrapper'>
+            {folderType && <div className='price-div'>
+                <input value={priceValue} onChange={(e)=>setPriceValue(e.target.value)} maxLength={15} onKeyUp={(e)=>renameEnterHandler(e.key)} />
+            </div>}
+            <div className='rename-container-btn-wrapper' style={{top:!folderType ?'41%':'48%'}}>
                 <button onClick={()=>{
                     handleRenameIconClick(false)
                     handleSetClickedItemIdToNull(null);
                 }}>Cancel</button>
-                <button onClick={handleOkClick} ref={renameButtonRef} disabled={!isNameChanged || inputValue===''}>Rename</button>
+                <button onClick={handleOkClick} ref={renameButtonRef} disabled={!isNameChanged || inputValue==='' || priceValue===''}>Rename</button>
             </div>
         </div>
         </div>
@@ -64,5 +71,7 @@ RenameContainer.propTypes={
     clickedItemName:PropTypes.string,
     handleRename:PropTypes.func,
     handleSetClickedItemIdToNull:PropTypes.func,
+    folderType:PropTypes.string,
+    clickedItemPrice:PropTypes.string
 }
 export default RenameContainer;

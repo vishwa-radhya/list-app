@@ -11,7 +11,7 @@ import DeleteDialog from '../../components-2/delete-dialog/delete-dialog.compone
 import RenameFolderDialog from '../../components-2/rename-folder-dialog/rename-folder-dialog.component';
 import Loader from '../../components-3/loader/loader.component';
 import { PiFolderLockFill } from 'react-icons/pi';
-import { FaRegPaperPlane,FaBars,FaHouse,FaStar,FaFolderPlus,FaFolder,FaRegTrashCan,FaRegPenToSquare } from 'react-icons/fa6';
+import { FaRegPaperPlane,FaBars,FaHouse,FaStar,FaFolderPlus,FaFolder,FaRegTrashCan,FaRegPenToSquare,FaFileLines} from 'react-icons/fa6';
 import { TiMicrophoneOutline } from 'react-icons/ti';
 import { BsStars } from 'react-icons/bs';
 import { RiFolderSettingsLine } from 'react-icons/ri';
@@ -108,7 +108,7 @@ const SideBar=()=>{
                 
                 const data = snapshot.val();
                 if(data){
-                const folderNamesFromDbArr = Object.keys(data);                
+                const folderNamesFromDbArr = Object.entries(data).map(([key,val])=>({key:key,val:val}));                
                 handleFolderNamesAdd(folderNamesFromDbArr);
                 }else{
                     handleFolderNamesAdd([]);
@@ -123,11 +123,11 @@ const SideBar=()=>{
         setIsCreateFolderDialogOpen(bool);
     }
 
-    function handleFolderRouting(folderName,e){
+    function handleFolderRouting(folder,e){
         if(showPopup){
             e.preventDefault();
         }else{
-            navigateRouter(`folders/${folderName}`)    
+            navigateRouter(`folders/${folder?.key}`,{state:folder})    
             handleSetIsSideBarOpen(false);
         }
     }
@@ -170,7 +170,7 @@ const SideBar=()=>{
             {isFoldersLoaded && <Loader/>}
                {
                 folderNames.map((folder,index)=>{
-                    return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave}><FaFolder className='sb-i'></FaFolder>{folder}</div>
+                    return <div key={index} className='side-bar-items' onClick={(e)=>handleFolderRouting(folder,e)} onMouseDown={handleFolderMouseDown} onMouseUp={handleFolderMouseUp} onTouchStart={handleFolderMouseDown} onTouchEnd={handleFolderMouseLeave}>{folder?.val?.folderInstanceType ? <FaFileLines className='sb-i' /> : <FaFolder className='sb-i'/>} {folder?.key}</div>
                 })
             }
             </div>
@@ -209,7 +209,7 @@ const SideBar=()=>{
             </div>
             <div className='side-bar-toggle' ref={sideBarToggleRef}><FaBars className={'sb-t'} onClick={sideBarToggleHandler}></FaBars></div>
             { isCreateFolderDialogOpen && <SetFolderDialog setIsCreateFolderDialogOpen={setIsCreateFolderDialogOpen} isCreateFolderDialogOpen={isCreateFolderDialogOpen} ref={createFolderDialogRef} createFolderButtonRef={createFolderButtonRef} />}
-             { isDeleteFolderDialogOpen && <DeleteDialog ref={deleteDialogRef} currentFolderName={currentFolderName} setShowPopup={setShowPopup} popupDeleteButtonRef={popupDeleteButtonRef} />}
+             { isDeleteFolderDialogOpen && <DeleteDialog ref={deleteDialogRef} currentFolderName={currentFolderName} setShowPopup={setShowPopup} popupDeleteButtonRef={popupDeleteButtonRef}  />}
              {isRenameFolderDialogOpen && <RenameFolderDialog ref={renameDialogref} popupRenameButtonRef={popupRenameButtonRef} currentFolderName={currentFolderName} setShowPopup={setShowPopup} />}
         </Fragment>
     )

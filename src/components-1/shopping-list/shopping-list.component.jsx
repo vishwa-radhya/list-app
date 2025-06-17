@@ -153,10 +153,10 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
             {isFavOptionRequired && (
                 <div ref={el => starRefs.current[item.id]=el} style={starDivStyles} onClick={(e)=>
                 {   e.stopPropagation()
-                    handleStarClick(item.isFavorite,item.id)}
+                    handleStarClick(item?.isFavorite,item.id)}
                 }>
                     {
-                        item.isFavorite ? (
+                        item?.isFavorite ? (
                             <FaStar className="fa-solid animate__animated animate__rubberBand" />
                         ) : (
                             <FaRegStar/>
@@ -170,7 +170,7 @@ const ShoppingList=memo(({isFavItemsOnly,dbReference,isFavOptionRequired})=>{
                 key={item.id}
                 onClick={()=>showIcons(item.id,item.value)}
                 ref={el => listRefs.current[item.id]=el}
-                style={{outline: item.isFavorite  ? '2px solid #FADF6F' : '0',backgroundColor: isFavItemsOnly ? '#FCDA76' :'',padding:item.value===undefined?'0':'15px'}}
+                style={{outline: item?.isFavorite  ? '2px solid #FADF6F' : '0',backgroundColor: isFavItemsOnly ? '#FCDA76' :'',padding:item.value===undefined?'0':'15px'}}
                 >
             <div 
                 className={renameIconClass} 

@@ -2,6 +2,7 @@ import './folders-org.styles.css';
 import FolderCog from '../../assets/folder-cog.png'
 import { useContext, useEffect, useState } from 'react';
 import FolderImage from '../../assets/folder.svg'
+import InvoiceImage from '../../assets/invoice.svg';
 import {FolderNamesContext} from '../../contexts/folder-names-context';
 import SearchNotFound from '../../assets/no-srh-found.png';
 import { useRef } from 'react';
@@ -35,8 +36,8 @@ const FoldersOrg=()=>{
         setSelectedFoldersArray([]);
     },[folderNames])
 
-    const handleFilterFolder=(e)=>{        
-        setFilteredFolderNames(folderNames.filter(folder=>folder.toLowerCase().includes(e.target.value.toLowerCase())))        
+    const handleFilterFolder=(e)=>{     
+        setFilteredFolderNames(folderNames.filter(folder=>folder?.key.toLowerCase().includes(e.target.value.toLowerCase())))        
     }
 
     const hanldeFolderSelect=(folder)=>{
@@ -109,11 +110,11 @@ const FoldersOrg=()=>{
             </div>
             <div className='folders-div'>
                 {filteredFolderNames.map((folder,index)=>{
-                    return <div key={index} className='folders' onClick={()=>!isSelectClicked ? navigateRouter(`/folders/${folder}`) : hanldeFolderSelect(folder)} >
-                        <img src={FolderImage} alt="folder" width={90} />
-                        <span>{folder}</span>
+                    return <div key={index} className='folders' onClick={()=>!isSelectClicked ? navigateRouter(`/folders/${folder?.key}`,{state:folder}) : hanldeFolderSelect(folder?.key)} >
+                      <img src={folder?.val?.folderInstanceType ? InvoiceImage :FolderImage} className={folder?.val?.folderInstanceType ? "invoice-folder":""} alt="folder" width={90} />    
+                        <span>{folder?.key}</span>
                         {isSelectClicked && 
-                            <input type="checkbox" className='folder-select' checked={selectedFoldersArray.includes(folder)} onChange={()=>hanldeFolderSelect(folder)} />
+                            <input type="checkbox" className='folder-select' checked={selectedFoldersArray.includes(folder?.key)} onChange={()=>hanldeFolderSelect(folder?.key)} />
                         }
                     </div>
                 })}

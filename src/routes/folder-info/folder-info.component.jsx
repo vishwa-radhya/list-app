@@ -9,23 +9,26 @@ import { FaUser } from 'react-icons/fa6';
 import { FaClock } from 'react-icons/fa6';
 import { FaLayerGroup } from 'react-icons/fa6';
 import { FaBolt } from 'react-icons/fa6';
+import { FolderNamesContext } from '../../contexts/folder-names-context';
 
 const FolderInfo=()=>{
     const {folderName} = useParams();
     const userName = auth.currentUser.displayName;
     const {markerValue,items}=useContext(ListItemsContext);
-
+    const {invoiceFolderNames}=useContext(FolderNamesContext);
+    const isInvoiceInstanceTypeSelected = invoiceFolderNames.some(o=>o?.key?.trim()===folderName.trim());
+    
     return(
         <div className='folder-info-component animate__animated animate__fadeIn'>
             <div className='folder-img'>
                 <FaRegFolderOpen className="fi-b"></FaRegFolderOpen>
             </div>
-            <h5>Folder Info</h5>
+            <h5>{!isInvoiceInstanceTypeSelected ? "Folder" :"Invoice"} Info</h5>
                 <div className='items'>
                     <div>
                         <FaFolderClosed className='fi-s'></FaFolderClosed>
                         <div className='inner-block'>
-                            <p>Folder Name</p>
+                            <p>{!isInvoiceInstanceTypeSelected ? "Folder" :"Invoice"} Name</p>
                             <span>{folderName}</span>
                         </div>
                     </div>
@@ -55,7 +58,7 @@ const FolderInfo=()=>{
                         <FaBolt className='fi-s'></FaBolt>
                         <div className='inner-block'>
                             <p>Folder Type</p>
-                            <span>dynamic folders</span>
+                            <span>dynamic {!isInvoiceInstanceTypeSelected ? "Folder" :"Invoice"}</span>
                         </div>
                     </div>
                 </div>
