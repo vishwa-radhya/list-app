@@ -41,6 +41,10 @@
     top: 42%;
     height: 1.5rem;
 }
+.rename-container .price-div{
+    position: absolute;
+    margin-top: 48px;
+}
 .rename-container button{
     font-family: inherit;
     background-color: inherit;

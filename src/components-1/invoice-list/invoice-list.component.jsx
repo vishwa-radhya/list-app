@@ -7,7 +7,8 @@ import { isMobile } from '../../utils/check-mobile';
 import { ListItemsContext } from '../../contexts/list-items-context';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 import DeleteButton from '../../components-2/delete-button/delete-button.component';
-import { onValue, ref } from 'firebase/database';
+import { onValue, ref, update } from 'firebase/database';
+import RenameContainer from '../../components-2/rename/rename-container.component';
 
 const InvoiceList = ({dbReference}) => {
 
@@ -46,8 +47,8 @@ const InvoiceList = ({dbReference}) => {
 
     function showIcons(itemId,itemValue,itemPrice){
         setClickedItemId(clickedItemId === itemId ? null : itemId);
-        const setName = clickedItem.name === itemValue ? null : itemValue;
-        const setPrice = clickedItem.price === itemPrice ? null : itemPrice;
+        const setName = clickedItem?.name === itemValue ? null : itemValue;
+        const setPrice = clickedItem?.price === itemPrice ? null : itemPrice;
         setClickedItem({name:setName,price:setPrice});
     }
 
@@ -56,7 +57,7 @@ const InvoiceList = ({dbReference}) => {
         if((listRefArray.every(ref=>ref && !ref.contains(event.target))) && !renameContainerRef.current.contains(event.target)){
             setClickedItemId(null);
             setIsEditIconClicked(false);
-            setClickedItem(null);   
+            setClickedItem({name:null,price:null});   
         }
     }
 
@@ -81,6 +82,32 @@ const InvoiceList = ({dbReference}) => {
         for(const key in listRefs.current){
             if(listRefs.current[key] === null){
                 delete listRefs.current[key];
+            }
+        }
+    }
+    function handleSetClickedItemIdToNull(val){
+        setClickedItemId(val);
+        setClickedItem({name:null,price:null});
+    }
+
+    function handleRename(newName,newPrice){
+        if(clickedItemId){
+            let updates={}
+            if(newName?.trim() !== clickedItem.name?.trim()){
+                updates.value=newName?.trim()
+            }
+            if(newPrice?.trim() !== clickedItem.price?.trim()){
+                updates.price=newPrice?.trim()
+            }
+            if(Object.keys(updates).length){
+                const itemRef = ref(database,`shoppingLists/${user.uid}/${dbReference}/${clickedItemId}`);
+                update(itemRef,updates).then(()=>{
+                    setClickedItem({name:null,price:null});
+                    setIsEditIconClicked(false);
+                    setClickedItemId(null);
+                }).catch((e)=>{
+                    console.error('error renaming invoice items',e)
+                })
             }
         }
     }
@@ -124,6 +151,9 @@ const InvoiceList = ({dbReference}) => {
                     })}
                 </ul>
             </div>}
+            <div ref={renameContainerRef}>
+            {isEditIconClicked && <RenameContainer isEditIconClicked={isEditIconClicked} handleRenameIconClick={handleRenameIconClick} clickedItemName={clickedItem.name} clickedItemPrice={clickedItem.price} handleRename={handleRename} handleSetClickedItemIdToNull={handleSetClickedItemIdToNull} folderType={'invoice'} />}
+            </div>
         </div>
     );
 }

@@ -51,7 +51,7 @@ const FolderInfo=()=>{
                         <FaLayerGroup className='fi-s'></FaLayerGroup>
                         <div className='inner-block'>
                             <p>Items Count</p>
-                            <span>{!isInvoiceInstanceTypeSelected ? items.length : items.length-1}</span>
+                            <span>{items.length}</span>
                         </div>
                     </div>
                     <div>
