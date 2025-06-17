@@ -62,11 +62,20 @@
     transition: transform 0.2s, background 0.2s;
     box-shadow: 0 4px 15px rgba(72, 52, 212, 0.2);
 }
+.invoice-type{
+    background: #7c7c7e;
+    box-shadow: 0 4px 15px rgba(161, 161, 161, 0.2);
+}
 
 .privacy-button:hover {
     background: #3525b0;
     transform: translateY(-2px);
 }
+.invoice-type:hover {
+    background: #616161;
+    transform: translateY(-2px);
+}
+
 
 .privacy-button:active {
     transform: translateY(0);

@@ -12,9 +12,9 @@ import RenameFolderDialog from '../../components-2/rename-folder-dialog/rename-f
 import Loader from '../../components-3/loader/loader.component';
 import { PiFolderLockFill } from 'react-icons/pi';
 import { FaRegPaperPlane,FaBars,FaHouse,FaStar,FaFolderPlus,FaFolder,FaRegTrashCan,FaRegPenToSquare,FaFileLines} from 'react-icons/fa6';
-import { TiMicrophoneOutline } from 'react-icons/ti';
 import { BsStars } from 'react-icons/bs';
 import { RiFolderSettingsLine } from 'react-icons/ri';
+import { TbFileInvoice } from 'react-icons/tb';
 
 
 const SideBar=()=>{
@@ -191,7 +191,10 @@ const SideBar=()=>{
                     {navigateRouter('/item-transfer')
                         handleSetIsSideBarOpen(false)
                     }} />
-                     <TiMicrophoneOutline className='feature-picker-tile' />
+                     <TbFileInvoice className='feature-picker-tile' onClick={()=>
+                    {navigateRouter('/folder-privacy',{state:'privacy-invoice'})
+                        handleSetIsSideBarOpen(false)
+                    }} />
                      <BsStars className='feature-picker-tile' onClick={()=>
                     {navigateRouter('/ai-chat')
                         handleSetIsSideBarOpen(false)

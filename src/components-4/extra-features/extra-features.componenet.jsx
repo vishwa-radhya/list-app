@@ -4,6 +4,7 @@ import ImageForAi from '../../assets/image-for-ai.png';
 import ImageForTransfer from '../../assets/image-for-transfer.png';
 import ImageForPrivacy from '../../assets/image-for-privacy.png';
 import ImageForVoice from '../../assets/image-for-voice.png';
+import InvoicePrivacy from '../../assets/privacy-policy.png'
 import PropTypes from 'prop-types';
 import {  useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -36,6 +37,15 @@ const ExtraFeatures=({addonsDivRef,isExtraFeaturesOpen,setIsExtraFeaturesOpen})=
         <SvgWithLoader svgimg={ImageForPrivacy} svgWidth={45} />
         <span>Privacy Folder</span>
         </div>
+        <div className='feature-tile' 
+        onClick={
+            ()=>{
+                setIsExtraFeaturesOpen(false)
+                navigateRouter('/folder-privacy',{state:'privacy-invoice'})}
+            }>
+        <SvgWithLoader svgimg={InvoicePrivacy} svgWidth={54} />
+        <span>Privacy Invoice</span>
+        </div>
         <div className='feature-tile'
         onClick={
             ()=>{
@@ -45,10 +55,6 @@ const ExtraFeatures=({addonsDivRef,isExtraFeaturesOpen,setIsExtraFeaturesOpen})=
         }>
         <SvgWithLoader svgimg={ImageForTransfer} svgWidth={58} />
         <span>Item Transfer</span>
-        </div>
-        <div className='feature-tile'>
-        <SvgWithLoader svgimg={ImageForVoice} svgWidth={52} />
-        <span>Voice Access</span>
         </div>
         <div className='feature-tile' 
         onClick={
