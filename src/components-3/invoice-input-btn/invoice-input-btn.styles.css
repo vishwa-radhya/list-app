@@ -13,7 +13,7 @@
 .invoice-input-btn-container .group-field{
     display: flex;
     gap: 10px;
-    width: 93%;
+    width: 100%;
 }
 .invoice-input-btn-container .group-field input{
     color: #432000;
