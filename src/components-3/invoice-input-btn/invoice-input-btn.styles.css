@@ -9,6 +9,7 @@
         text-align: center;
         margin: 10px 0;
         margin-top: 20px;
+        width: 91%;
 }
 .invoice-input-btn-container .group-field{
     display: flex;
