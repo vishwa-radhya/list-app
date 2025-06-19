@@ -7,6 +7,7 @@ import { SideBarProvider } from './contexts/side-bar-context.jsx';
 import { ListItemsProvider } from './contexts/list-items-context.jsx';
 import { AditionalInfoProvider } from './contexts/aditionalnfoProvider.jsx';
 import { HelperProvider } from './contexts/helper-context.context.jsx';
+import { ToastProvider } from './contexts/toast-context.context.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <ListItemsProvider>
             <AditionalInfoProvider>
               <HelperProvider>
-                <App />
+                <ToastProvider>
+                  <App />
+                </ToastProvider>
               </HelperProvider>
             </AditionalInfoProvider>
           </ListItemsProvider>

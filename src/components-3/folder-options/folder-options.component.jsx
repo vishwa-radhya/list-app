@@ -10,6 +10,7 @@ import { auth } from '../../utils/firebase';
 import PropTypes from 'prop-types';
 import { ListItemsContext } from '../../contexts/list-items-context';
 import { pdfImageBase64Url } from '../../utils/check-mobile';
+import { useToast } from '../../contexts/toast-context.context';
 pdfMake.vfs = pdfFonts.vfs;
 const FolderOptions=forwardRef((props,ref1)=>{
     const {handleSetRenameFolderDialog,handleSetDeleteFolderDialog}=useContext(FolderNamesContext);
@@ -19,6 +20,7 @@ const FolderOptions=forwardRef((props,ref1)=>{
     const userEmail = auth.currentUser?.email;
     const { folderInstanceType } = props;
     const {items}=useContext(ListItemsContext);
+    const {showToast} = useToast();
     
     const handleFolderInfoRouting=()=>{
         navigateRouter(`${pathLocation.pathname}/info`)        
@@ -100,6 +102,7 @@ const FolderOptions=forwardRef((props,ref1)=>{
     };
 
     pdfMake.createPdf(dd).download("invoice.pdf"); 
+    showToast('Export successful, please check your browser downloads or file manager.',4000)
   };
 
     return(
@@ -119,6 +122,7 @@ const FolderOptions=forwardRef((props,ref1)=>{
                 generatePdf()
             }}><FaFileExport className='frfa'></FaFileExport>Export</div>
             <div onClick={()=>{
+              // showToast('Export successful, please check your browser downloads or file manager.',4000)
             }}><FaArrowsSplitUpAndLeft className='frfa'></FaArrowsSplitUpAndLeft>Split</div>
             </Fragment>}
         </div>

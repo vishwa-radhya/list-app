@@ -32,6 +32,18 @@ button:hover{
     justify-content: center;
     z-index: 3;
 }
+.overlaying-toast{
+  position: fixed;
+  width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+}
 
 @keyframes slide{
   from{
@@ -40,4 +52,23 @@ button:hover{
   to{
       transform: translateY(0px);
   }
+}
+.toast-styles{
+  position: fixed;
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 1rem;
+  top: 12px;
+  z-index: 50;
+  min-width: 310px;
+  max-width: 310px;
+  text-align: center;
+  /* background: rgba(192, 141, 251, 0.182); */
+  background: rgba(152, 148, 148, 0.182);
+  backdrop-filter: blur(30px);         
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  /* color: rgb(124, 60, 208); */
+  color: rgb(127, 127, 127);
 }
