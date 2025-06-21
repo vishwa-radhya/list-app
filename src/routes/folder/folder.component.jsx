@@ -9,7 +9,8 @@ import { FolderNamesContext } from "../../contexts/folder-names-context";
 import { FaEllipsisVertical } from 'react-icons/fa6';
 import InvoiceInputBtn from "../../components-3/invoice-input-btn/invoice-input-btn.component";
 import InvoiceList from "../../components-1/invoice-list/invoice-list.component";
-
+import SplitDialog from "../../components-2/split-dialog/split-dialog.component";
+import { HelperContext } from "../../contexts/helper-context.context";
 
 const FolderComponent=()=>{
     const {folderName} = useParams();
@@ -20,6 +21,7 @@ const FolderComponent=()=>{
     const locationUrl = useLocation();
     const folderType = locationUrl.state?.val?.folderInstanceType;
     const {handleSetRenameFolderDialog,handleSetDeleteFolderDialog,handleSetCurrentFolderName}=useContext(FolderNamesContext);
+    const {isSplitDialogOpen}=useContext(HelperContext);
     
     useEffect(()=>{
         if(isFolderOptionsOpen){
@@ -53,6 +55,7 @@ const FolderComponent=()=>{
                     handleSetCurrentFolderName(locationUrl.pathname.slice(9).replaceAll('%20',' '))}
             }><FaEllipsisVertical className="fa-solid fa-ellipsis-vertical"></FaEllipsisVertical></div>
             {isFolderOptionsOpen && <FolderOptions ref={folderOptionsDivRef} folderInstanceType={folderType} />}
+            {isSplitDialogOpen && <SplitDialog/>}
         </div>
     )
 }

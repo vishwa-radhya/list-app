@@ -31,7 +31,6 @@ export const FolderNamesProvider=({children})=>{
         setIsRenameFolderDialogOpen(bool);
     }
 
-
     const folderNamesContextValues={
         folderNames,handleFolderNamesAdd,isFolderExisted,handleFolderExistedError,isDeleteFolderDialogOpen,handleSetDeleteFolderDialog,isRenameFolderDialogOpen,handleSetRenameFolderDialog,currentFolderName,handleSetCurrentFolderName,invoiceFolderNames
     }

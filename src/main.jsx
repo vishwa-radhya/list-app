@@ -12,19 +12,19 @@ import { ToastProvider } from './contexts/toast-context.context.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <FolderNamesProvider>
-        <SideBarProvider>
-          <ListItemsProvider>
-            <AditionalInfoProvider>
-              <HelperProvider>
-                <ToastProvider>
+      <ToastProvider>
+        <FolderNamesProvider>
+          <SideBarProvider>
+            <ListItemsProvider>
+              <AditionalInfoProvider>
+                <HelperProvider>
                   <App />
-                </ToastProvider>
-              </HelperProvider>
-            </AditionalInfoProvider>
-          </ListItemsProvider>
-        </SideBarProvider>
-      </FolderNamesProvider>
+                </HelperProvider>
+              </AditionalInfoProvider>
+            </ListItemsProvider>
+          </SideBarProvider>
+        </FolderNamesProvider>
+      </ToastProvider>
     </AuthProvider>
   </React.StrictMode>,
 )
